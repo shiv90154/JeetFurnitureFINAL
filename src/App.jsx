@@ -4,6 +4,7 @@ import Header from './components/Header'
 import HeroSection from './components/HeroSection'
 import ShopByCategories from './components/ShopByCategories'
 import Treasure from './components/Treasure'
+import Trending from './components/Trending'
 function App() {
 
   return (
@@ -11,8 +12,9 @@ function App() {
       <Header />
       <HeroSection />
       <ShopByCategories />
-      <Collection/>
-      <Treasure/>
+      <Collection />
+      <Treasure />
+      <Trending />
 
     </>
   )
