@@ -144,7 +144,7 @@ const categories = [
     {
         id: 2,
         name: "Bangles",
-        image: "/bangles.png",
+        image: "/latestImg2.png",
     },
     {
         id: 3,
