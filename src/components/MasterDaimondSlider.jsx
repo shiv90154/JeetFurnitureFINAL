@@ -276,6 +276,7 @@ const MasterDaimondSlider = () => {
                 mx: 'auto',
                 p: { xs: 0, sm: 2, md: 5 },
                 backgroundColor: '#f5f5f5',
+                overflow: 'hidden',
             }}
         >
             <Typography
