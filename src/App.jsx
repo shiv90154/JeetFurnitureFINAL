@@ -11,6 +11,7 @@ import NewCollection from './components/NewCollection'
 import ChauhanWorld from './components/ChauhanWorld'
 import ExchangeOffer from './components/ExchangeOffer'
 import Exclusive from './components/Exclusive'
+import ChauhanExperience from './components/ChauhanExperience'
 function App() {
 
   return (
@@ -26,6 +27,7 @@ function App() {
       <ChauhanWorld />
       <ExchangeOffer />
       <Exclusive />
+      <ChauhanExperience/> 
       <Footer />
 
     </>
