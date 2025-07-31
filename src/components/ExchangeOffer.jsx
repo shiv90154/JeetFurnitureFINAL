@@ -42,18 +42,18 @@ const SubTitle = styled(Typography)({
 
 const VideoContainer = styled(Box)({
     position: "relative",
-    maxWidth: "900px",
+    // maxWidth: "900px",
     margin: "0 auto",
     borderRadius: "20px",
     overflow: "hidden",
     boxShadow: "0 20px 60px rgba(0,0,0,0.2)",
     cursor: "pointer",
     "@media (max-width: 960px)": {
-        maxWidth: "700px",
+        // maxWidth: "700px",
     },
     "@media (max-width: 600px)": {
-        maxWidth: "100%",
-        margin: "0 20px",
+        // maxWidth: "100%",
+        // margin: "0 20px",
     },
 })
 
@@ -107,69 +107,34 @@ const PlayButton = styled(Box)({
 
 const BrandLogo = styled(Box)({
     position: "absolute",
-    top: "30px",
-    left: "30px",
+    top: "0px",
+    left: "0px",
     zIndex: 5,
-    "@media (max-width: 600px)": {
-        top: "20px",
-        left: "20px",
-    },
+    // "@media (max-width: 600px)": {
+    //     width: "40px",
+    //     height: "40px",
+    // },
 })
 
 const LogoContainer = styled(Box)({
     display: "flex",
     alignItems: "center",
     gap: "8px",
-    backgroundColor: "rgba(255,255,255,0.9)",
-    padding: "8px 12px",
+    padding: "8px 5px",
     borderRadius: "8px",
-    backdropFilter: "blur(10px)",
-})
-
-const CrownIcon = styled("div")({
-    width: "24px",
-    height: "24px",
-    background: "linear-gradient(45deg, #FFD700, #FFA500)",
-    borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%",
-    position: "relative",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    "&::before": {
-        content: '""',
-        position: "absolute",
-        top: "-3px",
-        left: "50%",
-        transform: "translateX(-50%)",
-        width: "0",
-        height: "0",
-        borderLeft: "4px solid transparent",
-        borderRight: "4px solid transparent",
-        borderBottom: "6px solid #FFD700",
+    // backdropFilter: "blur(10px)",
+    "@media (max-width: 600px)": {
+        width: "40px",
+        height: "40px",
     },
-    "&::after": {
-        content: '""',
-        position: "absolute",
-        top: "6px",
-        left: "50%",
-        transform: "translateX(-50%)",
-        width: "3px",
-        height: "3px",
-        backgroundColor: "#8B4513",
-        borderRadius: "50%",
-    },
-})
-
-const LogoText = styled(Typography)({
-    fontSize: "12px",
-    fontWeight: "600",
-    color: "#2C2C2C",
-    lineHeight: "1.2",
 })
 
 const BottomSection = styled(Box)({
     textAlign: "center",
-    marginTop: "40px",
+    // marginTop: "40px",
+    "@media (max-width: 1100px)": {
+        marginTop: "40px",
+    },
 })
 
 const ExploreButton = styled(Button)({
@@ -190,6 +155,9 @@ const ExploreButton = styled(Button)({
         padding: "10px 20px",
         fontSize: "14px",
     },
+    "@media (min-width:1100px)": {
+        marginTop: "-120px"
+    }
 })
 
 const DescriptionText = styled(Typography)({
@@ -233,7 +201,7 @@ export default function ExchangeOffer() {
         <SectionContainer>
             <HeaderContainer maxWidth="xl">
                 <MainTitle>Exchange Program</MainTitle>
-                <SubTitle>Trusted by 7,00+ families</SubTitle>
+                <SubTitle>Trusted by 2.6M+ families</SubTitle>
             </HeaderContainer>
 
             <Container maxWidth="xl">
@@ -242,20 +210,20 @@ export default function ExchangeOffer() {
                         ref={videoRef}
                         onEnded={handleVideoEnded}
                         onPause={handleVideoPause}
-                        poster="/placeholder.svg?height=500&width=900&text=Luxury+Bridal+Jewelry+Video+Poster"
+                        poster="/videoPlaceholderImg.png"
                     >
-                        <source src="/placeholder.mp4" type="video/mp4" />
+                        <source src="/public/video/homeVideo.mp4" type="video/mp4" />
                         Your browser does not support the video tag.
                     </VideoElement>
 
                     <BrandLogo>
-                        <LogoContainer>
+                        <LogoContainer className="videoLogoSize">
                             <img src="/logo.svg" alt="img" />
                         </LogoContainer>
                     </BrandLogo>
 
                     <VideoOverlay isPlaying={isPlaying}>
-                        <PlayButton>
+                        <PlayButton >
                             <PlayArrow sx={{ fontSize: "32px", color: "#2C2C2C", marginLeft: "4px" }} />
                         </PlayButton>
                     </VideoOverlay>

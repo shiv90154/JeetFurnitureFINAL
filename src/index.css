@@ -1,3 +1,10 @@
 .primary_Bgclr {
     background-color: #44170D !important;
 }
+
+@media (max-width: 700px) {
+    .videoLogoSize img {
+        width: 100px;
+        height: 100px;
+    }
+}
