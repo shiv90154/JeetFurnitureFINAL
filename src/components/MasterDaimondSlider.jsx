@@ -274,7 +274,7 @@ const MasterDaimondSlider = () => {
             sx={{
                 maxWidth: 1400,
                 mx: 'auto',
-                p: { xs: 2, md: 5 },
+                p: { xs: 0, sm: 2, md: 5 },
                 backgroundColor: '#f5f5f5',
             }}
         >
@@ -298,8 +298,8 @@ const MasterDaimondSlider = () => {
                     position: 'relative',
                     width: '100%',
                     left: "-2%",
-                    // overflow: 'visible',
-                    overflow: 'hidden',
+                    overflow: 'visible',
+                    // overflow: 'hidden',
                     backgroundColor: '#2b0a07',
                     borderRadius: 3,
                     py: { xs: 4, md: 7 },
@@ -350,14 +350,14 @@ const MasterDaimondSlider = () => {
                     '& .swiper-button-prev, & .swiper-button-next': {
                         backgroundColor: 'rgba(255,255,255,0.95)',
                         color: '#2b0a07',
-                        width: { xs: 40, md: 50 },
-                        height: { xs: 40, md: 50 },
+                        width: { xs: 30, md: 40 },
+                        height: { xs: 30, md: 40 },
                         borderRadius: '50%',
                         boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
                         transition: 'all 0.3s ease',
                         '&:hover': {
                             backgroundColor: 'rgba(255,255,255,1)',
-                            transform: 'scale(1.1)',
+                            // transform: 'scale(1.1)',
                             boxShadow: '0 8px 25px rgba(0,0,0,0.2)',
                         },
                     },
