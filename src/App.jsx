@@ -2,12 +2,13 @@ import './App.css'
 import Collection from './components/Collection'
 import Header from './components/Header'
 import HeroSection from './components/HeroSection'
-// import MasterDaimondSlider from './components/MasterDaimondSlider'
 import ShopByCategories from './components/ShopByCategories'
 import Treasure from './components/Treasure'
 import Trending from './components/Trending'
 import MasterDaimondSlider from './components/MasterDaimondSlider'
 import Footer from './components/Footer'
+import NewCollection from './components/NewCollection'
+import ChauhanWorld from './components/ChauhanWorld'
 function App() {
 
   return (
@@ -18,8 +19,9 @@ function App() {
       <Collection />
       <Treasure />
       <Trending />
-      {/* <MasterDaimondSlider /> */}
       <MasterDaimondSlider />
+      <NewCollection />
+      <ChauhanWorld />
       <Footer />
 
     </>
