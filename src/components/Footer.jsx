@@ -2,7 +2,6 @@ import { Box, Typography, Link, IconButton, styled, Container } from "@mui/mater
 import { WhatsApp, Email, Facebook, Instagram, Twitter, YouTube } from "@mui/icons-material";
 
 const FooterContainer = styled(Box)({
-    backgroundColor: "#44170D",
     color: "#fff",
     paddingTop: 60,
     paddingBottom: 30,
@@ -21,57 +20,6 @@ const LogoAndDesc = styled(Box)({
     },
 });
 
-const CrownIcon = styled("div")({
-    width: 40,
-    height: 40,
-    background: "linear-gradient(45deg, #FFD700, #FFA500)",
-    borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%",
-    position: "relative",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexShrink: 0,
-    marginTop: 5,
-    "&::before": {
-        content: '""',
-        position: "absolute",
-        top: -6,
-        left: "50%",
-        transform: "translateX(-50%)",
-        width: 0,
-        height: 0,
-        borderLeft: "8px solid transparent",
-        borderRight: "8px solid transparent",
-        borderBottom: "10px solid #FFD700",
-    },
-    "&::after": {
-        content: '""',
-        position: "absolute",
-        top: 12,
-        left: "50%",
-        transform: "translateX(-50%)",
-        width: 6,
-        height: 6,
-        backgroundColor: "#6B3E2A",
-        borderRadius: "50%",
-    },
-});
-
-const CompanyName = styled(Typography)({
-    fontWeight: "bold",
-    fontSize: 20,
-    color: "#FFD700",
-    letterSpacing: 1,
-    lineHeight: 1.2,
-    marginBottom: 2,
-});
-
-const CompanySubtext = styled(Typography)({
-    fontSize: 12,
-    color: "#FFD700",
-    letterSpacing: 0.5,
-    opacity: 0.9,
-});
 
 const CompanyDescription = styled(Typography)({
     fontSize: 14,
@@ -226,73 +174,68 @@ const Copyright = styled(Typography)({
 
 export default function Footer() {
     return (
-        <FooterContainer>
-            <Container maxWidth="xl" sx={{ display: 'flex', flexWrap: 'wrap', gap: 4, justifyContent: 'space-between' }}>
-                {/* Left: Logo and description */}
-                <LogoAndDesc>
-                    <div><img src="/logo.svg" alt="logo" /></div>
-                    <CompanyDescription>
-                        Chauhan Sons Jewellers offers exquisite gold, diamond, and traditional jewellery with timeless craftsmanship and trusted quality for every occasion.
-                    </CompanyDescription>
-                </LogoAndDesc>
-
-                {/* Useful Links */}
-                <FooterSection>
-                    <SectionTitle>Useful Links</SectionTitle>
-                    {["Delivery Information", "International Shipping", "Payment Options", "Track Your Order", "Returns", "Find a Store"].map((text) => (
-                        <FooterLink key={text}>{text}</FooterLink>
-                    ))}
-                </FooterSection>
-
-                {/* Information */}
-                <FooterSection>
-                    <SectionTitle>Information</SectionTitle>
-                    {["Blog", "Offers & Contest Details", "Help & FAQ", "About Chauhan Sons"].map((text) => (
-                        <FooterLink key={text}>{text}</FooterLink>
-                    ))}
-                </FooterSection>
-
-                {/* Contact Us */}
-                <FooterSection sx={{ minWidth: 220 }}>
-                    <SectionTitle>Contact Us</SectionTitle>
-                    <ContactInfo>+91 9876-535-881</ContactInfo>
-
-                    <ChatSection>
-                        <ChatTitle>Chat With Us</ChatTitle>
-                        <ChatNumber>+91 9876-535-881</ChatNumber>
-                        <SocialIcons>
-                            <SocialIcon aria-label="WhatsApp">
-                                <WhatsApp fontSize="small" />
-                            </SocialIcon>
-                            <SocialIcon aria-label="Email">
-                                <Email fontSize="small" />
-                            </SocialIcon>
-                        </SocialIcons>
-                    </ChatSection>
-                </FooterSection>
-            </Container>
-
-            {/* Bottom Section */}
-            <BottomSection>
-                <SocialSection>
-                    <SocialTitle>Social</SocialTitle>
-                    <SocialIcons>
-                        {[Facebook, Instagram, Twitter, YouTube].map((IconComp, idx) => (
-                            <SocialIcon key={idx} aria-label={IconComp.displayName || "social-icon"}>
-                                <IconComp fontSize="small" />
-                            </SocialIcon>
+        <div className="primary_Bgclr">
+            <FooterContainer>
+                <Container maxWidth="xl" sx={{ display: 'flex', flexWrap: 'wrap', gap: 4, justifyContent: 'space-between' }}>
+                    {/* Left: Logo and description */}
+                    <LogoAndDesc>
+                        <div><img src="/logo.svg" alt="logo" /></div>
+                        <CompanyDescription>
+                            Chauhan Sons Jewellers offers exquisite gold, diamond, and traditional jewellery with timeless craftsmanship and trusted quality for every occasion.
+                        </CompanyDescription>
+                    </LogoAndDesc>
+                    {/* Useful Links */}
+                    <FooterSection>
+                        <SectionTitle>Useful Links</SectionTitle>
+                        {["Delivery Information", "International Shipping", "Payment Options", "Track Your Order", "Returns", "Find a Store"].map((text) => (
+                            <FooterLink key={text}>{text}</FooterLink>
                         ))}
-                    </SocialIcons>
-                </SocialSection>
-
-                <FooterLinksRow>
-                    {["Terms & Conditions", "Privacy Policy", "Disclaimer"].map((text) => (
-                        <BottomLink key={text}>{text}</BottomLink>
-                    ))}
-                </FooterLinksRow>
-
-                <Copyright>© 2023 Chauhan Son's Company Limited. All Rights Reserved.</Copyright>
-            </BottomSection>
-        </FooterContainer>
+                    </FooterSection>
+                    {/* Information */}
+                    <FooterSection>
+                        <SectionTitle>Information</SectionTitle>
+                        {["Blog", "Offers & Contest Details", "Help & FAQ", "About Chauhan Sons"].map((text) => (
+                            <FooterLink key={text}>{text}</FooterLink>
+                        ))}
+                    </FooterSection>
+                    {/* Contact Us */}
+                    <FooterSection sx={{ minWidth: 220 }}>
+                        <SectionTitle>Contact Us</SectionTitle>
+                        <ContactInfo>+91 9876-535-881</ContactInfo>
+                        <ChatSection>
+                            <ChatTitle>Chat With Us</ChatTitle>
+                            <ChatNumber>+91 9876-535-881</ChatNumber>
+                            <SocialIcons>
+                                <SocialIcon aria-label="WhatsApp">
+                                    <WhatsApp fontSize="small" />
+                                </SocialIcon>
+                                <SocialIcon aria-label="Email">
+                                    <Email fontSize="small" />
+                                </SocialIcon>
+                            </SocialIcons>
+                        </ChatSection>
+                    </FooterSection>
+                </Container>
+                {/* Bottom Section */}
+                <BottomSection>
+                    <SocialSection>
+                        <SocialTitle>Social</SocialTitle>
+                        <SocialIcons>
+                            {[Facebook, Instagram, Twitter, YouTube].map((IconComp, idx) => (
+                                <SocialIcon key={idx} aria-label={IconComp.displayName || "social-icon"}>
+                                    <IconComp fontSize="small" />
+                                </SocialIcon>
+                            ))}
+                        </SocialIcons>
+                    </SocialSection>
+                    <FooterLinksRow>
+                        {["Terms & Conditions", "Privacy Policy", "Disclaimer"].map((text) => (
+                            <BottomLink key={text}>{text}</BottomLink>
+                        ))}
+                    </FooterLinksRow>
+                    <Copyright>© 2023 Chauhan Son's Company Limited. All Rights Reserved.</Copyright>
+                </BottomSection>
+            </FooterContainer>
+        </div>
     );
 }
