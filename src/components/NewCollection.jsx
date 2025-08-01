@@ -143,7 +143,7 @@ const RightFlexBox = styled(Box)({
     justifyContent: "center",
   },
   "@media (max-width:500px)": {
-    flexDirection: "column",
+    // flexDirection: "column",
     // flexWrap: "nowrap",
     gap: 10,
   },
@@ -155,10 +155,10 @@ const ProductCard = styled(Card)({
   cursor: "pointer",
   display: "flex",
   flexDirection: "column",
-  width: "calc(33% - 14px)", // 3 in a row with gap adjustment
-  minWidth: 180,
-  maxWidth: 220,
-  height: 270,
+  width: "calc(33% - 14px)",
+  // minWidth: 180,
+  // maxWidth: 220,
+  // height: 270,
   boxSizing: "border-box",
   boxShadow: "0 2px 8px rgba(0,0,0,0.07)",
   transition: "transform 0.26s, box-shadow 0.26s",
@@ -206,7 +206,7 @@ const DiscountBadge = styled(Chip)({
 });
 
 const ProductInfo = styled(CardContent)({
-  padding: "14px 14px 12px 14px",
+  padding: "14px",
   flex: 1,
 });
 
