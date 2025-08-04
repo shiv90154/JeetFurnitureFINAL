@@ -178,9 +178,14 @@ const ExperienceCards = [
     title: "TALK TO AN EXPERT",
   },
   {
-    key: "silver",
-    title: "SILVER"
+    key: "talk-expert",
+    image: "/experImg6.png",
+    title: "Blogs",
   },
+  // {
+  //   key: "silver",
+  //   title: "SILVER"
+  // },
 ];
 
 export default function ChauhanExperience() {
