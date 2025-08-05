@@ -31,7 +31,7 @@ import {
   Close as CloseIcon,
 } from "@mui/icons-material";
 
-import NavHoverDropdown from "../dropdown/NavHoverDropdown";
+import NavHoverDropdown from "../dropdownHover/NavHoverDropdown";
 import { useNavigate } from "react-router-dom";
 import AccountPopup from "../popUp/AccountPopup";
 
