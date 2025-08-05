@@ -20,7 +20,6 @@ function App() {
         <Route path="/allJewellery" element={<AllJewelleryPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/wishlist" element={<WishlistPage />} />
-        <Route path="/account" element={<AccountPopup />} />
       </Routes>
 
       <Footer />
