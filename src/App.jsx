@@ -9,6 +9,7 @@ import { MobileBottomNav } from './common components/MobileBottomNav'
 import LoginPage from './common components/LoginPage'
 import WishlistPage from './common components/WishlistPage'
 import AccountPopup from './popUp/AccountPopup'
+import CartPage from './pages/CartPage'
 function App() {
 
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/allJewellery" element={<AllJewelleryPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/wishlist" element={<WishlistPage />} />
+        <Route path="/cart" element={<CartPage />} />
       </Routes>
 
       <Footer />

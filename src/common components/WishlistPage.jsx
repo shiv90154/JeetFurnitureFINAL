@@ -6,13 +6,13 @@ import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 
 const wishlistItems = [
   // Fill with product objects when items are in the wishlist, leave [] for empty
-  // {
-  //   img: 'https://example.com/image.jpg',
-  //   title: 'Product title...',
-  //   price: '₹ 37,038',
-  //   oldPrice: '₹ 38,845',
-  //   status: 'Only 1 left', // or 'Best Seller', or ''
-  // },
+  {
+    img: 'https://example.com/image.jpg',
+    title: 'Product title...',
+    price: '₹ 37,038',
+    oldPrice: '₹ 38,845',
+    status: 'Only 1 left', // or 'Best Seller', or ''
+  },
   // ... more items
 ];
 
