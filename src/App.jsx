@@ -9,6 +9,7 @@ import { MobileBottomNav } from './common components/MobileBottomNav'
 import LoginPage from './pages/LoginPage'
 import WishlistPage from './pages/WishlistPage'
 import CartPage from './pages/CartPage'
+import SingleProductPage from './pages/SingleProductPage'
 function App() {
 
   return (
@@ -21,6 +22,8 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/wishlist" element={<WishlistPage />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/singleProduct" element={<SingleProductPage />} />
+
       </Routes>
 
       <Footer />
