@@ -4,6 +4,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 import { useState } from 'react';
+import SlickSlider from '../common components/SlickSlider';
 
 const jewelleryData = [
     {
@@ -426,6 +427,7 @@ export default function AllJewelleryPage() {
             <Container maxWidth="xl">
                 <JewelleryGrid />
                 <JewelAssurance />
+                <SlickSlider />
             </Container>
         </Box>
     );

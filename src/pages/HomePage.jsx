@@ -11,6 +11,7 @@ import Exclusive from '../HomePageComponents/Exclusive'
 import ChauhanExperience from '../HomePageComponents/ChauhanExperience'
 
 const HomePage = () => {
+
     return (
         <div>
             <HeroSection />

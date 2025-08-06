@@ -279,17 +279,18 @@ export default function Header() {
           <TopIconButton size="small">
             <DiamondOutlined sx={{ fontSize: 20 }} />
           </TopIconButton>
-          <TopIconButton size="small">
+          {/* <TopIconButton size="small">
             <LocalMallOutlined sx={{ fontSize: 20 }} />
+          </TopIconButton> */}
+          <TopIconButton size="small">
+            <FavoriteBorder onClick={() => navigate("/wishlist")} sx={{ fontSize: 20 }} />
           </TopIconButton>
           <TopIconButton size="small">
-            <FavoriteBorder sx={{ fontSize: 20 }} />
+            <PersonOutline onMouseEnter={() => setShowAccountPopup(!showAccountPopup)} sx={{ fontSize: 20 }} />
+            {/* <PersonOutline onClick={() => setShowAccountPopup(!showAccountPopup)} sx={{ fontSize: 20 }} /> */}
           </TopIconButton>
           <TopIconButton size="small">
-            <PersonOutline onClick={() => setShowAccountPopup(!showAccountPopup)} sx={{ fontSize: 20 }} />
-          </TopIconButton>
-          <TopIconButton size="small">
-            <ShoppingBagOutlined sx={{ fontSize: 20 }} />
+            <ShoppingBagOutlined onClick={() => navigate("/cart")} sx={{ fontSize: 20 }} />
           </TopIconButton>
         </IconsRow>
       </HeaderToolbar>

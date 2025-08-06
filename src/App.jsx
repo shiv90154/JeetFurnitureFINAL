@@ -8,7 +8,6 @@ import Footer from './common components/Footer'
 import { MobileBottomNav } from './common components/MobileBottomNav'
 import LoginPage from './pages/LoginPage'
 import WishlistPage from './pages/WishlistPage'
-import AccountPopup from './popUp/AccountPopup'
 import CartPage from './pages/CartPage'
 function App() {
 
