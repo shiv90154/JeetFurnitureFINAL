@@ -9,11 +9,13 @@ import ChauhanWorld from '../HomePageComponents/ChauhanWorld'
 import ExchangeOffer from '../HomePageComponents/ExchangeOffer'
 import Exclusive from '../HomePageComponents/Exclusive'
 import ChauhanExperience from '../HomePageComponents/ChauhanExperience'
+import GetInTouchCard from '../common components/GetInTouchCard'
 
 const HomePage = () => {
 
     return (
         <div>
+            {/* <GetInTouchCard /> */}
             <HeroSection />
             <ShopByCategories />
             <Collection />
