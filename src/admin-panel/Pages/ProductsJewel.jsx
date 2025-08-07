@@ -106,7 +106,7 @@ const ProductsJewel = () => {
   };
 
   const handleEdit = (id) => {
-    navigate(`/pharma-admin/addNewProduct/${id}`);
+    navigate(`/AdminPanel/addNewProduct/${id}`);
   };
 
   const handleView = (product) => {
@@ -136,7 +136,7 @@ const ProductsJewel = () => {
             color="primary"
             startIcon={<Add />}
             component={Link}
-            to="/pharma-admin/addNewProduct"
+            to="/AdminPanel/addNewProduct"
           >
             Add New Product
           </Button>

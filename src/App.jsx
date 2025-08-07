@@ -17,6 +17,8 @@ import AdminLayout from './admin-panel/component/AdminLayout';
 import Dashboard from './admin-panel/Pages/Dashboard';
 import CategoryJewel from './admin-panel/Pages/CategoryJewel';
 import SubCategoryJewel from './admin-panel/Pages/SubCategoryJewel';
+import ProductsJewel from './admin-panel/Pages/ProductsJewel';
+import AddNewProduct from './admin-panel/Pages/AddNewProduct';
 
 function App() {
   const location = useLocation();
@@ -59,6 +61,8 @@ function App() {
             <Route index element={<Dashboard />} />
             <Route path="category" element={<CategoryJewel />} />
             <Route path="subcategory" element={<SubCategoryJewel />} />
+            <Route path="products" element={<ProductsJewel />} />
+            <Route path="addNewProduct" element={<AddNewProduct />} />
           </Route>
         </Route>
       </Routes>
