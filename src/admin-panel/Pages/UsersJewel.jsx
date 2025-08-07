@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axiosInstance from '../../../components/AxiosInstance';
+import axiosInstance from '../../common components/AxiosInstance';
 import CustomLoader from '../../../components/CustomLoader';
 import { toast } from 'react-toastify';
 import {

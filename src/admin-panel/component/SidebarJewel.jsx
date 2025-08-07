@@ -24,16 +24,16 @@ const SidebarJewel = ({ onClose }) => {
     const isMobile = useMediaQuery('(max-width:760px)');
 
     const navItems = [
-        { to: '/pharma-admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-        { to: '/pharma-admin/Category', label: 'Category', icon: Users },
-        { to: '/pharma-admin/subCategory', label: 'Sub Category', icon: Users },
-        { to: '/pharma-admin/products', label: 'Products', icon: Package },
-        { to: '/pharma-admin/orders', label: 'Orders', icon: Package },
-        { to: '/pharma-admin/banner', label: 'Banner', icon: Image },
-        { to: '/pharma-admin/user', label: 'User', icon: Users },
-        { to: '/pharma-admin/wholesale', label: 'Wholesale User', icon: Users },
-        { to: '/pharma-admin/prescriptions', label: 'Prescriptions', icon: Users },
-        { to: '/pharma-admin/settings', label: 'Settings', icon: Settings },
+        { to: '/AdminPanel/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+        { to: '/AdminPanel/Category', label: 'Category', icon: Users },
+        { to: '/AdminPanel/subCategory', label: 'Sub Category', icon: Users },
+        { to: '/AdminPanel/products', label: 'Products', icon: Package },
+        { to: '/AdminPanel/orders', label: 'Orders', icon: Package },
+        { to: '/AdminPanel/banner', label: 'Banner', icon: Image },
+        { to: '/AdminPanel/user', label: 'User', icon: Users },
+        // { to: '/AdminPanel/wholesale', label: 'Wholesale User', icon: Users },
+        // { to: '/AdminPanel/prescriptions', label: 'Prescriptions', icon: Users },
+        // { to: '/AdminPanel/settings', label: 'Settings', icon: Settings },
     ];
 
     return (

@@ -88,6 +88,7 @@ import AdminLogin from './admin-panel/component/AdminLogin';
 import ProtectedRoute from './admin-panel/component/ProtectedRoute';
 import AdminLayout from './admin-panel/component/AdminLayout';
 import Dashboard from './admin-panel/Pages/Dashboard';
+import CategoryJewel from './admin-panel/Pages/CategoryJewel';
 
 function App() {
   const location = useLocation();
@@ -128,7 +129,7 @@ function App() {
             }
           >
             <Route index element={<Dashboard />} />
-            {/* Add more admin routes as needed */}
+            <Route path="category" element={<CategoryJewel />} />
           </Route>
         </Route>
       </Routes>
