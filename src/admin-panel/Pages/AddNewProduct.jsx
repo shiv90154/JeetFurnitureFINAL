@@ -80,8 +80,8 @@ const AddNewProduct = () => {
             quantity: Array.isArray(product.quantity)
               ? product.quantity
               : typeof product.quantity === 'string' && product.quantity.length > 0
-              ? [product.quantity]
-              : [],
+                ? [product.quantity]
+                : [],
             stock: (product.stock ?? '').toLowerCase().trim() === 'no' ? 'no' : 'yes',
           });
         }
@@ -308,133 +308,133 @@ const AddNewProduct = () => {
         <form onSubmit={handleSubmit} noValidate>
           {/* Basic Information */}
           <Box mb={4}>
-  <Typography variant="h6" gutterBottom>
-    Basic Information
-  </Typography>
-  <Box display="flex" gap={2} mb={2}>
-    {/* Product Name Input */}
-    <TextField
-      label="Product Name *"
-      name="name"
-      value={formData.name}
-      onChange={handleChange}
-      fullWidth
-      error={!!errors.name}
-      helperText={errors.name}
-      required
-    />
-
-    {/* Add Media Button and Help Text */}
-    <Box flex={1} display="flex" flexDirection="column" justifyContent="flex-end">
-      <input
-        multiple
-        accept="image/*,video/*"
-        ref={fileInputRef}
-        type="file"
-        style={{ display: 'none' }}
-        onChange={handleMediaChange}
-      />
-      <Button
-        variant="contained"
-        fullWidth
-        onClick={triggerFileInput}
-        sx={{ mb: 0.5 }}
-      >
-        Add Media
-      </Button>
-      <Typography
-        variant="caption"
-        color="textSecondary"
-        textAlign="center"
-        sx={{ minHeight: 18 }}
-      >
-        Supports JPG, PNG, GIF, MP4 (Max 10MB each)
-      </Typography>
-      {/* This next Typography is always shown when no media is uploaded */}
-      {formData.media.length === 0 && (
-        <Typography
-          variant="caption"
-          color="textSecondary"
-          textAlign="center"
-          sx={{ minHeight: 18 }}
-        >
-          No media selected
-        </Typography>
-      )}
-    </Box>
-  </Box>
-
-  {/* Media Preview: ONLY displayed if media.length > 0. Each shown on a card row with X. */}
-  {formData.media.length > 0 && (
-    <Box display="flex" gap={2} flexWrap="wrap" mb={2}>
-      {formData.media.map((media, index) => (
-        <Card
-          key={index}
-          sx={{
-            maxWidth: 150,
-            minWidth: 120,
-            position: 'relative',
-            p: 0,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          {media.type === 'video' ? (
-            <CardMedia
-              component="video"
-              controls
-              src={media.url}
-              sx={{ height: 100, width: '100%' }}
-            />
-          ) : (
-            <CardMedia
-              component="img"
-              image={media.url}
-              alt={`Media preview ${index}`}
-              sx={{ height: 100, objectFit: 'cover', width: '100%' }}
-            />
-          )}
-          <IconButton
-            aria-label="Remove media"
-            onClick={() => removeMedia(index)}
-            size="small"
-            sx={{
-              position: 'absolute',
-              top: 2,
-              right: 2,
-              bgcolor: 'rgba(255,255,255,0.7)',
-            }}
-          >
-            <CloseIcon fontSize="small" />
-          </IconButton>
-          <CardContent sx={{ p: 1, pb: '8px!important' }}>
-            <Typography variant="body2" noWrap>
-              {media.name}
+            <Typography variant="h6" gutterBottom>
+              Basic Information
             </Typography>
-            <Typography variant="caption" color="textSecondary" noWrap>
-              {formatFileSize(media.size)}
-            </Typography>
-          </CardContent>
-        </Card>
-      ))}
-    </Box>
-  )}
+            <Box display="flex" gap={2} mb={2}>
+              {/* Product Name Input */}
+              <TextField
+                label="Product Name *"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                fullWidth
+                error={!!errors.name}
+                helperText={errors.name}
+                required
+              />
 
-  <TextField
-    label="Description *"
-    name="description"
-    value={formData.description}
-    onChange={handleChange}
-    multiline
-    minRows={3}
-    fullWidth
-    error={!!errors.description}
-    helperText={errors.description}
-    required
-    sx={{ mt: 2 }}
-  />
-</Box>
+              {/* Add Media Button and Help Text */}
+              <Box flex={1} display="flex" flexDirection="column" justifyContent="flex-end">
+                <input
+                  multiple
+                  accept="image/*,video/*"
+                  ref={fileInputRef}
+                  type="file"
+                  style={{ display: 'none' }}
+                  onChange={handleMediaChange}
+                />
+                <Button
+                  variant="contained"
+                  fullWidth
+                  onClick={triggerFileInput}
+                  sx={{ mb: 0.5 }}
+                >
+                  Add Media
+                </Button>
+                <Typography
+                  variant="caption"
+                  color="textSecondary"
+                  textAlign="center"
+                  sx={{ minHeight: 18 }}
+                >
+                  Supports JPG, PNG, GIF, MP4 (Max 10MB each)
+                </Typography>
+                {/* This next Typography is always shown when no media is uploaded */}
+                {formData.media.length === 0 && (
+                  <Typography
+                    variant="caption"
+                    color="textSecondary"
+                    textAlign="center"
+                    sx={{ minHeight: 18 }}
+                  >
+                    No media selected
+                  </Typography>
+                )}
+              </Box>
+            </Box>
+
+            {/* Media Preview: ONLY displayed if media.length > 0. Each shown on a card row with X. */}
+            {formData.media.length > 0 && (
+              <Box display="flex" gap={2} flexWrap="wrap" mb={2}>
+                {formData.media.map((media, index) => (
+                  <Card
+                    key={index}
+                    sx={{
+                      maxWidth: 150,
+                      minWidth: 120,
+                      position: 'relative',
+                      p: 0,
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                    }}
+                  >
+                    {media.type === 'video' ? (
+                      <CardMedia
+                        component="video"
+                        controls
+                        src={media.url}
+                        sx={{ height: 100, width: '100%' }}
+                      />
+                    ) : (
+                      <CardMedia
+                        component="img"
+                        image={media.url}
+                        alt={`Media preview ${index}`}
+                        sx={{ height: 100, objectFit: 'cover', width: '100%' }}
+                      />
+                    )}
+                    <IconButton
+                      aria-label="Remove media"
+                      onClick={() => removeMedia(index)}
+                      size="small"
+                      sx={{
+                        position: 'absolute',
+                        top: 2,
+                        right: 2,
+                        bgcolor: 'rgba(255,255,255,0.7)',
+                      }}
+                    >
+                      <CloseIcon fontSize="small" />
+                    </IconButton>
+                    <CardContent sx={{ p: 1, pb: '8px!important' }}>
+                      <Typography variant="body2" noWrap>
+                        {media.name}
+                      </Typography>
+                      <Typography variant="caption" color="textSecondary" noWrap>
+                        {formatFileSize(media.size)}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                ))}
+              </Box>
+            )}
+
+            <TextField
+              label="Description *"
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              multiline
+              minRows={3}
+              fullWidth
+              error={!!errors.description}
+              helperText={errors.description}
+              required
+              sx={{ mt: 2 }}
+            />
+          </Box>
 
 
           {/* Pricing Information */}

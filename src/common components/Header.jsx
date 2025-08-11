@@ -235,8 +235,8 @@ export default function Header() {
     { id: null, icon: <Circle sx={{ fontSize: "16px" }} />, label: "Rings" },
     { id: null, icon: <Star sx={{ fontSize: "16px" }} />, label: "Daily Wear" },
     { id: null, icon: <LocalMallOutlined sx={{ fontSize: "16px" }} />, label: "Collections" },
-    { id: null, icon: <Favorite sx={{ fontSize: "16px" }} />, label: "Wedding" },
-    { id: null, icon: <CardGiftcard sx={{ fontSize: "16px" }} />, label: "Gifting" },
+    { id: "wedding", icon: <Favorite sx={{ fontSize: "16px" }} />, label: "Wedding", navigate: () => navigate("/wedding") },
+    { id: "gifting", icon: <CardGiftcard sx={{ fontSize: "16px" }} />, label: "Gifting", navigate: () => navigate("/gifting") },
     { id: null, icon: <MoreHoriz sx={{ fontSize: "16px" }} />, label: "More" },
   ];
 

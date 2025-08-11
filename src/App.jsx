@@ -19,6 +19,8 @@ import CategoryJewel from './admin-panel/Pages/CategoryJewel';
 import SubCategoryJewel from './admin-panel/Pages/SubCategoryJewel';
 import ProductsJewel from './admin-panel/Pages/ProductsJewel';
 import AddNewProduct from './admin-panel/Pages/AddNewProduct';
+import WeddingPage from './dropdownPages/WeddingPage';
+import GiftingPage from './dropdownPages/GiftingPage';
 
 function App() {
   const location = useLocation();
@@ -40,6 +42,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/allJewellery" element={<AllJewelleryPage />} />
+        <Route path="/wedding" element={<WeddingPage />} />
+        <Route path="/gifting" element={<GiftingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/wishlist" element={<WishlistPage />} />
         <Route path="/cart" element={<CartPage />} />
