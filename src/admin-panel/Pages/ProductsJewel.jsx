@@ -31,6 +31,7 @@ import {
 } from '@mui/material';
 import { Add, Edit, Delete, Close, Visibility } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
+import { publicUrl } from '../../common components/PublicUrl';
 
 const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
   marginTop: theme.spacing(3),
@@ -63,14 +64,6 @@ const ProductsJewel = () => {
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-
-  const publicUrl = (p) =>
-    new URL(
-      String(p || '')
-        .replace(/\\/g, '/')        // windows → web slashes
-        .replace(/^\/+/, ''),       // strip leading slashes
-      API_URL                       // can end with or without '/'
-    ).toString();
 
   // Pagination handlers
   const handleChangePage = (event, newPage) => {
