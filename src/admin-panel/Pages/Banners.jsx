@@ -44,6 +44,13 @@ const Banners = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const publicUrl = (p) =>
+    new URL(
+      String(p || '')
+        .replace(/\\/g, '/')        // windows → web slashes
+        .replace(/^\/+/, ''),       // strip leading slashes
+      API_URL                       // can end with or without '/'
+    ).toString();
 
   const bannerList = [
     { id: 1, title: 'HomePageSlider' },
@@ -186,7 +193,8 @@ const Banners = () => {
                     <TableCell>{item.type}</TableCell>
                     <TableCell>
                       <img
-                        src={`${API_URL}/${item.slider_image}`}
+                        // src={`${API_URL}/${item.slider_image}`}
+                        src={publicUrl(item.slider_image)}
                         alt={`Banner ${i + 1}`}
                         style={{
                           width: 200,
