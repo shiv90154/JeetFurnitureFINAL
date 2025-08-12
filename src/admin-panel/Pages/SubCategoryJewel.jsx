@@ -72,6 +72,13 @@ const SubCategoryJewel = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [submitting, setSubmitting] = useState(false);
+  const publicUrl = (p) =>
+    new URL(
+      String(p || '')
+        .replace(/\\/g, '/')        // windows → web slashes
+        .replace(/^\/+/, ''),       // strip leading slashes
+      API_URL                       // can end with or without '/'
+    ).toString();
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -212,7 +219,8 @@ const SubCategoryJewel = () => {
       subCategoryvariety: selectedVariety,
     });
 
-    setImagePreview(item.image ? `${API_URL}/${item.image}` : null);
+    // setImagePreview(item.image ? `${API_URL}/${item.image}` : null);
+    setImagePreview(cat.image ? publicUrl(cat.image) : null);
     setFilteredCategories(filtered);
     setEditingId(item._id);
     setOpenModal(true);
@@ -303,7 +311,8 @@ const SubCategoryJewel = () => {
                     <TableCell>{item.description || '-'}</TableCell>
                     <TableCell>
                       <Avatar
-                        src={item.image ? `${API_URL}/${item.image}` : `${API_URL}/${item.category_id?.image}`}
+                        // src={item.image ? `${API_URL}/${item.image}` : `${API_URL}/${item.category_id?.image}`}
+                        src={publicUrl(item.image)}
                         alt={item.name}
                         sx={{ width: 56, height: 56 }}
                         variant="rounded"
@@ -389,7 +398,7 @@ const SubCategoryJewel = () => {
                   fullWidth={false} // remove forced full width
                 >
                   <MenuItem value="" disabled>Select Variety</MenuItem>
-                  <MenuItem value="human">Diamond</MenuItem>
+                  <MenuItem value="diamond">Diamond</MenuItem>
                   <MenuItem value="gold">Gold</MenuItem>
                   <MenuItem value="silver">Silver</MenuItem>
                 </Select>

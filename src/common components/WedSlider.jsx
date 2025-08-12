@@ -1,276 +1,211 @@
-import React, { useRef, useState } from 'react';
-import { Box, IconButton, Button } from '@mui/material';
-import { ArrowBackIos, ArrowForwardIos, ArrowForward } from '@mui/icons-material';
+// WeddingPage.jsx
+import React, { useState } from "react";
+import {
+    Container,
+    Typography,
+    Box,
+    Grid,
+    Button,
+    IconButton,
+    TextField,
+    InputAdornment,
+    styled,
+    Fade
+} from "@mui/material";
+import {
+    Search,
+    Diamond,
+    Spa,
+    Celebration,
+    LocalOffer,
+    ArrowForwardIos
+} from "@mui/icons-material";
+import { keyframes } from "@emotion/react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Autoplay } from "swiper/modules";
+import WedSlider from "../common components/WedSlider";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/autoplay";
 
-const weddingOccasions = [
-    {
-        name: 'Reception',
-        image: 'https://staticimg.tanishq.co.in/microsite/rivaah-homepage/assets/images/bigImageSlider/8.png',
-        link: 'https://www.tanishq.co.in/shop/rivaah-x-tarun-tahiliani?lang=en_IN'
+const reel1Video = "/video/homeVideo.mp4";
+const reel2Video = "/video/homeVideo.mp4";
+const instaPhotosImage = "/experImg2.png";
+const rivaahHeroImage = "/experImg5.png";
+
+const shimmer = keyframes`
+  0% { background-position: -468px 0 }
+  100% { background-position: 468px 0 }
+`;
+
+const GlowButton = styled(Button)({
+    position: "relative",
+    overflow: "hidden",
+    fontWeight: 600,
+    "&:before": {
+        content: '""',
+        position: "absolute",
+        top: "-50%",
+        left: "-50%",
+        right: "-50%",
+        bottom: "-50%",
+        background: "linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent)",
+        transform: "rotate(45deg)",
+        animation: `${shimmer} 3s infinite linear`,
+        opacity: 0,
+        transition: "opacity 0.3s",
     },
-    {
-        name: 'Engagement',
-        image: 'https://staticimg.tanishq.co.in/microsite/rivaah-homepage/assets/images/bigImageSlider/1.png',
-        link: 'https://www.tanishq.co.in/shop/finger-rings?lang=en_IN'
-    },
-    {
-        name: 'Haldi',
-        image: 'https://staticimg.tanishq.co.in/microsite/rivaah-homepage/assets/images/bigImageSlider/2.png',
-        link: 'https://www.tanishq.co.in/shop/rivaah-gujarati-jewellery?lang=en_IN'
-    },
-    {
-        name: 'Mehendi',
-        image: 'https://staticimg.tanishq.co.in/microsite/rivaah-homepage/assets/images/bigImageSlider/3.png',
-        link: 'https://www.tanishq.co.in/shop/rivaah-contemporary-jewellery?lang=en_IN'
-    },
-    {
-        name: 'Sangeet',
-        image: 'https://staticimg.tanishq.co.in/microsite/rivaah-homepage/assets/images/bigImageSlider/4.png',
-        link: 'https://www.tanishq.co.in/shop/rivaah?lang=en_IN'
-    },
-    {
-        name: 'Wedding',
-        image: 'https://staticimg.tanishq.co.in/microsite/rivaah-homepage/assets/images/bigImageSlider/5.png',
-        link: 'https://www.tanishq.co.in/shop/rivaah?lang=en_IN'
-    },
-    {
-        name: 'Cocktail',
-        image: 'https://staticimg.tanishq.co.in/microsite/rivaah-homepage/assets/images/bigImageSlider/6.png',
-        link: 'https://www.tanishq.co.in/shop/diamond?lang=en_IN'
-    }
+    "&:hover:before": { opacity: 1 },
+});
+
+// Add community images for richer UI
+const communityBrides = [
+    { name: "Bihari Bride", img: "/brides/bihari.jpg" },
+    { name: "Tamil Bride", img: "/brides/tamil.jpg" },
+    { name: "Telugu Bride", img: "/brides/telugu.jpg" },
+    { name: "Kannadiga Bride", img: "/brides/kannada.jpg" },
+    { name: "Gujarati Bride", img: "/brides/gujarati.jpg" },
+    { name: "Marathi Bride", img: "/brides/marathi.jpg" },
+    { name: "Bengali Bride", img: "/brides/bengali.jpg" },
+    { name: "Punjabi Bride", img: "/brides/punjabi.jpg" }
 ];
 
-const WedSlider = () => {
-    const [activeIndex, setActiveIndex] = useState(6); // Start with Reception (index 6)
+const brideCategories = [
+    { name: "Necklace Set", icon: <Diamond /> },
+    { name: "Long Necklace", icon: <Spa /> },
+    { name: "Bangles", icon: <Celebration /> },
+    { name: "Diamond", icon: <Diamond /> },
+    { name: "Mangalsutra", icon: <LocalOffer /> },
+    { name: "Accessories", icon: <Spa /> },
+];
 
-    const nextSlide = () => {
-        setActiveIndex((prev) => (prev + 1) % weddingOccasions.length);
-    };
+const trendingItems = ["Accessories", "Long Necklace", "Bangles", "Necklace Sets", "Diamond Jewellery"];
 
-    const prevSlide = () => {
-        setActiveIndex((prev) => (prev - 1 + weddingOccasions.length) % weddingOccasions.length);
-    };
-
-    const getCardStyle = (index) => {
-        const diff = index - activeIndex;
-        const totalCards = weddingOccasions.length;
-
-        // Normalize the difference to handle circular array
-        let normalizedDiff = diff;
-        if (Math.abs(diff) > totalCards / 2) {
-            normalizedDiff = diff > 0 ? diff - totalCards : diff + totalCards;
-        }
-
-        let transform = '';
-        let zIndex = 0;
-        let opacity = 1;
-
-        if (normalizedDiff === 0) {
-            // Active card - front center
-            transform = 'translate3d(0px, 0px, 0px) rotateZ(0deg) scale(1)';
-            zIndex = 7;
-        } else if (normalizedDiff === 1) {
-            // Next card - right side
-            transform = 'translate3d(calc(19.25% - 589px), 0px, -100px) rotateZ(8deg) scale(1)';
-            zIndex = 6;
-        } else if (normalizedDiff === 2) {
-            // Second card - further right
-            transform = 'translate3d(calc(37% - 1178px), 0px, -200px) rotateZ(16deg) scale(1)';
-            zIndex = 5;
-        } else if (normalizedDiff === 3) {
-            // Third card - even further right
-            transform = 'translate3d(calc(53.25% - 1767px), 0px, -300px) rotateZ(24deg) scale(1)';
-            zIndex = 4;
-        } else if (normalizedDiff >= 4) {
-            // Cards at the back - max rotation
-            transform = 'translate3d(calc(68% - 2356px), 0px, -400px) rotateZ(32deg) scale(1)';
-            zIndex = Math.max(1, 4 - (normalizedDiff - 4));
-        } else if (normalizedDiff === -1) {
-            // Previous card - left side (hidden behind)
-            transform = 'translate3d(calc(-19.25% + 589px), 0px, -100px) rotateZ(-8deg) scale(1)';
-            zIndex = 6;
-            opacity = 0.7;
-        } else {
-            // Other cards - hidden
-            transform = 'translate3d(calc(-68% + 2356px), 0px, -400px) rotateZ(-32deg) scale(1)';
-            zIndex = 1;
-            opacity = 0;
-        }
-
-        return {
-            transform,
-            zIndex,
-            opacity,
-            transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)'
-        };
-    };
-
+export default function WeddingPage() {
     return (
-        <div 
-        // style={{ minHeight: "120vh" }}
-        >
-            <Box sx={{
-                width: '100%',
-                maxWidth: '80%',
-                mx: 'auto',
-                py: 4,
-                position: 'relative',
-                mt: { xs: 4, md: 10 },
-                height: { xs: '400px', md: '600px' },
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-            }}>
-                {/* Navigation Buttons */}
-                <IconButton
-                    onClick={prevSlide}
-                    sx={{
-                        position: 'absolute',
-                        left: { xs: 10, md: 40 },
-                        top: '50%',
-                        zIndex: 10,
-                        transform: 'translateY(-50%)',
-                        bgcolor: '#fff',
-                        border: '1px solid #ddd',
-                        width: 50,
-                        height: 50,
-                        borderRadius: '50%',
-                        boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-                        '&:hover': {
-                            bgcolor: '#f5f5f5',
-                        }
+        <Box sx={{ backgroundColor: "#fff", overflowX: "hidden" }}>
+
+            {/* HERO SECTION */}
+            <Box sx={{ position: "relative", width: "100%", height: { xs: 300, md: 500 }, mb: 8 }}>
+                <img
+                    src={rivaahHeroImage}
+                    alt="Rivaah Wedding Jewellers"
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover"
                     }}
-                >
-                    <ArrowBackIos sx={{ color: '#333', fontSize: '18px' }} />
-                </IconButton>
-                <IconButton
-                    onClick={nextSlide}
-                    sx={{
-                        position: 'absolute',
-                        right: { xs: 10, md: 40 },
-                        top: '50%',
-                        zIndex: 10,
-                        transform: 'translateY(-50%)',
-                        bgcolor: '#fff',
-                        border: '1px solid #ddd',
-                        width: 50,
-                        height: 50,
-                        borderRadius: '50%',
-                        boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-                        '&:hover': {
-                            bgcolor: '#f5f5f5',
-                        }
-                    }}
-                >
-                    <ArrowForwardIos sx={{ color: '#333', fontSize: '18px' }} />
-                </IconButton>
-                {/* 3D Card Stack Container */}
+                />
+                {/* Overlay */}
                 <Box sx={{
-                    position: 'relative',
-                    width: { xs: '280px', md: '569px' },
-                    height: { xs: '350px', md: '450px' },
-                    perspective: '1000px',
-                    transformStyle: 'preserve-3d'
+                    position: "absolute",
+                    inset: 0,
+                    background: "linear-gradient(180deg,rgba(0,0,0,0.3),rgba(0,0,0,0.6))",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    color: "white",
+                    textAlign: "center"
                 }}>
-                    {weddingOccasions.map((occasion, index) => {
-                        const cardStyle = getCardStyle(index);
-                        const isActive = index === activeIndex;
-                        return (
-                            <Box
-                                key={index}
-                                sx={{
-                                    position: 'absolute',
-                                    top: 0,
-                                    left: 0,
-                                    width: '100%',
-                                    height: '100%',
-                                    borderRadius: '20px',
-                                    overflow: 'hidden',
-                                    cursor: 'pointer',
-                                    transformOrigin: 'center center',
-                                    boxShadow: '0 8px 32px rgba(0,0,0,0.15)',
-                                    ...cardStyle,
-                                    '&:hover .occasion-button': {
-                                        opacity: isActive ? 1 : 0,
-                                        transform: isActive ? 'translateX(-50%) translateY(0)' : 'translateX(-50%) translateY(10px)'
-                                    }
-                                }}
-                                onClick={() => setActiveIndex(index)}
-                            >
-                                <img
-                                    src={occasion.image}
-                                    alt={occasion.name}
-                                    style={{
-                                        width: '100%',
-                                        height: '100%',
-                                        objectFit: 'cover',
-                                        display: 'block'
-                                    }}
-                                />
-                                {/* Occasion Button - only show on active card */}
-                                {isActive && (
-                                    <Box
-                                        className="occasion-button"
-                                        sx={{
-                                            position: 'absolute',
-                                            bottom: 8,
-                                            left: '50%',
-                                            transform: 'translateX(-50%) translateY(10px)',
-                                            opacity: 0,
-                                            transition: 'all 0.3s ease',
-                                            zIndex: 2
-                                        }}
-                                    >
-                                        <Button
-                                            sx={{
-                                                background: 'linear-gradient(90.18deg, rgba(131, 39, 41, 0.741) 0.17%, rgba(99, 21, 24, 0.752) 99.86%)',
-                                                color: '#fff',
-                                                borderRadius: '21px',
-                                                px: 3,
-                                                py: 0.5,
-                                                fontSize: { xs: '10px', md: '16px' },
-                                                fontWeight: 'normal',
-                                                textTransform: 'none',
-                                                fontFamily: 'Nunito, sans-serif',
-                                                boxShadow: 'rgba(0, 0, 0, 0.15) 0px 2px 8px',
-                                                minWidth: 'auto',
-                                                '&:hover': {
-                                                    background: '#832729',
-                                                    boxShadow: '0 4px 16px rgba(131, 39, 41, 0.3)'
-                                                }
-                                            }}
-                                            onClick={(e) => {
-                                                e.stopPropagation();
-                                                window.open(occasion.link, '_blank');
-                                            }}
-                                        >
-                                            {occasion.name}
-                                            <Box sx={{
-                                                ml: 1,
-                                                width: 25,
-                                                height: 25,
-                                                borderRadius: '50%',
-                                                backgroundColor: 'transparent',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                boxShadow: 'rgba(0, 0, 0, 0.15) 0px 2px 8px',
-                                                '&:hover': {
-                                                    backgroundColor: 'rgba(99,21,24,0.99)'
-                                                }
-                                            }}>
-                                                <ArrowForward sx={{ fontSize: '15px', color: '#fff' }} />
-                                            </Box>
-                                        </Button>
-                                    </Box>
-                                )}
-                            </Box>
-                        );
-                    })}
+                    <Typography variant="h3" sx={{ fontFamily: '"Playfair Display", serif', fontWeight: 600 }}>
+                        For a sparkling new beginning
+                    </Typography>
+                    <GlowButton sx={{ mt: 3, backgroundColor: "#D4AF37", color: "#000", px: 4, borderRadius: "30px" }}>
+                        Explore Collection
+                    </GlowButton>
                 </Box>
             </Box>
-        </div>
-    );
-};
 
-export default WedSlider;
+            {/* COMMUNITY BRIDES */}
+            <Container maxWidth="lg" sx={{ py: 6 }}>
+                <Typography variant="h4" align="center" sx={{
+                    fontFamily: '"Playfair Display", serif',
+                    mb: 4, color: "#8B1538", fontWeight: 600
+                }}>
+                    Find My Community
+                </Typography>
+
+                <Grid container spacing={3}>
+                    {communityBrides.map((bride, i) => (
+                        <Grid item xs={6} sm={4} md={3} key={i}>
+                            <Box sx={{
+                                position: "relative",
+                                borderRadius: 3,
+                                overflow: "hidden",
+                                cursor: "pointer",
+                                boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+                                "&:hover": { transform: "translateY(-4px)", transition: "0.3s" }
+                            }}>
+                                <img src={bride.img} alt={bride.name} style={{ width: "100%", height: 180, objectFit: "cover" }} />
+                                <Box sx={{
+                                    position: "absolute", bottom: 0, left: 0, right: 0,
+                                    background: "rgba(0,0,0,0.5)",
+                                    p: 1, textAlign: "center"
+                                }}>
+                                    <Typography sx={{ color: "#fff", fontWeight: 600 }}>{bride.name}</Typography>
+                                </Box>
+                            </Box>
+                        </Grid>
+                    ))}
+                </Grid>
+            </Container>
+
+            {/* HANDPICKED FOR THE BRIDE */}
+            <Box sx={{ py: 6, backgroundColor: "#faf5f0" }}>
+                <Container maxWidth="lg">
+                    <Typography variant="h4" align="center" sx={{ fontFamily: '"Playfair Display", serif', mb: 4, color: "#8B1538", fontWeight: 600 }}>
+                        Handpicked for the Bride
+                    </Typography>
+                    <Grid container spacing={4}>
+                        {brideCategories.map((cat, i) => (
+                            <Grid item xs={6} md={4} lg={2} key={i}>
+                                <Box sx={{
+                                    p: 3,
+                                    backgroundColor: "#fff",
+                                    borderRadius: 3,
+                                    textAlign: "center",
+                                    boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+                                    "&:hover": { boxShadow: "0 8px 20px rgba(0,0,0,0.15)" },
+                                    transition: "0.3s"
+                                }}>
+                                    <Box sx={{ fontSize: 40, color: "#D4AF37" }}>{cat.icon}</Box>
+                                    <Typography sx={{ fontWeight: 600, mt: 1 }}>{cat.name}</Typography>
+                                </Box>
+                            </Grid>
+                        ))}
+                    </Grid>
+                </Container>
+            </Box>
+
+            {/* WEDDING OCCASIONS SLIDER */}
+            <Box sx={{
+                py: 8,
+                backgroundColor: "#faf5f0",
+                backgroundImage: "linear-gradient(135deg, rgba(139,21,56,0.05), rgba(212,175,55,0.05))"
+            }}>
+                <Container maxWidth="lg">
+                    <Fade timeout={800}>
+                        <Typography variant="h4" align="center" sx={{
+                            fontFamily: '"Playfair Display", serif',
+                            mb: 6, color: "#8B1538", fontWeight: 600,
+                            position: "relative",
+                            "&:after": {
+                                content: '"✧"',
+                                position: "absolute",
+                                top: -28,
+                                left: "50%",
+                                transform: "translateX(-50%)",
+                                color: "#d4af37",
+                                fontSize: "2rem"
+                            }
+                        }}>
+                            Be a Star in Every Wedding Occasion
+                        </Typography>
+                    </Fade>
+                    <WedSlider />
+                </Container>
+            </Box>
+        </Box>
+    );
+}

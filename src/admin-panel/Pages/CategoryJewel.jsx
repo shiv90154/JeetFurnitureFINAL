@@ -66,6 +66,16 @@ const CategoryJewel = () => {
     const [imagePreview, setImagePreview] = useState(null);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
+    // const publicUrl = (p) => `${API_URL}/${String(p || '').replace(/\\/g, '/')}`;
+    // //  image shows in table because of this below publicUrl function:
+    const publicUrl = (p) =>
+        new URL(
+            String(p || '')
+                .replace(/\\/g, '/')        // windows → web slashes
+                .replace(/^\/+/, ''),       // strip leading slashes
+            API_URL                       // can end with or without '/'
+        ).toString();
+
 
     // Handlers
     const handleChangePage = (_, newPage) => setPage(newPage);
@@ -175,7 +185,8 @@ const CategoryJewel = () => {
             description: cat.description || '',
             image: null,
         });
-        setImagePreview(cat.image ? `${API_URL}/${cat.image}` : null);
+        // setImagePreview(cat.image ? `${API_URL}/${cat.image}` : null);
+        setImagePreview(cat.image ? publicUrl(cat.image) : null);
         setOpenModal(true);
     };
 
@@ -244,7 +255,8 @@ const CategoryJewel = () => {
                                         <TableCell>{cat.description}</TableCell>
                                         <TableCell>
                                             <Avatar
-                                                src={`${API_URL}/${cat.image}`}
+                                                // src={`${API_URL}/${cat.image}`}
+                                                src={publicUrl(cat.image)}
                                                 alt={cat.name}
                                                 sx={{ width: 56, height: 56 }}
                                                 variant="rounded"
@@ -330,8 +342,9 @@ const CategoryJewel = () => {
                                         <MenuItem value="selectVariety" disabled>
                                             Select Variety
                                         </MenuItem>
-                                        <MenuItem value="Human">Human</MenuItem>
-                                        <MenuItem value="Veterinary">Veterinary</MenuItem>
+                                        <MenuItem value="diamond">Diamond</MenuItem>
+                                        <MenuItem value="gold">Gold</MenuItem>
+                                        <MenuItem value="silver">Silver</MenuItem>
                                     </Select>
                                 </FormControl>
 
