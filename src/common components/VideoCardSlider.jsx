@@ -28,7 +28,7 @@ const SliderContainer = styled(Box)(({ theme }) => ({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: theme.spacing(4),
+    padding: theme.spacing(2),
     overflowX: 'hidden',
 }));
 
@@ -64,6 +64,10 @@ const VideoCard = styled(Box)(({ theme }) => ({
     cursor: 'pointer',
     transformStyle: 'preserve-3d',
     boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
+    '@media (max-width: 600px)': {
+        width: '160px',
+        height: '270px',
+    },
     '&:hover': {
         '& .video-overlay': {
             opacity: 1,
@@ -77,10 +81,7 @@ const VideoCard = styled(Box)(({ theme }) => ({
         '& .fullscreen-button': {
             opacity: 1,
         },
-        '@media (max-width: 600px)': {
-            width: '150px', // Smaller size for mobile screens
-            height: '250px', // Smaller size for mobile screens
-        },
+
     },
 }));
 
@@ -162,8 +163,8 @@ const DotsContainer = styled(Box)(({ theme }) => ({
 }));
 
 const DotButton = styled(Box)(({ active }) => ({
-    width: '12px',
-    height: '12px',
+    width: '10px',
+    height: '10px',
     borderRadius: '50%',
     cursor: 'pointer',
     transition: 'all 0.3s ease',
@@ -178,27 +179,6 @@ const DotButton = styled(Box)(({ active }) => ({
                 backgroundColor: 'rgba(0, 0, 0, 0.4)',
             },
         }),
-}));
-
-const ControlsContainer = styled(Box)(({ theme }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    gap: theme.spacing(2),
-    marginTop: theme.spacing(3),
-}));
-
-const ControlButton = styled(Button)(({ theme }) => ({
-    background: 'white',
-    color: '#000',
-    borderRadius: '25px',
-    padding: theme.spacing(1, 3),
-    fontWeight: 500,
-    textTransform: 'none',
-    border: '1px solid rgba(0, 0, 0, 0.2)',
-    '&:hover': {
-        background: 'rgba(0, 0, 0, 0.05)',
-        transform: 'scale(1.05)',
-    },
 }));
 
 const FullscreenVideo = styled(Box)({
