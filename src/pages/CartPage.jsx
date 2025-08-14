@@ -82,8 +82,8 @@ function EmptyCart({ onContinueShopping }) {
       pt: { xs: 2, md: 4 }
     }}>
       {/* Empty cart illustration */}
-      <Box sx={{ 
-        minWidth: { xs: 150, md: 190 }, 
+      <Box sx={{
+        minWidth: { xs: 150, md: 190 },
         textAlign: 'center',
         order: { xs: 1, md: 1 }
       }}>
@@ -108,37 +108,37 @@ function EmptyCart({ onContinueShopping }) {
             position: 'relative'
           }}>
             <svg width="45" height="55" viewBox="0 0 65 75" fill="none">
-              <rect x="8" y="20" width="49" height="44" rx="5" stroke="#7d2a25" strokeWidth="2.1" fill="none"/>
-              <path d="M18 20V14C18 7 47 7 47 14V20" stroke="#7d2a25" strokeWidth="2.1" fill="none"/>
-              <circle cx="32.5" cy="44.5" r="2.5" fill="#7d2a25"/>
-              <rect x="24" y="31" width="17" height="3" rx="1.5" fill="#7d2a25" opacity="0.5"/>
+              <rect x="8" y="20" width="49" height="44" rx="5" stroke="#7d2a25" strokeWidth="2.1" fill="none" />
+              <path d="M18 20V14C18 7 47 7 47 14V20" stroke="#7d2a25" strokeWidth="2.1" fill="none" />
+              <circle cx="32.5" cy="44.5" r="2.5" fill="#7d2a25" />
+              <rect x="24" y="31" width="17" height="3" rx="1.5" fill="#7d2a25" opacity="0.5" />
             </svg>
           </Box>
         </Box>
       </Box>
-      
+
       {/* Text content */}
-      <Box sx={{ 
-        textAlign: { xs: 'center', md: 'left' }, 
+      <Box sx={{
+        textAlign: { xs: 'center', md: 'left' },
         mt: { xs: 2, md: 10 },
         order: { xs: 2, md: 2 },
         maxWidth: { xs: '100%', md: '400px' }
       }}>
-        <Typography 
-          variant="h6" 
-          sx={{ 
-            color: '#702626', 
-            fontWeight: 600, 
+        <Typography
+          variant="h6"
+          sx={{
+            color: '#702626',
+            fontWeight: 600,
             mb: 0.75,
             fontSize: { xs: '18px', md: '20px' }
           }}
         >
           Your Cart Is Empty !
         </Typography>
-        <Typography 
-          variant="body2" 
-          sx={{ 
-            mb: 3, 
+        <Typography
+          variant="body2"
+          sx={{
+            mb: 3,
             color: '#702626',
             fontSize: { xs: '14px', md: '16px' }
           }}
@@ -194,8 +194,8 @@ function CartCard({ product, onRemove, onUpdateQuantity }) {
       <IconButton
         size="small"
         onClick={() => onRemove(product.id)}
-        sx={{ 
-          position: 'absolute', 
+        sx={{
+          position: 'absolute',
           top: { xs: 4, sm: 6, md: 8 },
           right: { xs: 4, sm: 6, md: 8 },
           backgroundColor: '#fff',
@@ -209,12 +209,12 @@ function CartCard({ product, onRemove, onUpdateQuantity }) {
           }
         }}
       >
-        <DeleteOutlineIcon sx={{ 
-          color: '#bbb', 
+        <DeleteOutlineIcon sx={{
+          color: '#bbb',
           fontSize: { xs: '14px', sm: '16px', md: '18px' }
         }} />
       </IconButton>
-      
+
       {/* Product image container - responsive dimensions */}
       <Box sx={{
         width: '100%',
@@ -237,7 +237,7 @@ function CartCard({ product, onRemove, onUpdateQuantity }) {
           }}
         />
       </Box>
-      
+
       {/* Content section - flexible height */}
       <Box sx={{
         flex: 1,
@@ -265,7 +265,7 @@ function CartCard({ product, onRemove, onUpdateQuantity }) {
           >
             {product.title}
           </Typography>
-          
+
           <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 0.3, sm: 0.5, md: 0.5 }, mb: { xs: 0.3, sm: 0.5, md: 0.5 } }}>
             <Typography
               sx={{
@@ -300,7 +300,7 @@ function CartCard({ product, onRemove, onUpdateQuantity }) {
             Weight: {product.weight}
           </Typography>
         </Box>
-        
+
         {/* Quantity controls */}
         <Box sx={{
           display: 'flex',
@@ -403,8 +403,8 @@ export default function CartPage() {
 
   const handleUpdateQuantity = (productId, newQuantity) => {
     if (newQuantity < 1) return;
-    
-    const updatedCart = cartItems.map(item => 
+
+    const updatedCart = cartItems.map(item =>
       item.id === productId ? { ...item, quantity: newQuantity } : item
     );
     setCartItems(updatedCart);
@@ -435,9 +435,9 @@ export default function CartPage() {
   const isEmpty = cartItems.length === 0;
 
   return (
-    <Box sx={{ 
-      px: { xs: 2, sm: 3, md: 5 }, 
-      py: { xs: 2, md: 3 }, 
+    <Box sx={{
+      px: { xs: 2, sm: 3, md: 5 },
+      py: { xs: 2, md: 3 },
       minHeight: '100vh',
       backgroundColor: '#fafafa'
     }}>
@@ -449,11 +449,11 @@ export default function CartPage() {
         gap: 2,
         flexWrap: 'wrap'
       }}>
-        <Typography 
-          variant="h6" 
-          sx={{ 
-            fontWeight: 400, 
-            color: '#222', 
+        <Typography
+          variant="h6"
+          sx={{
+            fontWeight: 400,
+            color: '#222',
             flex: 1,
             fontSize: { xs: '20px', md: '24px' }
           }}
@@ -461,7 +461,7 @@ export default function CartPage() {
           Shopping Cart ({cartItems.length} items)
         </Typography>
       </Box>
-      
+
       {/* Content */}
       {isEmpty ? (
         <EmptyCart onContinueShopping={handleContinueShopping} />
@@ -470,10 +470,11 @@ export default function CartPage() {
           <Box sx={{ display: 'flex', flexDirection: { xs: 'column', lg: 'row' }, gap: 2 }}>
             {/* Cart Items Grid */}
             <Box sx={{ flex: 1 }}>
-              <Grid 
-                container 
+              <Grid
+                container
                 spacing={{ xs: 1, sm: 1.5, md: 1.5, lg: 2 }}
-                justifyContent={{ xs: 'center', sm: 'center', md: 'flex-start' }}
+                // justifyContent={{ xs: 'center', sm: 'center', md: 'flex-start' }}
+                justifyContent="center"
               >
                 {cartItems.map((item) => (
                   <Grid
@@ -484,13 +485,13 @@ export default function CartPage() {
                     md={4}
                     lg={4}
                     xl={3}
-                    sx={{ 
+                    sx={{
                       display: 'flex',
                       justifyContent: 'center'
                     }}
                   >
-                    <CartCard 
-                      product={item} 
+                    <CartCard
+                      product={item}
                       onRemove={handleRemoveFromCart}
                       onUpdateQuantity={handleUpdateQuantity}
                     />
@@ -511,11 +512,11 @@ export default function CartPage() {
               position: 'sticky',
               top: 20
             }}>
-              <Typography 
-                variant="h6" 
-                sx={{ 
-                  fontWeight: 500, 
-                  color: '#222', 
+              <Typography
+                variant="h6"
+                sx={{
+                  fontWeight: 500,
+                  color: '#222',
                   mb: 3,
                   fontSize: { xs: '20px', md: '22px' },
                   textAlign: 'center',
@@ -525,7 +526,7 @@ export default function CartPage() {
               >
                 Order Summary
               </Typography>
-              
+
               <Box sx={{ mb: 3 }}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2, alignItems: 'center' }}>
                   <Typography sx={{ fontSize: { xs: 16, md: 18 }, color: '#555' }}>Subtotal</Typography>
@@ -565,9 +566,9 @@ export default function CartPage() {
 
               {/* Additional Info */}
               <Box sx={{ mt: 3, pt: 2, borderTop: '1px solid #f0f0f0' }}>
-                <Typography sx={{ 
-                  fontSize: { xs: '12px', md: '14px' }, 
-                  color: '#666', 
+                <Typography sx={{
+                  fontSize: { xs: '12px', md: '14px' },
+                  color: '#666',
                   textAlign: 'center',
                   lineHeight: 1.4
                 }}>
@@ -577,18 +578,18 @@ export default function CartPage() {
 
               {/* Delivery Details */}
               <Box sx={{ mt: 3, pt: 2, borderTop: '1px solid #f0f0f0' }}>
-                <Typography sx={{ 
-                  fontSize: { xs: '16px', md: '18px' }, 
+                <Typography sx={{
+                  fontSize: { xs: '16px', md: '18px' },
                   fontWeight: 600,
-                  color: '#333', 
+                  color: '#333',
                   mb: 2,
                   fontFamily: 'serif'
                 }}>
                   Delivery Details
                 </Typography>
-                
-                <Box sx={{ 
-                  display: 'flex', 
+
+                <Box sx={{
+                  display: 'flex',
                   flexDirection: { xs: 'column', sm: 'row' },
                   gap: { xs: 1.5, sm: 1 },
                   alignItems: { xs: 'stretch', sm: 'center' }
@@ -677,7 +678,7 @@ export default function CartPage() {
                         alignItems: 'center'
                       }}>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>
+                          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor" />
                         </svg>
                       </Box>
                       <input
@@ -730,10 +731,10 @@ export default function CartPage() {
           bottom: { xs: 80, sm: 20, md: 20 }
         }}
       >
-        <Alert 
-          onClose={() => setShowSnackbar(false)} 
-          severity="success" 
-          sx={{ 
+        <Alert
+          onClose={() => setShowSnackbar(false)}
+          severity="success"
+          sx={{
             width: '100%',
             fontSize: { xs: '14px', sm: '16px' }
           }}

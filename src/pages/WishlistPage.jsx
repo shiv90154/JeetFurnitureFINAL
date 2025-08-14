@@ -354,13 +354,14 @@ function WishlistCard({ product, onRemove, onMoveToCart }) {
       p: { xs: 1.5, sm: 2, md: 2 },
       mb: 1.5,
       position: 'relative',
-      height: { xs: 260, sm: 280, md: 300, lg: 320 },
+      // height: { xs: 260, sm: 280, md: 300, lg: 320 },
       width: { xs: 160, sm: 200, md: 240, lg: 280 },
       maxWidth: '100%',
       mx: 'auto',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
+      gap:1,
       transition: 'transform 0.2s ease, box-shadow 0.2s ease',
       '&:hover': {
         transform: 'translateY(-2px)',
@@ -433,7 +434,6 @@ function WishlistCard({ product, onRemove, onMoveToCart }) {
               lineHeight: 1.2,
               mb: { xs: 0.3, sm: 0.5, md: 0.5 },
               fontSize: { xs: 11, sm: 12, md: 13, lg: 14 },
-              height: { xs: '32px', sm: '36px', md: '40px', lg: '44px' },
               display: '-webkit-box',
               WebkitLineClamp: 2,
               WebkitBoxOrient: 'vertical',
@@ -606,7 +606,7 @@ export default function WishlistPage() {
                           <Grid 
            container 
            spacing={{ xs: 1, sm: 1.5, md: 2, lg: 2.5 }}
-           justifyContent={{ xs: 'center', sm: 'center', md: 'flex-start' }}
+           justifyContent="center"
          >
            {wishlistItems.map((item) => (
              <Grid
