@@ -274,7 +274,8 @@ const MasterDaimondSlider = () => {
             sx={{
                 maxWidth: 1400,
                 mx: 'auto',
-                p: { xs: 0, sm: 2, md: 5 },
+                py: { xs: 7, md: 10 },
+                px: 2,
                 backgroundColor: '#f5f5f5',
                 overflow: 'hidden',
             }}
@@ -287,7 +288,7 @@ const MasterDaimondSlider = () => {
                     fontSize: { xs: '1.5rem', md: '2.5rem' },
                     fontWeight: 400,
                     color: '#333',
-                    mb: 5,
+                    mb: { xs: 2, md: 5 },
                     lineHeight: 1.2,
                 }}
             >

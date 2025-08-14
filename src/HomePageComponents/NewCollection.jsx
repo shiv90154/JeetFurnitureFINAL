@@ -11,7 +11,7 @@ const SectionContainer = styled(Box)({
 
 const HeaderContainer = styled(Container)({
   textAlign: "center",
-  marginBottom: 60,
+  marginBottom: 30,
 });
 
 const MainTitle = styled(Typography)({
@@ -169,11 +169,11 @@ const ProductCard = styled(Card)({
   "@media (max-width:900px)": {
     width: "calc(50% - 8px)", // 2 in a row
   },
-  "@media (max-width:450px)": {
-    width: "100%",
-    maxWidth: "100%",
-    minWidth: 0,
-  },
+  // "@media (max-width:450px)": {
+  //   width: "100%",
+  //   maxWidth: "100%",
+  //   minWidth: 0,
+  // },
 });
 
 const ProductImageContainer = styled(Box)({

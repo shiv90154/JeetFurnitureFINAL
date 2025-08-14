@@ -42,44 +42,20 @@ const GridWrap = styled(Box)(({ theme }) => ({
   gridAutoRows: "1fr",
   maxWidth: 1100,
   margin: "0 auto",
+  px: 4,
   [theme.breakpoints.down("md")]: {
     gridTemplateColumns: "repeat(2, 1fr)",
     gap: "18px 18px",
     maxWidth: 600,
   },
-  [theme.breakpoints.down("sm")]: {
-    gridTemplateColumns: "1fr",
-    gap: 13,
-    maxWidth: 375,
-    width: "90vw",
+  // [theme.breakpoints.down("sm")]: {
+  //   gridTemplateColumns: "1fr",
+  //   gap: 13,
+  //   maxWidth: 375,
+  //   width: "90vw",
 
-  },
+  // },
 }));
-
-// const ExpCard = styled(Card)(({ theme }) => ({
-//   borderRadius: 19,
-//   boxShadow: "0px 2px 15px 0 rgba(45,32,11,0.07)",
-//   padding: 0,
-//   position: "relative",
-//   display: "flex",
-//   flexDirection: "column",
-//   // minHeight: 234,
-//   cursor: "pointer",
-//   transition: "transform .19s, box-shadow .18s",
-//   "&:hover": {
-//     transform: "translateY(-3px) scale(1.02)",
-//     boxShadow:
-//       "0 0 0 2px #deb886 inset, 0px 8px 22px 0px rgba(45,32,11,0.11)",
-//   },
-//   [theme.breakpoints.down("md")]: {
-//     // minHeight: 190,
-//     borderRadius: 14,
-//   },
-//   [theme.breakpoints.down("sm")]: {
-//     // minHeight: 138,
-//     borderRadius: 9,
-//   },
-// }));
 
 const ExpMedia = styled(CardMedia)(({ theme }) => ({
   // height: 110,
@@ -121,16 +97,6 @@ const DigiGoldCard = styled(Card)(() => ({
   boxShadow: "0 2px 15px 0 rgba(45,32,11,0.11)",
   padding: 0,
   width: "100%",
-  // Sizes SAME as regular CardWrap
-}));
-
-const DigiLogo = styled("img")(({ theme }) => ({
-  width: 58,
-  height: 58,
-  marginBottom: 7,
-  marginTop: 10,
-  objectFit: "contain",
-  [theme.breakpoints.down("sm")]: { width: 36, height: 36, marginTop: 8, marginBottom: 4 }
 }));
 
 const DigiHeading = styled(Typography)({
@@ -190,7 +156,7 @@ const ExperienceCards = [
 
 export default function ChauhanExperience() {
   return (
-    <Box sx={{ mb: 2 }}>
+    <Box sx={{ mb: 2, py: 5 }}>
       < Title > Chauhan Son’s Experience</Title >
       <Subtitle>Find a Boutique or Book a Consultation</Subtitle>
       <GridWrap>
