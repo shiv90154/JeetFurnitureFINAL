@@ -165,7 +165,7 @@ const WeddingPage = () => {
 
   return (
     <Box sx={{ backgroundColor: "#fff", overflowX: "hidden", position: "relative" }}>
-      {/* Community Brides */}
+      {/* Community Brides  */}
       <Container maxWidth="lg" sx={{ py: 8 }}>
         <Zoom in={trigger} timeout={500}>
           <Typography variant="h4" component="h2" sx={sectionTitleStyle}>
