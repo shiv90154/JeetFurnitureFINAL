@@ -115,7 +115,7 @@ function JewelleryCard({ product }) {
     const [liked, setLiked] = useState(false);
 
     // Ensure the image URL is correct, using the public URL helper if necessary
-    const imgUrl = publicUrl(product.media?.[0]?.url) || '/path/to/default-image.jpg';  // Fallback image if media is missing
+    const imgUrl = publicUrl(product.media?.[0]?.url) || "no img found";
 
     return (
         <Box sx={{ pb: 2 }}>
@@ -258,7 +258,7 @@ export function JewelleryGrid() {
         <Box>
             <JewelleryHeader />
 
-            <Box>
+            <Box sx={{ pt: 5 }}>
 
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 3 }}>
                     <TextField
@@ -301,7 +301,8 @@ export function JewelleryGrid() {
             ) : (
                 <Grid container spacing={2}>
                     {sortedProducts.map((product) => (
-                        <Link to={`/singleProduct/${product.id}`} key={product.id}>
+                        // console.log(product._id, "product id"),
+                        <Link to={`/singleProduct/${product._id}`} key={product._id}>
                             <Grid item xs={12} sm={6} md={4}>
                                 <JewelleryCard product={product} />
                             </Grid>
