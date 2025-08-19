@@ -21,8 +21,8 @@ import {
 import { keyframes } from "@emotion/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
-import TrendingKeywordsMarquee from "../common components/TrendingKeywordsMarquee";
-import WeddingOccasionSlider from "../common components/WeddingOccasionSlider";
+import TrendingKeywordsMarquee from "./WeddingpageParts/TrendingKeywordsMarquee";
+import WeddingOccasionSlider from "./WeddingpageParts/WeddingOccasionSlider";
 import FindMyCommunity from "../common components/FindMyCommunity";
 
 // Animation presets

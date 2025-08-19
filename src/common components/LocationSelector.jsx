@@ -85,10 +85,10 @@ export default function LocationSelector() {
                 onClick={handleDivClick}
             >
                 <LocationOnIcon sx={{ color: '#44170D' }} />
-                <Typography sx={{ ml: 2, flex: 1, fontWeight: 500, color: '#3d1822' }}>
+                <Typography sx={{ ml: 1, flex: 1, fontWeight: 500, color: '#3d1822' }}>
                     {currentPincode || 'Enter Pincode'}
                 </Typography>
-                <Typography sx={{ ml: 1, flex: 2, fontWeight: 500, color: '#616161' }}>
+                <Typography sx={{ ml: 1, flex: 2, fontWeight: 500, color: '#616161',fontSize: '0.9rem' }}>
                     {locationName || 'Location not set'}
                 </Typography>
                 <IconButton sx={{ color: '#44170D' }}>

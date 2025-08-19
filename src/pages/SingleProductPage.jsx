@@ -888,178 +888,165 @@ export default function SingleProductPage() {
     return (
         <Box bgcolor="#fff" px={{ xs: 1, sm: 3, md: 6 }} py={6}>
             <Container maxWidth="xl" sx={{ maxWidth: 1140 }}>
-                {/* View Similar Button */}
-                <Box sx={{ textAlign: 'center', mb: { xs: 2, sm: 3 } }}>
-                    <Button
-                        variant="outlined"
-                        startIcon={<Visibility />}
-                        sx={{
-                            bgcolor: '#fff',
-                            color: '#44170D',
-                            border: '1px solid #ddd',
-                            borderRadius: 20,
-                            px: 2.5,
-                            py: 1,
-                            fontSize: 13,
-                            fontWeight: 600,
-                            textTransform: 'none',
-                            minWidth: 150,
-                            '&:hover': { bgcolor: '#fafafa', borderColor: '#b8843f' },
-                            boxShadow: '0 1px 3px rgba(139, 69, 19,0.15)',
-                        }}
-                    >
-                        View Similar
-                    </Button>
-                </Box>
+                <Box display="flex" alignItems="center" justifyContent="space-between" flexDirection={{ xs: "column", sm: "row" }}>
+                    <Box sx={{ width: { sm: "48%" } }}>
+                        {/* View Similar Button */}
+                        {/* <Box sx={{ textAlign: 'center', mb: { xs: 2, sm: 3 } }}>
+                            <Button
+                                variant="outlined"
+                                startIcon={<Visibility />}
+                                sx={{
+                                    bgcolor: '#fff',
+                                    color: '#44170D',
+                                    border: '1px solid #ddd',
+                                    borderRadius: 20,
+                                    px: 2.5,
+                                    py: 1,
+                                    fontSize: 13,
+                                    fontWeight: 600,
+                                    textTransform: 'none',
+                                    minWidth: 150,
+                                    '&:hover': { bgcolor: '#fafafa', borderColor: '#b8843f' },
+                                    boxShadow: '0 1px 3px rgba(139, 69, 19,0.15)',
+                                }}
+                            >
+                                View Similar
+                            </Button>
+                        </Box> */}
 
-                {/* Product Specs Chips */}
-                <Box sx={{ textAlign: 'center', mb: { xs: 2, sm: 3 } }}>
-                    <Chip
-                        icon={<Diamond sx={{ color: '#E65100' }} />}
-                        label={product?.productvariety}
-                        sx={{
-                            bgcolor: '#FFF3E0',
-                            color: '#E65100',
-                            fontSize: 13,
-                            fontWeight: 600,
-                            mx: 1,
-                            height: 32,
-                            px: 1.5,
-                            boxShadow: '0 1px 3px rgba(230, 120, 30, 0.3)',
-                        }}
-                    />
-                    <Chip
-                        label={`Stock: ${product?.stock === 'yes' ? 'In Stock' : 'Out of Stock'}`}
-                        sx={{
-                            bgcolor: '#FFF3E0',
-                            color: '#E65100',
-                            fontSize: 13,
-                            fontWeight: 600,
-                            mx: 1,
-                            height: 32,
-                            px: 1.5,
-                            boxShadow: '0 1px 3px rgba(230, 120, 30, 0.3)',
-                        }}
-                    />
-                </Box>
+                        {/* Product Specs Chips */}
+                        <Box sx={{ display: 'flex',justifyContent:"center", textAlign: 'center', mb: { xs: 1, md: 3 } }}>
+                            <Chip
+                                icon={<Diamond sx={{ color: '#fff' }} />}
+                                label={product?.productvariety}
+                                sx={{
+                                    bgcolor: '#44170D',
+                                    color: '#fff',
+                                    fontSize: 13,
+                                    fontWeight: 600,
+                                    mx: 1,
+                                    height: 32,
+                                    px: 1.5,
+                                    boxShadow: '0 1px 3px rgba(230, 120, 30, 0.3)',
+                                }}
+                            />
+                            <Chip
+                                label={`Stock: ${product?.stock === 'yes' ? 'In Stock' : 'Out of Stock'}`}
+                                sx={{
+                                    bgcolor: '#44170D',
+                                    color: '#fff',
+                                    fontSize: 13,
+                                    fontWeight: 600,
+                                    mx: 1,
+                                    height: 32,
+                                    px: 1.5,
+                                    boxShadow: '0 1px 3px rgba(230, 120, 30, 0.3)',
+                                }}
+                            />
+                        </Box>
 
-                {/* Title */}
-                <Typography
-                    component="h1"
-                    sx={{
-                        fontFamily: 'serif',
-                        fontWeight: 400,
-                        fontSize: { xs: 24, sm: 34 },
-                        color: '#2C2C2C',
-                        textAlign: 'center',
-                        mb: { xs: 2, sm: 3 },
-                        letterSpacing: '0.03em',
-                    }}
-                >
-                    {product?.name}
-                </Typography>
-
-                {/* Price with old price */}
-                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 1.5, mb: 0.5 }}>
-                    <Typography sx={{ fontSize: { xs: 24, sm: 30 }, fontWeight: 700, color: '#2C2C2C' }}>
-                        ₹{product?.price}
-                    </Typography>
-                    {product?.originalPrice && (
+                        {/* Title */}
                         <Typography
+                            component="h1"
                             sx={{
-                                fontSize: 18,
-                                color: '#A49E9B',
-                                textDecoration: 'line-through',
+                                fontFamily: 'serif',
                                 fontWeight: 400,
-                                ml: { xs: 0, sm: 2 },
+                                fontSize: { xs: 24, md: 34 },
+                                color: '#2C2C2C',
+                                textAlign: 'center',
+                                mb: 1,
+                                letterSpacing: '0.03em',
+                                textTransform: 'capitalize',
                             }}
                         >
-                            ₹{product?.originalPrice}
+                            {product?.name}
                         </Typography>
-                    )}
+
+                        {/* Price with old price */}
+                        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 1.5, mb: 0.5 }}>
+                            <Typography sx={{ fontSize: { xs: 24, md: 30 }, fontWeight: 700, color: '#2C2C2C' }}>
+                                ₹{product?.price}
+                            </Typography>
+                            {product?.originalPrice && (
+                                <Typography
+                                    sx={{
+                                        fontSize: 18,
+                                        color: '#A49E9B',
+                                        textDecoration: 'line-through',
+                                        fontWeight: 400,
+                                        ml: { xs: 0, sm: 2 },
+                                    }}
+                                >
+                                    ₹{product?.originalPrice}
+                                </Typography>
+                            )}
+                        </Box>
+
+                        <Typography variant="caption" display="block" textAlign="center" sx={{ fontSize: 13, color: '#666', mb: { xs: 2, sm: 3 } }}>
+                            incl taxes and charges
+                        </Typography>
+
+                        {/* Action Buttons */}
+                        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mb: { xs: 4, sm: 6 } }}>
+                            <IconButton
+                                onClick={() => navigate('/wishlist')}
+                                size="large"
+                                aria-label="Add to wishlist"
+                                sx={{
+                                    border: '1px solid #ddd',
+                                    color: '#666',
+                                    borderRadius: '50%',
+                                    width: 46,
+                                    height: 46,
+                                    transition: 'background-color 0.3s',
+                                    '&:hover': { bgcolor: '#f3f1ee' },
+                                }}
+                            >
+                                <FavoriteBorder fontSize="medium" />
+                            </IconButton>
+                            <IconButton
+                                size="large"
+                                aria-label="Share"
+                                sx={{
+                                    border: '1px solid #ddd',
+                                    color: '#666',
+                                    borderRadius: '50%',
+                                    width: 46,
+                                    height: 46,
+                                    transition: 'background-color 0.3s',
+                                    '&:hover': { bgcolor: '#f3f1ee' },
+                                }}
+                            >
+                                <Share fontSize="medium" />
+                            </IconButton>
+                        </Box>
+                    </Box>
+
+                    {/* Product Images */}
+                    <Box sx={{ width: { sm: "48%" } }}>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                gap: { xs: 3, sm: 6 },
+                                // bgcolor: '#fafafa',
+                                // py: { xs: 5, sm: 7 },
+                                px: { xs: 1, sm: 3 },
+                                borderRadius: 3,
+                                position: 'relative',
+                                mb: 7,
+                            }}
+                        >
+                            <Box component="img" src={product?.frontImage} alt="Front view" sx={{ maxHeight: 350, width: '100%', objectFit: 'cover', userSelect: 'none', boxShadow: '0 6px 20px rgb(0 0 0 / 0.10)', borderRadius: 2 }} draggable={false} />
+                            {product?.sideImage && (
+                                <Box component="img" src={product?.sideImage} alt="Side view" sx={{ maxHeight: 350, width: '100%', objectFit: 'cover', userSelect: 'none', boxShadow: '0 8px 28px rgb(0 0 0 / 0.08)', borderRadius: 4 }} draggable={false} />
+                            )}
+                        </Box>
+                    </Box>
                 </Box>
-
-                <Typography variant="caption" display="block" textAlign="center" sx={{ fontSize: 13, color: '#666', mb: { xs: 2, sm: 3 } }}>
-                    incl taxes and charges
-                </Typography>
-
-                {/* Action Buttons */}
-                <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mb: { xs: 4, sm: 6 } }}>
-                    <IconButton
-                        onClick={() => navigate('/wishlist')}
-                        size="large"
-                        aria-label="Add to wishlist"
-                        sx={{
-                            border: '1px solid #ddd',
-                            color: '#666',
-                            borderRadius: '50%',
-                            width: 46,
-                            height: 46,
-                            transition: 'background-color 0.3s',
-                            '&:hover': { bgcolor: '#f3f1ee' },
-                        }}
-                    >
-                        <FavoriteBorder fontSize="medium" />
-                    </IconButton>
-                    <IconButton
-                        size="large"
-                        aria-label="Share"
-                        sx={{
-                            border: '1px solid #ddd',
-                            color: '#666',
-                            borderRadius: '50%',
-                            width: 46,
-                            height: 46,
-                            transition: 'background-color 0.3s',
-                            '&:hover': { bgcolor: '#f3f1ee' },
-                        }}
-                    >
-                        <Share fontSize="medium" />
-                    </IconButton>
-                </Box>
-
-                {/* Product Images */}
-                {/* <Box
-                    sx={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        gap: { xs: 3, sm: 6 },
-                        bgcolor: '#fafafa',
-                        py: { xs: 5, sm: 7 },
-                        px: { xs: 1, sm: 6 },
-                        borderRadius: 3,
-                        position: 'relative',
-                        mb: 7,
-                    }}
-                >
-                    <Box component="img" src={publicUrl()} alt="Front view" sx={{ maxHeight: 400, maxWidth: { xs: 150, sm: 250 }, objectFit: 'contain', userSelect: 'none', boxShadow: '0 6px 20px rgb(0 0 0 / 0.10)', borderRadius: 2 }} draggable={false} />
-                    <Box component="img" src={product?.sideImage} alt="Side view" sx={{ maxHeight: 400, maxWidth: { xs: 150, sm: 300 }, objectFit: 'contain', userSelect: 'none', boxShadow: '0 8px 28px rgb(0 0 0 / 0.08)', borderRadius: 4 }} draggable={false} />
-                </Box> */}
-
-                {/* Product Images */}
-                <Box
-                    sx={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        gap: { xs: 3, sm: 6 },
-                        bgcolor: '#fafafa',
-                        py: { xs: 5, sm: 7 },
-                        px: { xs: 1, sm: 6 },
-                        borderRadius: 3,
-                        position: 'relative',
-                        mb: 7,
-                    }}
-                >
-                    <Box component="img" src={product?.frontImage} alt="Front view" sx={{ maxHeight: 400, maxWidth: { xs: 150, sm: 250 }, objectFit: 'contain', userSelect: 'none', boxShadow: '0 6px 20px rgb(0 0 0 / 0.10)', borderRadius: 2 }} draggable={false} />
-                    {product?.sideImage && (
-                        <Box component="img" src={product?.sideImage} alt="Side view" sx={{ maxHeight: 400, maxWidth: { xs: 150, sm: 300 }, objectFit: 'contain', userSelect: 'none', boxShadow: '0 8px 28px rgb(0 0 0 / 0.08)', borderRadius: 4 }} draggable={false} />
-                    )}
-                </Box>
-
                 {/* Delivery Details */}
-                <Box sx={{ bgcolor: '#fff', p: { xs: 2.5, sm: 3.5 }, borderRadius: 2, border: '1px solid #eee', mb: { xs: 6, sm: 8 }, maxWidth: 580, mx: 'auto', textAlign: 'center' }}>
+                <Box sx={{ bgcolor: '#fff', py: 2, borderRadius: 2, border: '1px solid #eee', mb: { xs: 6, sm: 8 }, maxWidth: 580, mx: 'auto', textAlign: 'center' }}>
                     <Typography variant="h6" sx={{ fontWeight: 700, color: '#2C2C2C', mb: 3, fontFamily: 'serif' }}>
                         Delivery Details
                     </Typography>
