@@ -921,23 +921,66 @@ const AddNewProduct = () => {
     deleted_at: null,
   });
 
+
+  const normalizeQuantityItem = (q = {}) => ({
+    weight: q.weight ?? q.Weight ?? q.wt ?? '',
+    pricePerGram: q.pricePerGram ?? q.price_per_gram ?? q.price ?? '',
+    discount: q.discount ?? q.Discount ?? '',
+    gst: q.gst ?? q.GST ?? '',
+    makingPrice: q.makingPrice ?? q.making_price ?? '',
+    totalWeight: q.totalWeight ?? q.total_weight ?? '',
+    finalPrice: q.finalPrice ?? q.final_price ?? ''
+  });
+
+
   // init: categories + product (if edit)
   useEffect(() => {
     const init = async () => {
       try {
         const categoriesResponse = await axiosInstance.get('/user/allcategories');
         setCategoryList(categoriesResponse.data || []);
+        const occasionResponse = await axiosInstance.get('/user/allOccasions');
+        setOccasionList(occasionResponse.data || []);
 
         if (isEditMode) {
           const productResponse = await axiosInstance.get(`/user/product/${id}`);
           const product = productResponse.data;
 
-          if (product.category) {
-            const subCategoryResponse = await axiosInstance.get(
-              `/user/allSubcategories?category=${encodeURIComponent(product.category)}`
-            );
-            setSubCategoryList(subCategoryResponse.data || []);
+          // Parse the quantity field if it's a string and ensure it's an array of objects
+          // Parse the quantity field and normalize it
+          let parsedQuantity = [];
+
+          // Case 1: API gives string
+          if (typeof product.quantity === 'string') {
+            try {
+              const temp = JSON.parse(product.quantity);
+              parsedQuantity = Array.isArray(temp) ? temp : [];
+            } catch (e) {
+              console.error("Error parsing quantity JSON", e);
+              parsedQuantity = [];
+            }
           }
+          // Case 2: API gives array
+          else if (Array.isArray(product.quantity)) {
+            // Sometimes it’s an array of JSON strings
+            if (typeof product.quantity[0] === 'string') {
+              product.quantity.forEach(qtyString => {
+                try {
+                  const arr = JSON.parse(qtyString);
+                  if (Array.isArray(arr)) parsedQuantity.push(...arr);
+                  else if (typeof arr === 'object') parsedQuantity.push(arr);
+                } catch (e) {
+                  console.error("Error parsing qty string", e);
+                }
+              });
+            } else {
+              parsedQuantity = product.quantity;
+            }
+          }
+
+          // Normalize & ensure at least one row
+          const normalizedQuantity =
+            (parsedQuantity.length ? parsedQuantity : [{}]).map(normalizeQuantityItem);
 
           setFormData(prev => ({
             ...prev,
@@ -950,14 +993,39 @@ const AddNewProduct = () => {
               name: m.name || m.url?.split('/').pop() || 'media',
               size: m.size || 0,
             })),
-            quantity: Array.isArray(product.quantity)
-              ? product.quantity
-              : (typeof product.quantity === 'string' && product.quantity.length > 0 ? [product.quantity] : []),
+            quantity: normalizedQuantity,
             stock: (() => {
               const s = (product.stock ?? '').toLowerCase().trim();
               return s === 'yes' ? 'yes' : s === 'no' ? 'no' : 'yes';
             })(),
           }));
+
+          // Fetch subcategories if category exists
+          if (product.category) {
+            const subCategoryResponse = await axiosInstance.get(
+              `/user/allSubcategories?category=${encodeURIComponent(product.category)}`
+            );
+            setSubCategoryList(subCategoryResponse.data || []);
+          }
+
+          // // Set the form data with parsed quantity
+          // setFormData(prev => ({
+          //   ...prev,
+          //   ...product,
+          //   media: (product.media || []).map(m => ({
+          //     ...m,
+          //     url: m.url?.startsWith('http') ? m.url : `${m.url}`,
+          //     type: m.type?.includes('video') ? 'video' : 'image',
+          //     file: null,
+          //     name: m.name || m.url?.split('/').pop() || 'media',
+          //     size: m.size || 0,
+          //   })),
+          //   quantity: parsedQuantity, // Correctly assign parsed quantity
+          //   stock: (() => {
+          //     const s = (product.stock ?? '').toLowerCase().trim();
+          //     return s === 'yes' ? 'yes' : s === 'no' ? 'no' : 'yes';
+          //   })(),
+          // }));
         }
       } catch (err) {
         console.error('Error during initialization:', err);
@@ -966,6 +1034,8 @@ const AddNewProduct = () => {
     };
     init();
   }, [id, isEditMode]);
+
+
 
   const fetchSubCategories = async (category) => {
     try {
@@ -1121,15 +1191,23 @@ const AddNewProduct = () => {
     });
   };
 
+  // const addQuantityField = () => {
+  //   setFormData(prev => ({
+  //     ...prev,
+  //     quantity: [
+  //       ...prev.quantity,
+  //       { weight: '', pricePerGram: '', discount: '', gst: '', makingPrice: '', totalWeight: '', finalPrice: '' }
+  //     ]
+  //   }));
+  // };
+
   const addQuantityField = () => {
     setFormData(prev => ({
       ...prev,
-      quantity: [
-        ...prev.quantity,
-        { weight: '', pricePerGram: '', discount: '', gst: '', makingPrice: '', totalWeight: '', finalPrice: '' }
-      ]
+      quantity: [...prev.quantity, normalizeQuantityItem({})]
     }));
   };
+
 
   const removeQuantityField = (index) => {
     setFormData(prev => {
@@ -1606,7 +1684,7 @@ const AddNewProduct = () => {
                 <TextField
                   label="Weight (gm)"
                   name="weight"
-                  value={qty.weight}
+                  value={qty.weight ?? ''}
                   onChange={(e) => handleChange(e, index)}
                   fullWidth
                   type="number"
@@ -1619,7 +1697,7 @@ const AddNewProduct = () => {
                 <TextField
                   label="Price per gram (₹)"
                   name="pricePerGram"
-                  value={qty.pricePerGram}
+                  value={qty.pricePerGram ?? ''}
                   onChange={(e) => handleChange(e, index)}
                   fullWidth
                   type="number"
@@ -1632,7 +1710,7 @@ const AddNewProduct = () => {
                 <TextField
                   label="Discount (%)"
                   name="discount"
-                  value={qty.discount}
+                  value={qty.discount ?? ''}
                   onChange={(e) => handleChange(e, index)}
                   fullWidth
                   type="number"
@@ -1645,7 +1723,7 @@ const AddNewProduct = () => {
                 <TextField
                   label="GST (%)"
                   name="gst"
-                  value={qty.gst}
+                  value={qty.gst ?? ''}
                   onChange={(e) => handleChange(e, index)}
                   fullWidth
                   type="number"
@@ -1658,7 +1736,7 @@ const AddNewProduct = () => {
                 <TextField
                   label="Making Price (₹)"
                   name="makingPrice"
-                  value={qty.makingPrice}
+                  value={qty.makingPrice ?? ''}
                   onChange={(e) => handleChange(e, index)}
                   fullWidth
                   type="number"
@@ -1670,7 +1748,7 @@ const AddNewProduct = () => {
               <Grid item xs={6}>
                 <TextField
                   label="Total Weight (gm)"
-                  value={qty.totalWeight}
+                  value={qty.totalWeight ?? ''}
                   fullWidth
                   disabled
                 />
@@ -1680,7 +1758,7 @@ const AddNewProduct = () => {
               <Grid item xs={6}>
                 <TextField
                   label="Final Price (₹)"
-                  value={qty.finalPrice}
+                  value={qty.finalPrice ?? ''}
                   fullWidth
                   disabled
                 />

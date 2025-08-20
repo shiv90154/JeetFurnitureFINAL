@@ -1,3 +1,416 @@
+// import React, { useEffect, useState } from 'react';
+// import { Link, useNavigate } from 'react-router-dom';
+// import axiosInstance from '../../common components/AxiosInstance';
+// import API_URL from '../../../config';
+// import {
+//   Box,
+//   Button,
+//   Container,
+//   Dialog,
+//   DialogActions,
+//   DialogContent,
+//   DialogTitle,
+//   Paper,
+//   Table,
+//   TableBody,
+//   TableCell,
+//   TableContainer,
+//   TableHead,
+//   TableRow,
+//   IconButton,
+//   Typography,
+//   Avatar,
+//   Card,
+//   CardHeader,
+//   CardContent,
+//   CircularProgress,
+//   Chip,
+//   Divider,
+//   Grid,
+//   TablePagination
+// } from '@mui/material';
+// import { Add, Edit, Delete, Close, Visibility } from '@mui/icons-material';
+// import { styled } from '@mui/material/styles';
+// import { publicUrl } from '../../common components/PublicUrl';
+
+// const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
+//   marginTop: theme.spacing(3),
+//   boxShadow: theme.shadows[3],
+//   borderRadius: theme.shape.borderRadius,
+// }));
+
+// const StatusChip = styled(Chip)(({ theme, status }) => ({
+//   fontWeight: 600,
+//   backgroundColor: status === 'active'
+//     ? theme.palette.success.light
+//     : theme.palette.error.light,
+//   color: status === 'active'
+//     ? theme.palette.success.dark
+//     : theme.palette.error.dark,
+// }));
+
+// const ProductImage = styled(Avatar)(({ theme }) => ({
+//   width: theme.spacing(10),
+//   height: theme.spacing(10),
+//   marginRight: theme.spacing(2),
+// }));
+
+// const ProductsJewel = () => {
+//   const [products, setProducts] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const [selectedProduct, setSelectedProduct] = useState(null);
+//   const [openModal, setOpenModal] = useState(false);
+//   const navigate = useNavigate();
+
+//   const [page, setPage] = useState(0);
+//   const [rowsPerPage, setRowsPerPage] = useState(10);
+
+//   // Pagination handlers
+//   const handleChangePage = (event, newPage) => {
+//     setPage(newPage);
+//   };
+
+//   const handleChangeRowsPerPage = (event) => {
+//     setRowsPerPage(parseInt(event.target.value, 10));
+//     setPage(0);
+//   };
+
+//   const currentProducts = products.slice(
+//     page * rowsPerPage,
+//     page * rowsPerPage + rowsPerPage
+//   );
+
+//   const fetchData = async () => {
+//     setLoading(true);
+//     try {
+//       const response = await axiosInstance.get('/user/allproducts');
+//       setProducts(response.data);
+//     } catch (error) {
+//       console.error("Error fetching data:", error);
+//     }
+//     setLoading(false);
+//   };
+
+//   useEffect(() => {
+//     fetchData();
+//   }, []);
+
+//   const handleDelete = async (id) => {
+//     if (window.confirm("Are you sure you want to delete this product?")) {
+//       try {
+//         await axiosInstance.delete(`/user/deleteProduct/${id}`);
+//         fetchData();
+//       } catch (error) {
+//         console.error("Delete error:", error);
+//       }
+//     }
+//   };
+
+//   const handleEdit = (id) => {
+//     navigate(`/AdminPanel/addNewProduct/${id}`);
+//   };
+
+//   const handleView = (product) => {
+//     setSelectedProduct(product);
+//     setOpenModal(true);
+//   };
+
+//   const handleCloseModal = () => {
+//     setOpenModal(false);
+//     setSelectedProduct(null);
+//   };
+
+//   return (
+//     <Container maxWidth="xl">
+//       <Box sx={{ my: 4 }}>
+//         <Typography variant="h4"
+//           gutterBottom
+//           sx={{ fontWeight: 700, color: 'text.primary', mb: 4 }}>
+//           Products
+//         </Typography>
+//         <Box sx={{
+//           display: 'flex',
+//           justifyContent: 'end',
+//           alignItems: 'center',
+//           my: 3
+//         }}>
+//           <Button
+//             variant="contained"
+//             color="primary"
+//             startIcon={<Add />}
+//             component={Link}
+//             to="/AdminPanel/addNewProduct"
+//           >
+//             Add New Product
+//           </Button>
+//         </Box>
+
+//         {loading ? (
+//           <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+//             <CircularProgress />
+//           </Box>
+//         ) : (
+//           <StyledTableContainer component={Paper}>
+//             <Table>
+//               <TableHead>
+//                 <TableRow sx={{ backgroundColor: (theme) => theme.palette.primary.main }}>
+//                   <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Image</TableCell>
+//                   <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Name</TableCell>
+//                   <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Category</TableCell>
+//                   <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>MRP (Consumer)</TableCell>
+//                   <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Quantity</TableCell>
+//                   {/* <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Stock</TableCell> */}
+//                   {/* <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Status</TableCell> */}
+//                   <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Actions</TableCell>
+//                 </TableRow>
+//               </TableHead>
+//               <TableBody>
+//                 {currentProducts.map(product => (
+//                   <TableRow key={product._id} hover>
+//                     <TableCell>
+//                       {product.media && product.media.length > 0 ? (
+//                         <ProductImage
+//                           // src={`${API_URL}${product.media[0].url}`}
+//                           src={publicUrl(product.media[0].url)}
+//                           alt={product.name}
+//                           variant="rounded"
+//                         />
+//                       ) : (
+//                         <ProductImage variant="rounded">
+//                           <Typography variant="caption">No Image</Typography>
+//                         </ProductImage>
+//                       )}
+//                     </TableCell>
+//                     <TableCell>
+//                       <Typography fontWeight="medium">{product.name}</Typography>
+//                       <Typography variant="body2" color="textSecondary">
+//                         {product._id}
+//                       </Typography>
+//                     </TableCell>
+//                     <TableCell>
+//                       <Typography>{product.category}</Typography>
+//                       <Typography variant="body2" color="textSecondary">
+//                         {product.sub_category}
+//                       </Typography>
+//                     </TableCell>
+//                     <TableCell>
+//                       <Typography fontWeight="medium">
+//                         ₹{product.consumer_price}
+//                       </Typography>
+//                       {product.discount > 0 && (
+//                         <Typography variant="body2" color="error">
+//                           {product.discount}% off
+//                         </Typography>
+//                       )}
+//                     </TableCell>
+//                     <TableCell>
+//                       <Typography
+//                         fontWeight="medium"
+//                       >
+//                         {product.quantity}
+//                       </Typography>
+//                     </TableCell>
+//                     {/* <TableCell>
+//                       <Typography
+//                         color={product.quantity > 0 ? 'success.main' : 'error.main'}
+//                         fontWeight="medium"
+//                       >
+//                         {product.stock}
+//                       </Typography>
+//                     </TableCell> */}
+//                     {/* <TableCell>
+//                       <StatusChip
+//                         label={product.deleted_at ? 'Inactive' : 'Active'}
+//                         status={product.deleted_at ? 'inactive' : 'active'}
+//                         sx={{ pointerEvents: 'none' }}
+//                       />
+//                     </TableCell> */}
+//                     <TableCell>
+//                       <IconButton
+//                         color="info"
+//                         onClick={() => handleView(product)}
+//                         disabled={!!product.deleted_at}
+//                       >
+//                         <Visibility />
+//                       </IconButton>
+//                       <IconButton
+//                         color="primary"
+//                         onClick={() => handleEdit(product._id)}
+//                         disabled={!!product.deleted_at}
+//                       >
+//                         <Edit />
+//                       </IconButton>
+//                       <IconButton
+//                         color="error"
+//                         onClick={() => handleDelete(product._id)}
+//                       >
+//                         <Delete />
+//                       </IconButton>
+//                     </TableCell>
+//                   </TableRow>
+//                 ))}
+//               </TableBody>
+//             </Table>
+//             <TablePagination
+//               rowsPerPageOptions={[10, 20, 30]}
+//               component="div"
+//               count={products.length}
+//               rowsPerPage={rowsPerPage}
+//               page={page}
+//               onPageChange={handleChangePage}
+//               onRowsPerPageChange={handleChangeRowsPerPage}
+//               sx={{
+//                 backgroundColor: '#f5f5f5',
+//                 borderBottomLeftRadius: '8px',
+//                 borderBottomRightRadius: '8px',
+//               }}
+//             />
+//           </StyledTableContainer>
+//         )}
+//       </Box>
+
+//       {/* Product Details Dialog */}
+//       <Dialog
+//         open={openModal}
+//         onClose={handleCloseModal}
+//         maxWidth="md"
+//         fullWidth
+//         scroll="paper"
+//       >
+//         <DialogTitle>
+//           Product Details
+//           <IconButton
+//             aria-label="close"
+//             onClick={handleCloseModal}
+//             sx={{
+//               position: 'absolute',
+//               right: 8,
+//               top: 8,
+//               color: (theme) => theme.palette.grey[500],
+//             }}
+//           >
+//             <Close />
+//           </IconButton>
+//         </DialogTitle>
+//         <DialogContent dividers>
+//           {selectedProduct && (
+//             <Grid container spacing={3}>
+//               <Grid item xs={12} md={4}>
+//                 <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+//                   {selectedProduct.media && selectedProduct.media.length > 0 ? (
+//                     <Avatar
+//                       src={`${API_URL}${selectedProduct.media[0].url}`}
+//                       alt={selectedProduct.name}
+//                       sx={{ width: 200, height: 200 }}
+//                       variant="rounded"
+//                     />
+//                   ) : (
+//                     <Avatar
+//                       sx={{ width: 200, height: 200 }}
+//                       variant="rounded"
+//                     >
+//                       No Image
+//                     </Avatar>
+//                   )}
+//                 </Box>
+//               </Grid>
+//               <Grid item xs={12} md={8}>
+//                 <Typography variant="h5" gutterBottom>
+//                   {selectedProduct.name}
+//                 </Typography>
+//                 <Typography variant="body1" color="textSecondary" gutterBottom>
+//                   {selectedProduct.description}
+//                 </Typography>
+
+//                 <Divider sx={{ my: 2 }} />
+
+//                 <Grid container spacing={2}>
+//                   <Grid item xs={6}>
+//                     <Typography variant="subtitle2">Category:</Typography>
+//                     <Typography>{selectedProduct.category}</Typography>
+//                   </Grid>
+//                   <Grid item xs={6}>
+//                     <Typography variant="subtitle2">Sub-category:</Typography>
+//                     <Typography>{selectedProduct.sub_category}</Typography>
+//                   </Grid>
+//                   <Grid item xs={6}>
+//                     <Typography variant="subtitle2">Retail Price:</Typography>
+//                     <Typography>₹{selectedProduct.retail_price}</Typography>
+//                   </Grid>
+//                   <Grid item xs={6}>
+//                     <Typography variant="subtitle2">Consumer Price:</Typography>
+//                     <Typography>₹{selectedProduct.consumer_price}</Typography>
+//                   </Grid>
+//                   <Grid item xs={6}>
+//                     <Typography variant="subtitle2">MRP:</Typography>
+//                     <Typography>₹{selectedProduct.mrp}</Typography>
+//                   </Grid>
+//                   <Grid item xs={6}>
+//                     <Typography variant="subtitle2">Discount:</Typography>
+//                     <Typography>{selectedProduct.discount}%</Typography>
+//                   </Grid>
+//                   <Grid item xs={6}>
+//                     <Typography variant="subtitle2">GST:</Typography>
+//                     <Typography>{selectedProduct.gst}%</Typography>
+//                   </Grid>
+//                   <Grid item xs={6}>
+//                     <Typography variant="subtitle2">Stock:</Typography>
+//                     {/* <Typography>{selectedProduct.stock}</Typography> */}
+//                     <Typography>{selectedProduct.stock || "N/A"}</Typography>
+//                   </Grid>
+//                   <Grid item xs={6}>
+//                     <Typography variant="subtitle2">Quantity:</Typography>
+//                     <Typography
+//                       color={selectedProduct.quantity > 0 ? 'success.main' : 'error.main'}
+//                     >
+//                       {selectedProduct.quantity}
+//                     </Typography>
+//                   </Grid>
+//                   <Grid item xs={6}>
+//                     <Typography variant="subtitle2">Prescription:</Typography>
+//                     <Typography>{selectedProduct.prescription}</Typography>
+//                   </Grid>
+//                   <Grid item xs={12}>
+//                     <Typography variant="subtitle2">Benefits:</Typography>
+//                     <Typography>{selectedProduct.benefits}</Typography>
+//                   </Grid>
+//                   <Grid item xs={12}>
+//                     <Typography variant="subtitle2">Dosage:</Typography>
+//                     <Typography>{selectedProduct.dosage}</Typography>
+//                   </Grid>
+//                   <Grid item xs={12}>
+//                     <Typography variant="subtitle2">Side Effects:</Typography>
+//                     <Typography>{selectedProduct.side_effects}</Typography>
+//                   </Grid>
+//                   <Grid item xs={12}>
+//                     <Typography variant="subtitle2">Suitable For:</Typography>
+//                     <Typography>{selectedProduct.suitable_for}</Typography>
+//                   </Grid>
+//                   <Grid item xs={12}>
+//                     <Typography variant="subtitle2">Expires On:</Typography>
+//                     <Typography>
+//                       {selectedProduct.expires_on}
+//                     </Typography>
+//                   </Grid>
+//                 </Grid>
+//               </Grid>
+//             </Grid>
+//           )}
+//         </DialogContent>
+//         <DialogActions>
+//           <Button onClick={handleCloseModal} color="primary">
+//             Close
+//           </Button>
+//         </DialogActions>
+//       </Dialog>
+//     </Container>
+//   );
+// };
+
+// export default ProductsJewel;
+
+
+// //2:
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axiosInstance from '../../common components/AxiosInstance';
@@ -80,16 +493,56 @@ const ProductsJewel = () => {
     page * rowsPerPage + rowsPerPage
   );
 
+  // const fetchData = async () => {
+  //   setLoading(true);
+  //   try {
+  //     const response = await axiosInstance.get('/user/allproducts');
+  //     setProducts(response.data);
+  //   } catch (error) {
+  //     console.error("Error fetching data:", error);
+  //   }
+  //   setLoading(false);
+  // };
+
   const fetchData = async () => {
     setLoading(true);
     try {
       const response = await axiosInstance.get('/user/allproducts');
-      setProducts(response.data);
+      // Parse quantity array-of-string to array-of-objects if needed
+      const productsWithParsedQuantity = response.data.map(prod => {
+        let parsedQuantity = [];
+        // Case: API gives array with JSON string(s) inside
+        if (Array.isArray(prod.quantity) && typeof prod.quantity[0] === 'string') {
+          prod.quantity.forEach(qtyString => {
+            try {
+              // This parses a JSON-stringified array: '[{...}]'
+              const arr = JSON.parse(qtyString);
+              if (Array.isArray(arr)) parsedQuantity.push(...arr);
+            } catch (e) {
+              // fallback: just skip, or try parsing as single object
+              try {
+                const single = JSON.parse(qtyString);
+                if (typeof single === 'object') parsedQuantity.push(single);
+              } catch { /* ignore */ }
+            }
+          });
+        }
+        // Otherwise, just keep the array if it's already good
+        if (!parsedQuantity.length && Array.isArray(prod.quantity)) {
+          parsedQuantity = prod.quantity;
+        }
+        return {
+          ...prod,
+          quantity: parsedQuantity
+        };
+      });
+      setProducts(productsWithParsedQuantity);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
     setLoading(false);
   };
+
 
   useEffect(() => {
     fetchData();
@@ -157,7 +610,9 @@ const ProductsJewel = () => {
                   <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Image</TableCell>
                   <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Name</TableCell>
                   <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Category</TableCell>
-                  <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>MRP (Consumer)</TableCell>
+                  <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Occasion</TableCell>
+                  {/* <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>MRP 
+                    (Final)</TableCell> */}
                   <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Quantity</TableCell>
                   {/* <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Stock</TableCell> */}
                   {/* <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Status</TableCell> */}
@@ -189,11 +644,12 @@ const ProductsJewel = () => {
                     </TableCell>
                     <TableCell>
                       <Typography>{product.category}</Typography>
-                      <Typography variant="body2" color="textSecondary">
-                        {product.sub_category}
-                      </Typography>
                     </TableCell>
+
                     <TableCell>
+                      <Typography>{product.occasion}</Typography>
+                    </TableCell>
+                    {/* <TableCell>
                       <Typography fontWeight="medium">
                         ₹{product.consumer_price}
                       </Typography>
@@ -202,14 +658,29 @@ const ProductsJewel = () => {
                           {product.discount}% off
                         </Typography>
                       )}
-                    </TableCell>
+                    </TableCell> */}
                     <TableCell>
-                      <Typography
-                        fontWeight="medium"
-                      >
-                        {product.quantity}
-                      </Typography>
+                      {Array.isArray(product.quantity) && product.quantity.length > 0 ? (
+                        product.quantity.map((qty, idx) => (
+                          <Box key={idx} sx={{ mb: 1 }}>
+                            <Typography variant="body2" fontWeight="bold">
+                              Weight: {qty.weight ? `${qty.weight}g` : <span style={{ color: '#aaa' }}>N/A</span>}
+                            </Typography>
+                            <Typography variant="caption">
+                              Price/gram: {qty.pricePerGram ? `₹${qty.pricePerGram}` : 'N/A'} |
+                              Discount: {qty.discount ? `${qty.discount}%` : 'N/A'} |
+                              GST: {qty.gst ? `${qty.gst}%` : 'N/A'} |
+                              Making: {qty.makingPrice ? `₹${qty.makingPrice}` : 'N/A'} |
+                              <strong>Final: {qty.finalPrice ? `₹${qty.finalPrice}` : 'N/A'}</strong>
+                            </Typography>
+                          </Box>
+
+                        ))
+                      ) : (
+                        <Typography variant="caption" color="text.secondary">N/A</Typography>
+                      )}
                     </TableCell>
+
                     {/* <TableCell>
                       <Typography
                         color={product.quantity > 0 ? 'success.main' : 'error.main'}
@@ -295,15 +766,17 @@ const ProductsJewel = () => {
         <DialogContent dividers>
           {selectedProduct && (
             <Grid container spacing={3}>
-              <Grid item xs={12} md={4}>
+              {/* <Grid item xs={12} md={4}>
                 <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                   {selectedProduct.media && selectedProduct.media.length > 0 ? (
                     <Avatar
-                      src={`${API_URL}${selectedProduct.media[0].url}`}
+                      // src={`${API_URL}${selectedProduct.media[0].url}`}
+                      src={publicUrl(selectedProduct.media[0].url)}
                       alt={selectedProduct.name}
                       sx={{ width: 200, height: 200 }}
                       variant="rounded"
                     />
+                 
                   ) : (
                     <Avatar
                       sx={{ width: 200, height: 200 }}
@@ -313,7 +786,37 @@ const ProductsJewel = () => {
                     </Avatar>
                   )}
                 </Box>
+              </Grid> */}
+
+              <Grid item xs={12} md={4}>
+                {Array.isArray(selectedProduct.media) && selectedProduct.media.length > 0 ? (
+                  <Grid container spacing={1}>
+                    {selectedProduct.media.map((m, i) => (
+                      <Grid item xs={3} key={m._id || i}>
+                        {m.type === 'video' ? (
+                          <video
+                            src={publicUrl(m.url)}
+                            controls
+                            style={{ width: '300px', height: "200px", borderRadius: 8, display: 'block' }}
+                          />
+                        ) : (
+                          <img
+                            src={publicUrl(m.url)}
+                            alt={`${selectedProduct.name}-${i}`}
+                            style={{ width: '300px', height: "200px", borderRadius: 8, objectFit: 'cover', display: 'block' }}
+                          />
+                        )}
+                      </Grid>
+                    ))}
+                  </Grid>
+                ) : (
+                  <Avatar sx={{ width: 200, height: 200 }} variant="rounded">
+                    No Media
+                  </Avatar>
+                )}
               </Grid>
+
+
               <Grid item xs={12} md={8}>
                 <Typography variant="h5" gutterBottom>
                   {selectedProduct.name}
@@ -334,10 +837,10 @@ const ProductsJewel = () => {
                     <Typography>{selectedProduct.sub_category}</Typography>
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography variant="subtitle2">Retail Price:</Typography>
-                    <Typography>₹{selectedProduct.retail_price}</Typography>
+                    <Typography variant="subtitle2">Occasion:</Typography>
+                    <Typography>{selectedProduct.occasion}</Typography>
                   </Grid>
-                  <Grid item xs={6}>
+                  {/* <Grid item xs={6}>
                     <Typography variant="subtitle2">Consumer Price:</Typography>
                     <Typography>₹{selectedProduct.consumer_price}</Typography>
                   </Grid>
@@ -352,46 +855,34 @@ const ProductsJewel = () => {
                   <Grid item xs={6}>
                     <Typography variant="subtitle2">GST:</Typography>
                     <Typography>{selectedProduct.gst}%</Typography>
-                  </Grid>
+                  </Grid> */}
                   <Grid item xs={6}>
                     <Typography variant="subtitle2">Stock:</Typography>
-                    {/* <Typography>{selectedProduct.stock}</Typography> */}
                     <Typography>{selectedProduct.stock || "N/A"}</Typography>
                   </Grid>
-                  <Grid item xs={6}>
-                    <Typography variant="subtitle2">Quantity:</Typography>
-                    <Typography
-                      color={selectedProduct.quantity > 0 ? 'success.main' : 'error.main'}
-                    >
-                      {selectedProduct.quantity}
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Typography variant="subtitle2">Prescription:</Typography>
-                    <Typography>{selectedProduct.prescription}</Typography>
-                  </Grid>
                   <Grid item xs={12}>
-                    <Typography variant="subtitle2">Benefits:</Typography>
-                    <Typography>{selectedProduct.benefits}</Typography>
+                    <Typography variant="subtitle2">Quantities:</Typography>
+                    {Array.isArray(selectedProduct.quantity) && selectedProduct.quantity.length > 0 ? (
+                      selectedProduct.quantity.map((qty, idx) => (
+                        <Box key={idx} sx={{ mb: 1, pl: 2 }}>
+                          <h5> Product <span>({idx + 1}): </span></h5>
+                          <Typography variant="body2" fontWeight="bold">
+                            Weight: {qty.weight ? `${qty.weight}g` : <span style={{ color: '#aaa' }}>N/A</span>}
+                          </Typography>
+                          <Typography variant="caption">
+                            Price/gram: {qty.pricePerGram ? `₹${qty.pricePerGram}` : 'N/A'} |
+                            Discount: {qty.discount ? `${qty.discount}%` : 'N/A'} |
+                            GST: {qty.gst ? `${qty.gst}%` : 'N/A'} |
+                            Making: {qty.makingPrice ? `₹${qty.makingPrice}` : 'N/A'} |
+                            <strong>Final: {qty.finalPrice ? `₹${qty.finalPrice}` : 'N/A'}</strong>
+                          </Typography>
+                        </Box>
+                      ))
+                    ) : (
+                      <Typography variant="caption" color="text.secondary">N/A</Typography>
+                    )}
                   </Grid>
-                  <Grid item xs={12}>
-                    <Typography variant="subtitle2">Dosage:</Typography>
-                    <Typography>{selectedProduct.dosage}</Typography>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Typography variant="subtitle2">Side Effects:</Typography>
-                    <Typography>{selectedProduct.side_effects}</Typography>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Typography variant="subtitle2">Suitable For:</Typography>
-                    <Typography>{selectedProduct.suitable_for}</Typography>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Typography variant="subtitle2">Expires On:</Typography>
-                    <Typography>
-                      {selectedProduct.expires_on}
-                    </Typography>
-                  </Grid>
+
                 </Grid>
               </Grid>
             </Grid>
