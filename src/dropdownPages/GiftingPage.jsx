@@ -35,7 +35,7 @@ const GiftingPage = () => {
         {
             title: 'Gift Cards',
             subtitle: 'Late In Planning?',
-            description: 'Explore Tanishq Gift Cards For Your Last Minute Gifting Needs',
+            description: 'Explore Gift Cards For Your Last Minute Gifting Needs',
             buttonText: 'Buy Gift Cards',
             image: 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=500&h=400&fit=crop',
             bgColor: '#8B1538',
@@ -44,7 +44,7 @@ const GiftingPage = () => {
         {
             title: 'Gold Coins',
             subtitle: 'Or Gold Coins',
-            description: 'Explore Tanishq Gold Coins For Your Last Minute Gifting Needs',
+            description: 'Explore Gold Coins For Your Last Minute Gifting Needs',
             buttonText: 'Buy Gold Coins',
             image: 'https://images.unsplash.com/photo-1610375461246-83df859d849d?w=500&h=400&fit=crop',
             bgColor: '#B8860B',
@@ -384,7 +384,7 @@ const GiftingPage = () => {
                     Rakhi Gifts For Your Sister
                 </Typography>
                 <Typography variant="subtitle1" color="text.secondary" sx={{ mb: 4 }}>
-                    Express Your Love This Rakhi With Stunning Tanishq Jewellery
+                    Express Your Love This Rakhi With Stunning Jewellery
                 </Typography>
                 <Box sx={{ display: 'flex', gap: 3, justifyContent: 'center', flexWrap: 'wrap' }}>
                     <Box sx={{ flex: '1 1 200px', textAlign: 'left' }}>
@@ -1078,7 +1078,7 @@ const GiftingPage = () => {
                                 Late in planning?
                             </Typography>
                             <Typography variant="body1" sx={{ mb: 3 }}>
-                                Explore Tanishq Gift Cards for your last minute gifting needs
+                                Explore Gift Cards for your last minute gifting needs
                             </Typography>
                             <Box>
                                 <Button
@@ -1106,7 +1106,7 @@ const GiftingPage = () => {
                                 Or gold coins
                             </Typography>
                             <Typography variant="body1" sx={{ mb: 3 }}>
-                                Explore Tanishq Gift Coins for your last minute gifting needs
+                                Explore Gift Coins for your last minute gifting needs
                             </Typography>
                             <Box>
                                 <Button

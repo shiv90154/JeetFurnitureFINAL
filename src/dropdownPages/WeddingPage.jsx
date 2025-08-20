@@ -205,13 +205,7 @@ const WeddingPage = () => {
                 right: 6,
                 zIndex: 2
               }}>
-                <IconButton size="small" sx={{
-                  backgroundColor: "rgba(255,255,255,0.95)",
-                  width: 24,
-                  height: 24
-                }}>
-                  <FavoriteBorder sx={{ color: "#8B1538" }} />
-                </IconButton>
+                
               </Box>
               <Typography variant="body2" sx={{
                 mt: 1,
@@ -257,7 +251,6 @@ const WeddingPage = () => {
                   style={{
                     position: "absolute",
                     maxWidth: "120px",
-                    right: "20px",
                     top: "25%",
                   }}
                 />
@@ -297,7 +290,7 @@ const WeddingPage = () => {
       </Box>
 
       {/* Featured Collections */}
-      <Container maxWidth="lg" sx={{ py: 8 }}>
+      {/* <Container maxWidth="lg" sx={{ py: 8 }}>
         <Typography variant="h4" component="h2" sx={sectionTitleStyle}>
           Featured Collections
         </Typography>
@@ -308,10 +301,10 @@ const WeddingPage = () => {
             style={{ width: "100%", height: "auto" }}
           />
         </Box>
-      </Container>
+      </Container> */}
 
       {/* Store Banner */}
-      <Container maxWidth="lg" sx={{ py: 4 }}>
+      {/* <Container maxWidth="lg" sx={{ py: 4 }}>
         <Box sx={{ borderRadius: 3, overflow: "hidden" }}>
           <img
             src="/src/img/storeBannerDesktop.png"
@@ -319,7 +312,7 @@ const WeddingPage = () => {
             style={{ width: "100%", height: "auto" }}
           />
         </Box>
-      </Container>
+      </Container> */}
     </Box>
   );
 };

@@ -89,7 +89,7 @@ const DiamondSliderThree = () => {
         },
         {
             title: "Spotlight Edit",
-            description: "Inspired by nature's subtle nuances, each piece in our Spotlight Edit collection intertwines white and rose gold with shimmering diamonds, creating an elegant allure. Delicate designs bestow the Tanishq woman with her own radiant spotlight.",
+            description: "Inspired by nature's subtle nuances, each piece in our Spotlight Edit collection intertwines white and rose gold with shimmering diamonds, creating an elegant allure. Delicate designs bestow the woman with her own radiant spotlight.",
             mainImageDesktop: "https://staticimg.tanishq.co.in/microsite/diamond/images/diamondSpecial/spotlight-d.png",
             mainImageMobile: "https://staticimg.tanishq.co.in/microsite/diamond/images/diamondSpecial/spotlight-m.png",
             products: [

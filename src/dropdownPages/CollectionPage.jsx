@@ -54,7 +54,7 @@
 //                     component="img"
 //                     src="/hero_img.png"
 //                     // src="https://www.tanishq.co.in/on/demandware.static/-/Library-Sites-TanishqSharedLibrary/default/dwe0f92ec0/microsite/joy-of-dressing/sparklingavenuesdesktop.jpg"
-//                     alt="Tanishq Sparkling Avenues - The joy of dressing"
+//                     alt=" Sparkling Avenues - The joy of dressing"
 //                     sx={{
 //                         width: '100%',
 //                         // maxWidth: 1200,
@@ -308,7 +308,7 @@ export default function CollectionPage() {
         <Box
           component="img"
           src="/hero_img.png"
-          alt="Tanishq Sparkling Avenues - The joy of dressing"
+          alt=" Sparkling Avenues - The joy of dressing"
           sx={{
             width: '100%',
             height: 'auto',

@@ -150,8 +150,8 @@ const BridesDiamondStories = () => {
                         Alluring Floral Gold and Diamond Necklace Set
                     </Typography>
 
-                    {/* Tanishq Logo */}
-                    <Box sx={{ textAlign: 'center', mb: 3 }}>
+                    {/*  Logo */}
+                    {/* <Box sx={{ textAlign: 'center', mb: 3 }}>
                         <Typography
                             variant="h4"
                             sx={{
@@ -161,9 +161,9 @@ const BridesDiamondStories = () => {
                                 color: '#d4af37'
                             }}
                         >
-                            T
+                            C
                         </Typography>
-                    </Box>
+                    </Box> */}
 
                     {/* Description */}
                     <Typography

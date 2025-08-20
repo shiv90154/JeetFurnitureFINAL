@@ -82,7 +82,7 @@ const WeddingJewelleryRivaah = ({ reel1Video, reel2Video, instaPhotosImage }) =>
                                             mb: 1,
                                             opacity: 0.9
                                         }}>
-                                            Tanishq - Rivaah X Tarun Tahiliani
+                                            Chauhan Jewellers
                                         </Typography>
                                         <Button
                                             variant="contained"
@@ -151,7 +151,7 @@ const WeddingJewelleryRivaah = ({ reel1Video, reel2Video, instaPhotosImage }) =>
                                             mb: 1,
                                             opacity: 0.9
                                         }}>
-                                            Tanishq - Rivaah X Tarun Tahiliani
+                                            Chauhan Jewellers
                                         </Typography>
                                         <Button
                                             variant="contained"
