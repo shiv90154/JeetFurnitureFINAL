@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axiosInstance from '../../common components/AxiosInstance';
-import API_URL from '../../../config';
 import {
     Box,
     Button,
@@ -63,6 +62,7 @@ const CategoryJewel = () => {
         name: '',
         description: '',
         image: null,
+        assignedRoute: '',
     });
     const [imagePreview, setImagePreview] = useState(null);
     const [page, setPage] = useState(0);
@@ -95,7 +95,7 @@ const CategoryJewel = () => {
     };
 
     const resetCategoryForm = () => {
-        setNewCategory({ variety: '', name: '', description: '', image: null });
+        setNewCategory({ variety: '', name: '', description: '', image: null, assignedRoute: '' });
         setImagePreview(null);
     };
 
@@ -132,6 +132,7 @@ const CategoryJewel = () => {
         formData.append('name', newCategory.name);
         formData.append('description', newCategory.description);
         formData.append('image', newCategory.image);
+        formData.append('assignedRoute', newCategory.assignedRoute);
 
         try {
             await axiosInstance.post('/user/createCategory', formData);
@@ -148,6 +149,7 @@ const CategoryJewel = () => {
         formData.append('variety', newCategory.variety);
         formData.append('name', newCategory.name);
         formData.append('description', newCategory.description);
+        formData.append('assignedRoute', newCategory.assignedRoute);
         if (newCategory.image) formData.append('image', newCategory.image);
 
         try {
@@ -176,6 +178,7 @@ const CategoryJewel = () => {
             name: cat.name || '',
             description: cat.description || '',
             image: null,
+            assignedRoute: cat.assignedRoute || '',
         });
         // setImagePreview(cat.image ? `${API_URL}/${cat.image}` : null);
         setImagePreview(cat.image ? publicUrl(cat.image) : null);
@@ -227,7 +230,7 @@ const CategoryJewel = () => {
                         <Table>
                             <TableHead>
                                 <TableRow sx={{ backgroundColor: (theme) => theme.palette.primary.main }}>
-                                    {['Variety', 'Name', 'Description', 'Image', 'Status', 'Actions'].map(
+                                    {['Variety', 'Name', 'Description', 'Image', 'Status', 'AssignedRoute', 'Actions'].map(
                                         (headCell) => (
                                             <TableCell
                                                 key={headCell}
@@ -260,6 +263,7 @@ const CategoryJewel = () => {
                                                 status={cat.deleted_at ? 'inactive' : 'active'}
                                             />
                                         </TableCell>
+                                        <TableCell>{cat.assignedRoute}</TableCell>
                                         <TableCell>
                                             <IconButton
                                                 color="primary"
@@ -350,7 +354,7 @@ const CategoryJewel = () => {
                                 />
                             </Box>
 
-                            {/* Row 2: Description | Upload Image */}
+                            {/* Row 2: Description | AssignedRoute | Upload Image */}
                             <Box sx={{ display: 'flex', gap: 2, flexWrap: 'nowrap', mt: 2 }}>
                                 <TextField
                                     required
@@ -362,6 +366,28 @@ const CategoryJewel = () => {
                                     rows={4}
                                     sx={{ flex: 1 }}
                                 />
+                                <FormControl required sx={{ flex: 1 }}>
+                                    <InputLabel id="assigned-route-label">Assigned Route</InputLabel>
+                                    <Select
+                                        labelId="assigned-route-label"
+                                        id="assignedRoute"
+                                        name="assignedRoute"
+                                        value={newCategory.assignedRoute}
+                                        label="Assigned Route"
+                                        onChange={handleInputChange}
+                                    >
+                                        <MenuItem value="selectAssignedRoute" disabled>
+                                            Select Assigned Route
+                                        </MenuItem>
+                                        <MenuItem value="allJewellery">All Jewellery</MenuItem>
+                                        <MenuItem value="diamond">Diamond</MenuItem>
+                                        <MenuItem value="gold">Gold</MenuItem>
+                                        <MenuItem value="silver">Silver</MenuItem>
+                                        <MenuItem value="wedding">Wedding</MenuItem>
+                                        <MenuItem value="gifting">Gifting</MenuItem>
+                                        <MenuItem value="collection">Collection</MenuItem>
+                                    </Select>
+                                </FormControl>
 
                                 <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                                     <UploadButton

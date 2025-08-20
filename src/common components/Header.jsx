@@ -192,13 +192,16 @@ export default function Header() {
   // Dropdown IDs for hover menu
   const hasDropdown = ["category", "price", "gender", "occasion"];
 
-  // Map of API category _id to dropdown type id
-  const dropdownCategoryMap = {
-    // Example mapping: replace with real _ids from API
-    "66a1234567890": "category",
-    "66a2345678901": "price",
-    // ...
+  const assignedRouteToPath = {
+    allJewellery: '/allJewellery',
+    diamond: '/allJewellery',
+    gold: '/allJewellery',
+    silver: '/allJewellery',
+    wedding: '/wedding',
+    gifting: '/gifting',
+    collection: '/collection',
   };
+
 
   useEffect(() => {
     fetchData();
@@ -209,13 +212,16 @@ export default function Header() {
       const response = await axiosInstance.get(`/user/allcategories`);
       const data = response?.data || [];
       const mapped = data.map(cat => ({
-        id: dropdownCategoryMap[cat._id] || null,
+        // id: dropdownCategoryMap[cat._id] || null,
         apiId: cat._id,
         label: cat.name,
         icon: publicUrl(cat.image)
           ? <img src={publicUrl(cat.image)} alt={cat.name} style={{ width: 20, height: 20, borderRadius: "50%" }} />
-          : null
+          : null,
+        assignedRoute: cat.assignedRoute // <-- retain this from backend
       }));
+
+
       setCategories(mapped);
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -309,11 +315,20 @@ export default function Header() {
                 <NavButton
                   key={item.apiId}
                   startIcon={item.icon}
+                  // onClick={() => {
+                  //   if (!hasDropdown.includes(item.id)) {
+                  //     navigate(`/category/${item.apiId}`);
+                  //   }
+                  // }}
                   onClick={() => {
-                    if (!hasDropdown.includes(item.id)) {
+                    const route = assignedRouteToPath[item.assignedRoute];
+                    if (route) {
+                      navigate(route);
+                    } else {
                       navigate(`/category/${item.apiId}`);
                     }
                   }}
+
                   onMouseEnter={() => {
                     setHoveredMenu('category');  // Trigger the 'category' dropdown
                     setDropdownOpen(true);
@@ -408,5 +423,4 @@ export default function Header() {
     </StyledAppBar>
   );
 }
-
 
