@@ -37,14 +37,6 @@ const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
     borderRadius: theme.shape.borderRadius,
 }));
 
-const StatusChip = styled(Chip)(({ theme, status }) => ({
-    fontWeight: 600,
-    backgroundColor:
-        status === 'active' ? theme.palette.success.light : theme.palette.error.light,
-    color: status === 'active' ? theme.palette.success.dark : theme.palette.error.dark,
-    pointerEvents: 'none', // disable clicking
-}));
-
 const UploadButton = styled(Button)(({ theme }) => ({
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(2),
@@ -184,6 +176,7 @@ const CategoryJewel = () => {
         setOpenModal(true);
     };
 
+
     const handleDeleteCategory = async (id) => {
         if (!window.confirm('Are you sure you want to delete this category?')) return;
         try {
@@ -229,7 +222,7 @@ const CategoryJewel = () => {
                         <Table>
                             <TableHead>
                                 <TableRow sx={{ backgroundColor: (theme) => theme.palette.primary.main }}>
-                                    {['Variety', 'Name', 'Description', 'Image', 'Status', 'AssignedRoute', 'Actions'].map(
+                                    {['Variety', 'Name', 'Description', 'Image', 'AssignedRoute', 'Actions'].map(
                                         (headCell) => (
                                             <TableCell
                                                 key={headCell}
@@ -254,12 +247,6 @@ const CategoryJewel = () => {
                                                 alt={cat.name}
                                                 sx={{ width: 56, height: 56 }}
                                                 variant="rounded"
-                                            />
-                                        </TableCell>
-                                        <TableCell>
-                                            <StatusChip
-                                                label={cat.deleted_at ? 'Deleted' : 'Active'}
-                                                status={cat.deleted_at ? 'inactive' : 'active'}
                                             />
                                         </TableCell>
                                         <TableCell>{cat.assignedRoute}</TableCell>
