@@ -23,7 +23,7 @@ const BridesDiamondStories = () => {
                         mb: '0.5rem'
                     }}
                 >
-                    GLITTERING STORIES FROM TANISHQ
+                    GLITTERING STORIES FROM Chauhan Jewellers
                 </Typography>
                 <Typography
                     variant="h3"

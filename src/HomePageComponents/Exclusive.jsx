@@ -344,7 +344,7 @@ export default function Exclusive() {
           </PromoBlock>
 
           <PromoBlock variant="right">
-            <div><img className="" src="/logo.svg" alt="img" /></div>
+            <div><img className="digiGoldLogoSize" src="/logo.svg" alt="img" /></div>
             <RightHeader>
               <RightTitle>
                 Exchange your Old
