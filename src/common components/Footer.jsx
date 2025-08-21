@@ -114,7 +114,7 @@ const SocialIcon = styled(IconButton)({
 
 const BottomSection = styled(Box)({
     borderTop: "1px solid rgba(255,255,255,0.2)",
-    marginTop: 40,
+    marginTop: 20,
     paddingTop: 20,
     display: "flex",
     flexDirection: "column",
@@ -146,10 +146,10 @@ const SocialTitle = styled(Typography)({
 
 const FooterLinksRow = styled(Box)({
     display: "flex",
-    gap: 24,
+    gap: 16,
     flexWrap: "wrap",
-    "@media (max-width: 600px)": {
-        gap: 16,
+    "@media (max-width: 800px)": {
+        gap: 10,
     },
 });
 
@@ -217,24 +217,26 @@ export default function Footer() {
                     </FooterSection>
                 </Container>
                 {/* Bottom Section */}
-                <BottomSection>
-                    <SocialSection>
-                        <SocialTitle>Social</SocialTitle>
-                        <SocialIcons>
-                            {[Facebook, Instagram, Twitter, YouTube].map((IconComp, idx) => (
-                                <SocialIcon key={idx} aria-label={IconComp.displayName || "social-icon"}>
-                                    <IconComp fontSize="small" />
-                                </SocialIcon>
+                <Container maxWidth="xl">
+                    <BottomSection>
+                        <SocialSection>
+                            <SocialTitle>Social</SocialTitle>
+                            <SocialIcons>
+                                {[Facebook, Instagram, Twitter, YouTube].map((IconComp, idx) => (
+                                    <SocialIcon key={idx} aria-label={IconComp.displayName || "social-icon"}>
+                                        <IconComp fontSize="small" />
+                                    </SocialIcon>
+                                ))}
+                            </SocialIcons>
+                        </SocialSection>
+                        <FooterLinksRow>
+                            {["Terms & Conditions", "Privacy Policy", "Disclaimer"].map((text) => (
+                                <BottomLink key={text}>{text}</BottomLink>
                             ))}
-                        </SocialIcons>
-                    </SocialSection>
-                    <FooterLinksRow>
-                        {["Terms & Conditions", "Privacy Policy", "Disclaimer"].map((text) => (
-                            <BottomLink key={text}>{text}</BottomLink>
-                        ))}
-                    </FooterLinksRow>
-                    <Copyright>© 2023 Chauhan Son's Company Limited. All Rights Reserved.</Copyright>
-                </BottomSection>
+                        </FooterLinksRow>
+                        <Copyright>© 2023 Chauhan Son's Company Limited. All Rights Reserved.</Copyright>
+                    </BottomSection>
+                </Container>
             </FooterContainer>
         </div>
     );
