@@ -162,7 +162,7 @@ const FlexBox = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     flexDirection: "column",
     gap: "18px",
-    maxWidth: 430,
+    maxWidth: 400,
   },
 }));
 

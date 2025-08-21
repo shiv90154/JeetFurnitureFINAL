@@ -42,19 +42,17 @@ const GridWrap = styled(Box)(({ theme }) => ({
   gridAutoRows: "1fr",
   maxWidth: 1100,
   margin: "0 auto",
-  px: 4,
+  padding: "0 4px",
   [theme.breakpoints.down("md")]: {
-    gridTemplateColumns: "repeat(2, 1fr)",
-    gap: "18px 18px",
-    maxWidth: 600,
+    // gridTemplateColumns: "repeat(3, 1fr)",
+    gap: "10px 18px",
+    maxWidth: 700,
   },
-  // [theme.breakpoints.down("sm")]: {
-  //   gridTemplateColumns: "1fr",
-  //   gap: 13,
-  //   maxWidth: 375,
-  //   width: "90vw",
+  [theme.breakpoints.down("sm")]: {
+    gridTemplateColumns: "repeat(2, 1fr)",
+    maxWidth: 400,
+  },
 
-  // },
 }));
 
 const ExpMedia = styled(CardMedia)(({ theme }) => ({
@@ -64,9 +62,6 @@ const ExpMedia = styled(CardMedia)(({ theme }) => ({
   objectPosition: "center",
   borderTopLeftRadius: "inherit",
   borderTopRightRadius: "inherit",
-  // [theme.breakpoints.down("sm")]: {
-  //   // height: 67,
-  // },
 }));
 
 const ExpTitle = styled(Typography)(({ theme }) => ({
@@ -83,7 +78,7 @@ const ExpTitle = styled(Typography)(({ theme }) => ({
     marginTop: 0,
   },
 }));
-const DigiGoldCard = styled(Card)(() => ({
+const DigiGoldCard = styled(Card)(({ theme }) => ({
   borderRadius: 19,
   background: "#44170D",
   color: "#fff",
@@ -97,17 +92,19 @@ const DigiGoldCard = styled(Card)(() => ({
   boxShadow: "0 2px 15px 0 rgba(45,32,11,0.11)",
   padding: 0,
   width: "100%",
+  [theme.breakpoints.down("sm")]: { minHeight: 180, },
 }));
 
-const DigiHeading = styled(Typography)({
+const DigiHeading = styled(Typography)(({ theme }) => ({
   fontFamily: "serif",
   fontSize: 23,
   fontWeight: 700,
   color: "#fff",
-  margin: "5px 0",
+  margin: "3px 0",
   lineHeight: 1.1,
   letterSpacing: 0.3,
-});
+  [theme.breakpoints.down("sm")]: { fontSize: 18 },
+}));
 
 const DigiPowered = styled(Typography)({
   fontSize: 13,
@@ -163,7 +160,7 @@ export default function ChauhanExperience() {
         {ExperienceCards.map(card => (
           card.key === "digigold" ? (
             <DigiGoldCard key="digigold" elevation={0}>
-              <img src="/logo.svg" alt="Digi Gold Logo" />
+              <img className="digiGoldLogoSize" src="/logo.svg" alt="Digi Gold Logo" />
               <DigiHeading>DIGITAL GOLD</DigiHeading>
               <DigiPowered>POWERED BY SAFE GOLD</DigiPowered>
             </DigiGoldCard>
@@ -178,6 +175,7 @@ export default function ChauhanExperience() {
               {/* <ExpCard key={card.key}> */}
               <ExpMedia
                 component="img"
+                key={card.key}
                 image={card.image}
                 alt={card.title}
                 onError={(e) => {
