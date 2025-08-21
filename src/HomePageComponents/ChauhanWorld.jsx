@@ -1,12 +1,10 @@
 import { Box, Typography, Container, styled } from "@mui/material";
 
-// ------ STYLES ------
-
 const SectionContainer = styled(Box)({
     backgroundColor: "#fff",
     paddingTop: "80px",
     paddingBottom: "80px",
-    "@media (max-width: 1024px)": { paddingTop: "0px", }
+    "@media (max-width: 1024px)": { paddingTop: "0px", paddingBottom: "20px" },
 });
 
 const HeaderContainer = styled(Container)({
@@ -64,7 +62,9 @@ const CategoryCard = styled(Box)({
     },
     "@media (max-width: 1100px)": { width: 350, height: 250, margin: 10 },
     "@media (max-width: 780px)": { width: 250, height: 250, margin: 5 },
-    "@media (max-width: 700px)": { width: 200, height: 220, margin: 5 }
+    "@media (max-width: 700px)": { width: 200, height: 220, margin: 5 },
+    "@media (max-width: 500px)": { width: 170, height: 220, margin: 5 },
+    "@media (max-width: 400px)": { width: 150, height: 220, margin: 5 }
 });
 
 const CategoryImage = styled("img")({

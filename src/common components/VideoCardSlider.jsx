@@ -22,7 +22,7 @@ import reel4 from '/video/homeVideo.mp4';
 
 // Styled components with white background and dark text
 const SliderContainer = styled(Box)(({ theme }) => ({
-    minHeight: '100vh',
+    // minHeight: '100vh',
     background: 'white',
     display: 'flex',
     flexDirection: 'column',

@@ -6,8 +6,12 @@ import { useState, useRef } from "react"
 
 const SectionContainer = styled(Box)({
     backgroundColor: "#fff",
-    paddingTop: "80px",
-    paddingBottom: "80px",
+    paddingTop: "60px",
+    // paddingBottom: "60px",
+    "@media (max-width: 600px)": {
+        paddingTop: "40px",
+        paddingBottom: "40px",
+    },
 })
 
 const HeaderContainer = styled(Container)({

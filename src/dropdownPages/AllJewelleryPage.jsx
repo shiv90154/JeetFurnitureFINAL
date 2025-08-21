@@ -117,6 +117,14 @@ function JewelleryCard({ product }) {
     // Ensure the image URL is correct, using the public URL helper if necessary
     const imgUrl = publicUrl(product.media?.[0]?.url) || "no img found";
 
+    let finalPrice = "Not Available";
+    try {
+        const quantityData = JSON.parse(product.quantity?.[0] || '[]');
+        finalPrice = quantityData.length > 0 ? quantityData[0]?.finalPrice : "Not Available";
+    } catch (e) {
+        console.error("Error parsing quantity data:", e);
+    }
+
     return (
         <Box sx={{ pb: 2 }}>
             <Box
@@ -177,7 +185,7 @@ function JewelleryCard({ product }) {
             </Typography>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <Typography variant="subtitle1" sx={{ fontWeight: 500, fontSize: 17, color: '#222' }}>
-                    ₹{product.consumer_price} {/* Show consumer price */}
+                    ₹{product.finalPrice} {/* Show consumer price */}
                 </Typography>
                 {product.mrp && (
                     <Typography

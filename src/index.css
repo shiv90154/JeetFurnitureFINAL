@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     list-style-type: none;
     text-decoration: none;
@@ -6,6 +6,11 @@
 
 .primary_Bgclr {
     background-color: #44170D !important;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+    font-size: 15px !important;
 }
 
 .giftImgPos {

@@ -328,6 +328,7 @@ const MasterDaimondSlider = () => {
                         transform: 'scale(0.8) translateZ(-50px)',
                         zIndex: 3,
                         opacity: 0.6,
+                        fontSize: '0.9rem',
                         '.luxury-product-card': {
                             boxShadow: '0 8px 20px rgba(0,0,0,0.2)',
                             transform: 'scale(0.8)',
@@ -356,6 +357,7 @@ const MasterDaimondSlider = () => {
                         width: { xs: 30, md: 40 },
                         height: { xs: 30, md: 40 },
                         borderRadius: '50%',
+                        fontSize: '0.3rem' + ' !important',
                         boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
                         transition: 'all 0.3s ease',
                         '&:hover': {
@@ -373,7 +375,8 @@ const MasterDaimondSlider = () => {
                                 className="luxury-product-card"
                                 sx={{
                                     width: { xs: 250, sm: 280, md: 300 },
-                                    height: { xs: 375, sm: 420, md: 450 },
+                                    // height: { xs: 375, sm: 400},
+                                    height: 370,
                                     borderRadius: 3,
                                     overflow: 'hidden',
                                     cursor: 'pointer',
@@ -388,7 +391,7 @@ const MasterDaimondSlider = () => {
                             >
                                 <CardMedia
                                     component="img"
-                                    height="75%"
+                                    height="100%"
                                     image={product.image}
                                     alt={product.name}
                                     sx={{

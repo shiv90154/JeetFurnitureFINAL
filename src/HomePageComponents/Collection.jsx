@@ -6,6 +6,7 @@ import axiosInstance from "../common components/AxiosInstance";
 const SectionContainer = styled(Box)({
     backgroundColor: "#F2EDED",
     padding: "80px 0",
+    "@media (max-width: 600px)": { padding: "40px 0" },
     // minHeight: "700px",
 });
 
@@ -48,7 +49,7 @@ const Card = styled(Box)(({ height }) => ({
         height: height === "500px" ? "400px" : height === "240px" ? "200px" : height,
     },
     "@media (max-width: 600px)": {
-        height: height === "500px" ? "300px" : height === "240px" ? "180px" : height,
+        height: height === "500px" ? "300px" : height === "240px" ? "145px" : height,
     },
 }));
 
@@ -153,14 +154,16 @@ function Collection() {
                 {/* Flex Row: Left Large Card, Right Two Stack Cards */}
                 <Box
                     display="flex"
-                    flexDirection={{ xs: "column", sm: "row" }}
-                    gap={3}
+                    // flexDirection={{ xs: "column", sm: "row" }}
+                    gap={{ xs: 1, sm: 2 }}
                     width="100%"
                 >
                     {/* Left Large Card */}
                     <Box flex={1} minWidth={0} mb={{ xs: 3, md: 0 }}>
                         {banners.length > 0 && (
-                            <Card height="500px">
+                            <Card 
+                            height="500px"
+                            >
                                 <FallbackImage
                                     src={publicUrl(banners[0].slider_image[0])}
                                     alt={banners[0].name}
@@ -186,7 +189,7 @@ function Collection() {
                         flex={1}
                         display="flex"
                         flexDirection="column"
-                        gap={3}
+                        gap={1}
                         minWidth={0}
                     >
                         {banners.slice(1).map((item) => (

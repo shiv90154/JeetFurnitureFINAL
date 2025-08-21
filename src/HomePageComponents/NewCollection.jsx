@@ -7,6 +7,7 @@ const SectionContainer = styled(Box)({
   backgroundColor: "#fff",
   paddingTop: 80,
   paddingBottom: 80,
+  "@media (max-width:600px)": { paddingTop: 20, paddingBottom: 40 },
 });
 
 const HeaderContainer = styled(Container)({

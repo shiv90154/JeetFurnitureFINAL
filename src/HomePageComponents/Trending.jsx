@@ -5,12 +5,12 @@ const SectionContainer = styled(Box)({
     backgroundColor: "#fff",
     paddingTop: "50px",
     paddingBottom: 0,
-    "@media (max-width: 600px)": { paddingTop: "30px" },
+    "@media (max-width: 600px)": { paddingTop: "20px" },
 });
 
 const HeaderContainer = styled(Container)({
     textAlign: "center",
-    marginBottom: 60,
+    marginBottom: 30,
 });
 
 const MainTitle = styled(Typography)({
