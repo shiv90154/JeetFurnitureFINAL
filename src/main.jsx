@@ -5,14 +5,21 @@ import App from './App.jsx'
 import { HashRouter } from 'react-router-dom'
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import Theme from '../Theme.js'
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistor, store } from './store/Store.js'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ThemeProvider theme={Theme}>
-      <CssBaseline />
-      <HashRouter>
-        <App />
-      </HashRouter>
-    </ThemeProvider>
+    <HashRouter>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <ThemeProvider theme={Theme}>
+            <CssBaseline />
+            <App />
+          </ThemeProvider>
+        </PersistGate>
+      </Provider>
+    </HashRouter>
   </StrictMode>
 )
