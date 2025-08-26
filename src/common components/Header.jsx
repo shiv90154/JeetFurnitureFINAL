@@ -406,7 +406,7 @@ export default function Header() {
                   navigate(`/category/${item.apiId}`);
                 }
               }}
-              sx={{ 
+              sx={{
                 justifyContent: "flex-start",
                 fontWeight: 500,
                 bgcolor: "transparent",

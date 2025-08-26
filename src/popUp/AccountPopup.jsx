@@ -24,8 +24,10 @@ const menu = [
     { icon: <ChatBubbleOutlineOutlinedIcon sx={{ color: '#6a2322' }} />, label: "Contact Us" }
 ];
 
-export default function AccountPopup({ name = 'Ankita', onClose }) {
+export default function AccountPopup() {
     const isMobile = useMediaQuery('(max-width:600px)');
+    const storedUser = localStorage.getItem('userData');
+    const userData = storedUser ? JSON.parse(storedUser) : null;
 
     // Responsive typography and spacing
     const fontSize = isMobile ? 14 : 16;
@@ -82,8 +84,8 @@ export default function AccountPopup({ name = 'Ankita', onClose }) {
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                     <PersonOutlineIcon sx={{ fontSize: iconSize, mr: 1 }} />
-                    <Typography sx={{ fontWeight: 500, fontSize: headerFont, letterSpacing: 0.1 }}>
-                        {name}
+                    <Typography sx={{ fontWeight: 500, fontSize: headerFont, letterSpacing: 0.1, textTransform: 'capitalize' }}>
+                        {userData.name}
                     </Typography>
                 </Box>
             </Box>

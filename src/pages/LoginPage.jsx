@@ -421,7 +421,9 @@ export default function LoginPage() {
                 await axiosInstance.post('/admin/login', { email: loginData.email, password: loginData.password }) :
                 await axiosInstance.post('/admin/createAdmin', signupData);
 
+
             if (response.status === 200 || response.status === 201) {
+                console.log("saving data to localstorage")
                 localStorage.setItem('authToken', response.data.token);
                 localStorage.setItem('userData', JSON.stringify(response.data.data));
 
@@ -436,12 +438,15 @@ export default function LoginPage() {
                     })
                 }
             }
+
+            console.log(response.data, "ooo");
+
         } catch (error) {
             console.error("Error:", error);
 
             // Show an error toast if something goes wrong
             if (mode === "login") {
-                toast.error('Login failed.', { error });
+                toast.error('Login failed. Please check your credentials.');
             } else {
                 toast.error("Signup failed. Please try again.");
             }
