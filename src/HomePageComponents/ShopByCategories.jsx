@@ -112,12 +112,14 @@ import { useTheme } from "@mui/material/styles";
 import Slider from "react-slick";
 import axiosInstance from "../common components/AxiosInstance";
 import { publicUrl } from "../common components/PublicUrl";
+import { useNavigate } from "react-router-dom";
 
 
 const ShopByCategories = () => {
     const [categoryName, setCategoryName] = useState([]);
     const [loading, setLoading] = useState(true)
     const theme = useTheme();
+    const navigate = useNavigate()
 
     useEffect(() => {
         fetchData();
@@ -132,6 +134,16 @@ const ShopByCategories = () => {
         } finally {
             setLoading(false)
         }
+    };
+
+    const assignedRouteToPath = {
+        allJewellery: '/allJewellery',
+        diamond: '/allJewellery',
+        gold: '/allJewellery',
+        silver: '/allJewellery',
+        wedding: '/wedding',
+        gifting: '/gifting',
+        collection: '/collection',
     };
 
     const settings = {
@@ -248,6 +260,14 @@ const ShopByCategories = () => {
                                             "&:hover": { transform: "translateY(-4px)" },
                                             display: "flex",
                                             flexDirection: "column",
+                                        }}
+                                        onClick={() => {
+                                            const route = assignedRouteToPath[item.assignedRoute];
+                                            if (route) {
+                                                navigate(route);
+                                            } else {
+                                                navigate(`/category/${item.apiId}`);
+                                            }
                                         }}
                                     >
                                         <CardMedia
