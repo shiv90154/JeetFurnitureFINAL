@@ -1123,46 +1123,96 @@ const AddNewProduct = () => {
   //   });
   // };
 
+  // const handleChange = (e, index) => {
+  //   const { name, value } = e.target;
+  //   setFormData(prev => {
+  //     const updated = { ...prev };
+  //     if (typeof index === 'number') {
+  //       const qtyList = Array.isArray(updated.quantity) ? [...updated.quantity] : [];
+  //       if (!qtyList[index]) {
+  //         qtyList[index] = {
+  //           weight: '',
+  //           pricePerGram: '',
+  //           discount: '',
+  //           gst: '',
+  //           makingPrice: '',
+  //           totalWeight: '',
+  //           finalPrice: ''
+  //         };
+  //       }
+  //       qtyList[index][name] = value;
+  //       // Calculations
+  //       const weight = parseFloat(qtyList[index].weight);
+  //       const pricePerGram = parseFloat(qtyList[index].pricePerGram);
+  //       const discount = parseFloat(qtyList[index].discount);
+  //       const gst = parseFloat(qtyList[index].gst);
+  //       const makingPrice = parseFloat(qtyList[index].makingPrice);
+  //       let totalPrice = 0;
+  //       if (!isNaN(pricePerGram) && !isNaN(weight)) {
+  //         const totalPriceBeforeDiscountAndGST = pricePerGram * weight + makingPrice;
+  //         const discountedPrice = totalPriceBeforeDiscountAndGST - (totalPriceBeforeDiscountAndGST * discount) / 100;
+  //         totalPrice = discountedPrice + (discountedPrice * gst) / 100;
+  //       }
+  //       qtyList[index].totalWeight = weight;
+  //       qtyList[index].finalPrice = isNaN(totalPrice) ? '' : totalPrice.toFixed(2);
+  //       updated.quantity = qtyList;
+  //     } else {
+  //       updated[name] = value;
+  //       if (name === 'category') {
+  //         updated.sub_category = '';
+  //         fetchSubCategories(value);
+  //       }
+  //     }
+  //     return updated;
+  //   });
+  // };
+
   const handleChange = (e, index) => {
     const { name, value } = e.target;
+
     setFormData(prev => {
       const updated = { ...prev };
-      if (typeof index === 'number') {
-        const qtyList = Array.isArray(updated.quantity) ? [...updated.quantity] : [];
-        if (!qtyList[index]) {
-          qtyList[index] = {
-            weight: '',
-            pricePerGram: '',
-            discount: '',
-            gst: '',
-            makingPrice: '',
-            totalWeight: '',
-            finalPrice: ''
-          };
-        }
-        qtyList[index][name] = value;
-        // Calculations
-        const weight = parseFloat(qtyList[index].weight);
-        const pricePerGram = parseFloat(qtyList[index].pricePerGram);
-        const discount = parseFloat(qtyList[index].discount);
-        const gst = parseFloat(qtyList[index].gst);
-        const makingPrice = parseFloat(qtyList[index].makingPrice);
-        let totalPrice = 0;
-        if (!isNaN(pricePerGram) && !isNaN(weight)) {
-          const totalPriceBeforeDiscountAndGST = pricePerGram * weight + makingPrice;
-          const discountedPrice = totalPriceBeforeDiscountAndGST - (totalPriceBeforeDiscountAndGST * discount) / 100;
-          totalPrice = discountedPrice + (discountedPrice * gst) / 100;
-        }
-        qtyList[index].totalWeight = weight;
-        qtyList[index].finalPrice = isNaN(totalPrice) ? '' : totalPrice.toFixed(2);
-        updated.quantity = qtyList;
-      } else {
-        updated[name] = value;
-        if (name === 'category') {
-          updated.sub_category = '';
-          fetchSubCategories(value);
-        }
+      const qtyList = [...updated.quantity];
+
+      // Initialize if index doesn't exist
+      if (!qtyList[index]) {
+        qtyList[index] = {
+          weight: '',
+          pricePerGram: '',
+          discount: '',
+          gst: '',
+          makingPrice: '',
+          totalWeight: '',
+          finalPrice: ''
+        };
       }
+
+      // Update the field value
+      qtyList[index][name] = value;
+
+      // Recalculate totalWeight and finalPrice
+      const weight = parseFloat(qtyList[index].weight);
+      const pricePerGram = parseFloat(qtyList[index].pricePerGram);
+      const discount = parseFloat(qtyList[index].discount);
+      const gst = parseFloat(qtyList[index].gst);
+      const makingPrice = parseFloat(qtyList[index].makingPrice);
+      let totalPrice = 0;
+      let totalWeight = weight;
+
+      if (!isNaN(pricePerGram) && !isNaN(weight)) {
+        
+        // Calculate the price before discount and GST
+        const totalPriceBeforeDiscountAndGST = pricePerGram * weight + makingPrice;
+        const discountedPrice = totalPriceBeforeDiscountAndGST - (totalPriceBeforeDiscountAndGST * discount) / 100;
+        totalPrice = discountedPrice + (discountedPrice * gst) / 100;
+      }
+
+      // Update the total weight and final price
+      qtyList[index].totalWeight = totalWeight;
+      qtyList[index].finalPrice = isNaN(totalPrice) ? '' : totalPrice.toFixed(2);
+
+      updated.quantity = qtyList;
+
       return updated;
     });
   };
