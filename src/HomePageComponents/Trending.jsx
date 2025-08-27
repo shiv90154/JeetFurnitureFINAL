@@ -340,6 +340,16 @@ function Trending() {
     const [loading, setLoading] = useState(true)
     const navigate = useNavigate();
 
+    function shuffleArray(array) {
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+
     useEffect(() => {
         fetchSubCategories();
     }, [])
@@ -347,6 +357,9 @@ function Trending() {
         try {
             const response = await axiosInstance.get(`/user/allSubcategories`);
             setSubCategoryName(response?.data);
+            const shuffled = shuffleArray(data);
+            const selectedRandom = shuffled.slice(0, 3); 
+            setSubCategoryName(selectedRandom);
             setLoading(false)
         } catch (error) {
             console.error("Error fetching subcategories:", error);
@@ -373,7 +386,6 @@ function Trending() {
                 >
                     <OverlayFlex>
                         {subcategoryName.map((item, idx) => {
-                            // console.log(setSubCategoryName,"llll")
                             const isActive = hoveredItem === item._id;
                             return (
                                 <CategoryColumn
