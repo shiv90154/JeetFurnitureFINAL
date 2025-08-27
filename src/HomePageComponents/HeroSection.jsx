@@ -3,6 +3,10 @@ import { Box, GlobalStyles, styled } from "@mui/material"
 import { useTheme } from "@mui/material/styles"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
+import { useNavigate } from "react-router-dom"
+import axiosInstance from "../common components/AxiosInstance"
+import { useEffect, useState } from "react"
+import { publicUrl } from "../common components/PublicUrl"
 
 const SliderContainer = styled(Box)({
     position: "relative",
@@ -14,12 +18,9 @@ const SliderContainer = styled(Box)({
 
 const Slide = styled(Box)(({ theme }) => ({
     width: "100%",
-    height: 600,
+    height: 550,
     position: "relative",
     overflow: "hidden",
-    [theme.breakpoints.up("xl")]: {
-        height: 1000,
-    },
     [theme.breakpoints.down("lg")]: {
         height: 400,
     },
@@ -92,9 +93,35 @@ const SliderWrapper = styled(Box)(({ theme }) => ({
     },
 }));
 
-const slideImages = ["/hero_img.png", "/hero_img.png"]
 
 function HeroSection() {
+    const [banners, setBanners] = useState([]);
+    const navigate = useNavigate();
+
+    const fetchData = async () => {
+        try {
+            const response = await axiosInstance.get("/user/allBanners");
+            const bannerData = response.data;
+
+            // Filter the banners by type "MiddleSlider" without adding duplicates
+            const mainBanners = bannerData.filter(
+                (banner) =>
+                    banner.type === "HomePageSlider" &&
+                    Array.isArray(banner.slider_image) &&
+                    banner.slider_image.length > 0
+            );
+
+            setBanners(mainBanners); 
+
+        } catch (error) {
+            console.error("Error fetching banners:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
     const settings = {
         dots: true,
         infinite: true,
@@ -102,7 +129,7 @@ function HeroSection() {
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 4000,
+        autoplaySpeed: 3000,
         pauseOnHover: true,
         arrows: false,
     }
@@ -111,9 +138,9 @@ function HeroSection() {
         <SliderContainer>
             <SliderWrapper>
                 <Slider {...settings}>
-                    {slideImages.map((item, index) => (
-                        <Slide key={index}>
-                            <SlideImage src={item} alt={`slide-${index}`} />
+                    {banners.map((item, index) => (
+                        <Slide key={index} onClick={() => navigate(`/allJewellery`)}>
+                            <SlideImage src={publicUrl(item.slider_image[0])} alt={`slide-${index}`} />
                         </Slide>
                     ))}
                 </Slider>

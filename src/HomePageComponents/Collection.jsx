@@ -165,7 +165,8 @@ function Collection() {
                         {banners.length > 0 && (
                             <Card
                                 height="500px"
-                                onClick={() => navigate(`/collection`)}
+                                // onClick={() => navigate(`/collection`)}
+                                onClick={() => navigate(`/allJewellery`)}
                             >
                                 <FallbackImage
                                     src={publicUrl(banners[0].slider_image[0])}
