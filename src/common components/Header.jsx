@@ -395,9 +395,9 @@ export default function Header() {
                       key={product._id}
                       sx={{
                         cursor: 'pointer',
-                        color: '#000',
+                        color: '#44170D',
                         fontSize: '15px',
-                        '&:hover': { color: '#ab6941', bgcolor: '#f5f5f5' },
+                        '&:hover': { color: '#000', bgcolor: '#f5f5f5' },
                         textTransform: 'capitalize',
                         p: '5px',
                         fontWeight: 600,
