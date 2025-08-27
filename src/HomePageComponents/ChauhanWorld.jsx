@@ -1,4 +1,8 @@
 import { Box, Typography, Container, styled } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import axiosInstance from "../common components/AxiosInstance";
+import { publicUrl } from "../common components/PublicUrl";
+import { useEffect, useState } from "react";
 
 const SectionContainer = styled(Box)({
     backgroundColor: "#fff",
@@ -172,6 +176,27 @@ const categories = [
 ];
 
 export default function ChauhanWorld() {
+    const [occasion, setOccasion] = useState([]);
+    const [loading, setLoading] = useState(true)
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
+        try {
+            const response = await axiosInstance.get(`/user/allOccasions`);
+            setOccasion(response?.data ?? []);
+        } catch (error) {
+            console.error("Error fetching occasion:", error);
+        } finally {
+            setLoading(false)
+        }
+    };
+
+
+
     return (
         <SectionContainer>
             <HeaderContainer maxWidth="xl">
@@ -183,26 +208,30 @@ export default function ChauhanWorld() {
 
             <Container maxWidth="xl">
                 <FlexCardGrid>
-                    {/* 2x2 Category Cards */}
-                    {[0, 1, 2, 3].map(i => (
-                        <CategoryCard key={categories[i].id}>
-                            <CategoryImage
-                                src={categories[i].image}
-                                alt={`${categories[i].name} Jewelry Collection`}
-                                loading="lazy"
-                                onError={e => {
-                                    e.target.src = "/placeholder.svg?height=280&width=400&text=Image+Not+Found";
-                                }}
-                            />
-                            <CategoryOverlay>
-                                <CategoryName>{categories[i].name}</CategoryName>
-                            </CategoryOverlay>
-                        </CategoryCard>
-                    ))}
-                    {/* Center gold decoration */}
-                    <CenterDecoration>
-                        <SunburstIcon />
-                    </CenterDecoration>
+                    {loading ? "Loading..." : (
+                        <>
+                            {occasion.map(item => (
+                                <CategoryCard key={item._id}>
+                                    <CategoryImage
+                                        src={publicUrl(item.image)}
+                                        alt={`${item.name} Jewellery Collection`}
+                                        loading="lazy"
+                                        onError={e => {
+                                            e.target.src = "/placeholder.svg?height=280&width=400&text=Image+Not+Found";
+                                        }}
+                                    />
+                                    <CategoryOverlay>
+                                        <CategoryName>{item.name}</CategoryName>
+                                    </CategoryOverlay>
+                                </CategoryCard>
+                            ))}
+                            {/* Center gold decoration */}
+                            <CenterDecoration>
+                                <SunburstIcon />
+                            </CenterDecoration>
+                        </>
+                    )}
+
                 </FlexCardGrid>
             </Container>
         </SectionContainer>
