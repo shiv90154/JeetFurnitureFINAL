@@ -210,7 +210,7 @@ export default function ChauhanWorld() {
                 <FlexCardGrid>
                     {loading ? "Loading..." : (
                         <>
-                            {occasion.map(item => (
+                            {occasion.slice(0, 4).map(item => (
                                 <CategoryCard key={item._id}>
                                     <CategoryImage
                                         src={publicUrl(item.image)}
@@ -219,6 +219,8 @@ export default function ChauhanWorld() {
                                         onError={e => {
                                             e.target.src = "/placeholder.svg?height=280&width=400&text=Image+Not+Found";
                                         }}
+                                        // onClick={() => navigate(`/occasion/${item._id}`)}
+                                        onClick={() => navigate(`/allJewellery/${item._id}`)}
                                     />
                                     <CategoryOverlay>
                                         <CategoryName>{item.name}</CategoryName>
