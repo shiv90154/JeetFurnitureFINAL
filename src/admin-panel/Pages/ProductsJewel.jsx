@@ -664,7 +664,7 @@ const ProductsJewel = () => {
                         product.quantity.map((qty, idx) => (
                           <Box key={idx} sx={{ mb: 1 }}>
                             <Typography variant="body2" fontWeight="bold">
-                             {qty.weight ? `${qty.weight}g` : <span style={{ color: '#aaa' }}>N/A</span>}
+                              {qty.weight ? `${qty.weight}g` : <span style={{ color: '#aaa' }}>N/A</span>}
                             </Typography>
                             {/* uncomment to access all quantity details */}
                             {/*   <Typography variant="body2" fontWeight="bold">
@@ -856,7 +856,7 @@ const ProductsJewel = () => {
                             Weight: {qty.weight ? `${qty.weight}g` : <span style={{ color: '#aaa' }}>N/A</span>}
                           </Typography>
                           <Typography variant="caption">
-                            Price/gram: {qty.pricePerGram ? `₹${qty.pricePerGram}` : 'N/A'} |
+                            Price/gram: {qty.pricePerGram ? `₹${qty.pricePerGram}` : 'N/A'} |  carat: {qty.carat ? `${qty.carat}` : 'N/A'} |
                             Discount: {qty.discount ? `${qty.discount}%` : 'N/A'} |
                             GST: {qty.gst ? `${qty.gst}%` : 'N/A'} |
                             Making: {qty.makingPrice ? `₹${qty.makingPrice}` : 'N/A'} |
