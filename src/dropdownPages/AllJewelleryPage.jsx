@@ -420,7 +420,6 @@ export function JewelleryGrid() {
             {/* <JewelleryHeader /> */}
 
             <Box sx={{ pt: 5 }}>
-
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', mb: 3, gap: 1 }}>
                     <TextField
                         label="Search"
