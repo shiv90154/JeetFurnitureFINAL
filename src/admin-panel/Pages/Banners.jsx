@@ -38,7 +38,7 @@ import { Add, Delete } from '@mui/icons-material';
 import { publicUrl } from '../../common components/PublicUrl';
 
 const Banners = () => {
-  const [formData, setFormData] = useState({ image: '', banner_type: '' });
+  const [formData, setFormData] = useState({ image: '', banner_type: '', variety: '', });
   const [showModal, setShowModal] = useState(false);
   const [banners, setBanners] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -75,11 +75,12 @@ const Banners = () => {
     const data = new FormData();
     data.append('type', selectedType);
     data.append('slider_image', formData.image);
+    data.append('variety', formData.variety);
 
     try {
       await axiosInstance.post('/user/createBanner', data);
       toast.success('Banner uploaded successfully!');
-      setFormData({ image: '', banner_type: '' });
+      setFormData({ image: '', banner_type: '', variety: '' });
       setShowModal(false);
       fetchData();
     } catch (error) {
@@ -176,6 +177,9 @@ const Banners = () => {
                     <strong>Image</strong>
                   </TableCell>
                   <TableCell sx={{ color: 'primary.contrastText' }}>
+                    <strong>Variety</strong>
+                  </TableCell>
+                  <TableCell sx={{ color: 'primary.contrastText' }}>
                     <strong>Actions</strong>
                   </TableCell>
                 </TableRow>
@@ -201,6 +205,9 @@ const Banners = () => {
                           handleImageClick(`${API_URL}/${item.slider_image}`)
                         }
                       />
+                    </TableCell>
+                    <TableCell>
+                      {item.variety}
                     </TableCell>
                     <TableCell>
                       <IconButton
@@ -270,6 +277,25 @@ const Banners = () => {
                       {item.title}
                     </MenuItem>
                   ))}
+                </Select>
+              </FormControl>
+
+              <FormControl required sx={{ flex: 1 }}>
+                <InputLabel id="variety-label">Variety</InputLabel>
+                <Select
+                  labelId="variety-label"
+                  id="variety"
+                  name="variety"
+                  value={formData.variety}
+                  label="Variety"
+                  onChange={handleInputChange}
+                >
+                  <MenuItem value="selectVariety" disabled>
+                    Select Variety
+                  </MenuItem>
+                  <MenuItem value="diamond">Diamond</MenuItem>
+                  <MenuItem value="gold">Gold</MenuItem>
+                  <MenuItem value="silver">Silver</MenuItem>
                 </Select>
               </FormControl>
 
