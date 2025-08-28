@@ -195,7 +195,10 @@ function Treasure() {
                     <Box display="flex" gap={1} justifyContent={"center"}>
                         {subcategoryName.slice(1, 4).map((item) => (
                             <Grid xs={4} key={item._id}>
-                                <CategoryCard onClick={() => { navigate(`/allJewellery/${item._id}`) }}>
+                                <CategoryCard
+                                    // onClick={() => { navigate(`/allJewellery/${item._id}`) }}
+                                    onClick={() => { navigate(`/allJewellery?subcategory=${item._id}`) }}
+                                >
                                     <CategoryImage
                                         src={publicUrl(item.image)}
                                         alt={item.name}

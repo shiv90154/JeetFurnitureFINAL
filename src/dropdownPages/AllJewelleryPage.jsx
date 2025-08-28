@@ -659,6 +659,7 @@ function JewelleryCard({ product }) {
 
 export function JewelleryGrid() {
     const [allProducts, setAllProducts] = useState([]);
+    const [subcategoryName, setSubCategoryName] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [shownCount, setShownCount] = useState(10);
@@ -701,6 +702,10 @@ export function JewelleryGrid() {
 
     const query = useQuery();
     const selectedCategory = slugify(query.get('category') || '');
+    const selectedSubcategoryId = query.get('subcategory');
+    const selectedSubcategory = selectedSubcategoryId
+        ? subcategoryName.find(item => item._id === selectedSubcategoryId)
+        : null;
 
 
     const loadMoreProducts = () => {
@@ -752,14 +757,24 @@ export function JewelleryGrid() {
         setLoading(true);
         try {
             const response = await axiosInstance.get('/user/allproducts');
-            console.log(response.data, "ooo");  
+            console.log(response.data, "ooo");
             const processedProducts = preprocessProducts(response.data);
             setAllProducts(processedProducts);
         } catch (error) {
             setError('Could not load products. Please try again.');
-            console.error(error,"eee"); 
+            console.error(error, "eee");
         } finally {
             setLoading(false);
+        }
+    };
+
+    const fetchSubCategories = async () => {
+        try {
+            const response = await axiosInstance.get(`/user/allSubcategories`);
+            setSubCategoryName(response?.data);
+            setLoading(false)
+        } catch (error) {
+            console.error("Error fetching subcategories:", error);
         }
     };
 
@@ -784,10 +799,15 @@ export function JewelleryGrid() {
         // Assuming product.category holds product category name, normalize case for comparison
         const matchesCategory = selectedCategory ? product.category?.toLowerCase() === selectedCategory : true;
 
-        return isInPriceRange && isMatchingQuery && matchesCategory;
+        // subcategory filter
+        const matchesSubcategory = selectedSubcategory
+            ? product.sub_category === selectedSubcategory.name
+            : true;
+
+        return isInPriceRange && isMatchingQuery && matchesCategory && matchesSubcategory;
     });
 
-    // // 3:
+    // // 3 slugify:
     // const filteredProducts = allProducts.filter(product => {
     //     const isInPriceRange =
     //         filters.priceRange === 'all' ||
@@ -818,6 +838,7 @@ export function JewelleryGrid() {
 
     useEffect(() => {
         fetchAllProducts();
+        fetchSubCategories();
     }, []);
 
 

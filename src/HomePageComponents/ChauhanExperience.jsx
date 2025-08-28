@@ -127,25 +127,30 @@ const ExperienceCards = [
     key: "jewellery-guide",
     image: "/experImg2.png",
     title: "JEWELLERY GUIDE",
+    navigate: "/visit"
   },
   {
     key: "digigold",
     title: "DIGI GOLD",
+    navigate: "/visit"
   },
   {
     key: "book-appointment",
     image: "/experImg4.png",
     title: "BOOK AN APPOINTMENT",
+    navigate: "/visit"
   },
   {
     key: "talk-expert",
     image: "/experImg5.png",
     title: "TALK TO AN EXPERT",
+    navigate: "/visit"
   },
   {
     key: "talk-expert",
     image: "/experImg6.png",
     title: "Blogs",
+    navigate: "/visit"
   },
   // {
   //   key: "silver",
@@ -164,13 +169,13 @@ export default function ChauhanExperience() {
       <GridWrap>
         {ExperienceCards.map(card => (
           card.key === "digigold" ? (
-            <DigiGoldCard key="digigold" elevation={0}>
+            <DigiGoldCard onClick={() => navigate(card.navigate)} key="digigold" elevation={0}>
               <img className="digiGoldLogoSize" src="/logo.svg" alt="Digi Gold Logo" />
               <DigiHeading>DIGITAL GOLD</DigiHeading>
               <DigiPowered>POWERED BY SAFE GOLD</DigiPowered>
             </DigiGoldCard>
           ) : card.key === "silver" ? (
-            <DigiGoldCard key="silver" elevation={0}>
+            <DigiGoldCard onClick={() => navigate(card.navigate)} key="silver" elevation={0}>
               <img src="/logo.svg" alt="Digi silver Logo" />
               <DigiHeading>DIGITAL Silver</DigiHeading>
               <DigiPowered>POWERED BY SAFE Silver</DigiPowered>
