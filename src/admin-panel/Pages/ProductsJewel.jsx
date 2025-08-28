@@ -613,7 +613,7 @@ const ProductsJewel = () => {
                   <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Occasion</TableCell>
                   {/* <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>MRP 
                     (Final)</TableCell> */}
-                  <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Quantity</TableCell>
+                  <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Weight</TableCell>
                   {/* <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Stock</TableCell> */}
                   {/* <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Status</TableCell> */}
                   <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Actions</TableCell>
@@ -664,6 +664,10 @@ const ProductsJewel = () => {
                         product.quantity.map((qty, idx) => (
                           <Box key={idx} sx={{ mb: 1 }}>
                             <Typography variant="body2" fontWeight="bold">
+                             {qty.weight ? `${qty.weight}g` : <span style={{ color: '#aaa' }}>N/A</span>}
+                            </Typography>
+                            {/* uncomment to access all quantity details */}
+                            {/*   <Typography variant="body2" fontWeight="bold">
                               Weight: {qty.weight ? `${qty.weight}g` : <span style={{ color: '#aaa' }}>N/A</span>}
                             </Typography>
                             <Typography variant="caption">
@@ -672,7 +676,7 @@ const ProductsJewel = () => {
                               GST: {qty.gst ? `${qty.gst}%` : 'N/A'} |
                               Making: {qty.makingPrice ? `₹${qty.makingPrice}` : 'N/A'} |
                               <strong>Final: {qty.finalPrice ? `₹${qty.finalPrice}` : 'N/A'}</strong>
-                            </Typography>
+                            </Typography> */}
                           </Box>
 
                         ))
@@ -817,6 +821,10 @@ const ProductsJewel = () => {
                   <Grid item xs={6}>
                     <Typography variant="subtitle2">Occasion:</Typography>
                     <Typography>{selectedProduct.occasion}</Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography variant="subtitle2">Gender:</Typography>
+                    <Typography>{selectedProduct.genderVariety}</Typography>
                   </Grid>
                   {/* <Grid item xs={6}>
                     <Typography variant="subtitle2">Consumer Price:</Typography>
