@@ -660,6 +660,7 @@ function JewelleryCard({ product }) {
 export function JewelleryGrid() {
     const [allProducts, setAllProducts] = useState([]);
     const [subcategoryName, setSubCategoryName] = useState([]);
+    const [occasion, setOccasion] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [shownCount, setShownCount] = useState(10);
@@ -669,9 +670,6 @@ export function JewelleryGrid() {
     });
     const [sortOption, setSortOption] = useState('relevance');
 
-    function useQuery() {
-        return new URLSearchParams(useLocation().search);
-    }
 
     // --- helpers: slugify and get category names from product ---
     const slugify = (str) =>
@@ -700,13 +698,21 @@ export function JewelleryGrid() {
         return Array.from(out);
     };
 
+    //  // use of query for filtering
+    function useQuery() {
+        return new URLSearchParams(useLocation().search);
+    }
+
     const query = useQuery();
     const selectedCategory = slugify(query.get('category') || '');
     const selectedSubcategoryId = query.get('subcategory');
     const selectedSubcategory = selectedSubcategoryId
         ? subcategoryName.find(item => item._id === selectedSubcategoryId)
         : null;
-
+    const selectedOccasionId = query.get('occasion');
+    const selectedOccasion = selectedOccasionId
+        ? occasion.find(item => item._id === selectedOccasionId)
+        : null;
 
     const loadMoreProducts = () => {
         const newCount = shownCount + 10;
@@ -757,12 +763,12 @@ export function JewelleryGrid() {
         setLoading(true);
         try {
             const response = await axiosInstance.get('/user/allproducts');
-            console.log(response.data, "ooo");
+            // console.log(response.data, "ooo");
             const processedProducts = preprocessProducts(response.data);
             setAllProducts(processedProducts);
         } catch (error) {
             setError('Could not load products. Please try again.');
-            console.error(error, "eee");
+            // console.error(error, "eee");
         } finally {
             setLoading(false);
         }
@@ -775,6 +781,17 @@ export function JewelleryGrid() {
             setLoading(false)
         } catch (error) {
             console.error("Error fetching subcategories:", error);
+        }
+    };
+
+    const fetchOccasions = async () => {
+        try {
+            const response = await axiosInstance.get(`/user/allOccasions`);
+            setOccasion(response?.data ?? []);
+        } catch (error) {
+            console.error("Error fetching occasion:", error);
+        } finally {
+            setLoading(false)
         }
     };
 
@@ -804,7 +821,12 @@ export function JewelleryGrid() {
             ? product.sub_category === selectedSubcategory.name
             : true;
 
-        return isInPriceRange && isMatchingQuery && matchesCategory && matchesSubcategory;
+        // occasion filter
+        const matchesOccasion = selectedOccasion
+            ? product.occasion === selectedOccasion.name
+            : true;
+
+        return isInPriceRange && isMatchingQuery && matchesCategory && matchesSubcategory && matchesOccasion;
     });
 
     // // 3 slugify:
@@ -839,6 +861,7 @@ export function JewelleryGrid() {
     useEffect(() => {
         fetchAllProducts();
         fetchSubCategories();
+        fetchOccasions();
     }, []);
 
 
