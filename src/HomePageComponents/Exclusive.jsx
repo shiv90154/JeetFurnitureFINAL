@@ -356,7 +356,7 @@ export default function Exclusive() {
       </RootBox>
 
       {/* Promo Duo Cards Section */}
-      <PromoRoot>
+      {/* <PromoRoot>
         <FlexBox>
           <PromoBlock>
             <VerticalBar />
@@ -364,7 +364,7 @@ export default function Exclusive() {
             <img className="giftImgPos" src="/ylwFlower.png" alt="img" />
             <LeftContent>
               <MainText>Gift Your Way</MainText>
-              <SubText>STARTING AT ₹5,000</SubText>
+              <SubText>STARTING AT ₹1,00,000</SubText>
               <StyledButton>Explore Now</StyledButton>
             </LeftContent>
           </PromoBlock>
@@ -385,7 +385,7 @@ export default function Exclusive() {
             <StyledButton variant="right">Know More</StyledButton>
           </PromoBlock>
         </FlexBox>
-      </PromoRoot>
+      </PromoRoot> */}
     </>
   );
 }

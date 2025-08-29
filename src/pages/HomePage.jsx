@@ -27,7 +27,7 @@ const HomePage = () => {
             <ChauhanWorld />
             <ExchangeOffer />
             <Exclusive />
-            <ChauhanExperience />
+            {/* <ChauhanExperience /> */}
         </div>
     )
 }
