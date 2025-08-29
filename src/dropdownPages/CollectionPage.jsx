@@ -1,262 +1,3 @@
-// import React, { useEffect, useState } from 'react';
-// import {
-//   Box,
-//   Typography,
-//   Container,
-//   Card,
-//   CardContent,
-// } from '@mui/material';
-// import axiosInstance from '../common components/AxiosInstance';
-// import { useNavigate } from 'react-router-dom';
-
-// const products = [
-//   {
-//     id: 1,
-//     name: 'Rosy Glam Stud Earrings',
-//     price: '₹102',
-//     count: '1 PRODUCT',
-//     image:
-//       'https://www.tanishq.co.in/on/demandware.static/-/Library-Sites-TanishqSharedLibrary/default/dw23924cf8/microsite/joy-of-dressing/50D2FFSQGAGA02.jpg',
-//   },
-//   {
-//     id: 2,
-//     name: 'Sparkling Treasures Pendant',
-//     price: '₹102',
-//     count: '1 PRODUCT',
-//     image:
-//       'https://www.tanishq.co.in/on/demandware.static/-/Library-Sites-TanishqSharedLibrary/default/dwde8563a5/microsite/joy-of-dressing/50D2FFPRGAAA02.jpg',
-//   },
-//   {
-//     id: 3,
-//     name: 'Elite Glamorous Ring',
-//     price: '₹102',
-//     count: '1 PRODUCT',
-//     image:
-//       'https://www.tanishq.co.in/on/demandware.static/-/Library-Sites-TanishqSharedLibrary/default/dwa83f9f9e/microsite/joy-of-dressing/50D2FFFQRAA02.jpg',
-//   },
-// ];
-
-// export default function CollectionPage() {
-//   const [products, setProducts] = useState([]);
-//    const navigate = useNavigate()
-
-//   useEffect(() => {
-//     fetchAllProducts();
-//   })
-
-//   const fetchAllProducts = async () => {
-//     try {
-//       const response = await axiosInstance.get(`/user/allproducts`);
-//       setProducts(response?.data ?? []);
-//     } catch (error) {
-//       console.error("Error fetching categories:", error);
-//     } finally {
-//       setLoading(false)
-//     }
-//   };
-
-
-
-//   const handleProductClick = (productName) => {
-//     console.log(`${productName} clicked`);
-//   };
-
-//   return (
-//     <Box sx={{ backgroundColor: '#fff', minHeight: '100vh' }}>
-//       {/* Hero Section */}
-//       <Box
-//         sx={{
-//           width: '100%',
-//           display: 'flex',
-//           justifyContent: 'center',
-//           backgroundColor: '#fff',
-//         }}
-//       >
-//         <Box
-//           component="img"
-//           src="/hero_img.png"
-//           alt=" Sparkling Avenues - The joy of dressing"
-//           sx={{
-//             width: '100%',
-//             height: 'auto',
-//             objectFit: 'cover',
-//             display: 'block',
-//           }}
-//         />
-//       </Box>
-
-//       {/* Products Section */}
-//       <Box sx={{ backgroundColor: '#fff', py: '60px' }}>
-//         <Container maxWidth="xl">
-//           <Box
-//             sx={{
-//               display: 'flex',
-//               flexWrap: 'wrap',
-//               justifyContent: 'center',
-//               gap: { xs: 2, lg: 3 },
-//             }}
-//           >
-//             {[...products, { id: 'info', isInfo: true }].map((item) =>
-//               item.isInfo ? (
-//                 <Card
-//                   key="info-card"
-//                   sx={{
-//                     borderRadius: 0,
-//                     boxShadow: 'none',
-//                     border: '1px solid #eee',
-//                     display: 'flex',
-//                     flexDirection: 'column',
-//                     justifyContent: 'center',
-//                     alignItems: 'center',
-//                     backgroundColor: '#dbd7d7ff',
-//                     textAlign: 'center',
-//                     flexBasis: {
-//                       xs: '45%',
-//                       md: '30%',
-//                       lg: '23%',
-//                     },
-//                     maxWidth: {
-//                       xs: '45%',
-//                       md: '30%',
-//                       lg: '23%',
-//                     },
-//                     minWidth: 0,
-//                     // padding: { xs: '24px 10px', sm: '30px 16px', md: '34px 14px' },
-//                     boxSizing: 'border-box',
-//                   }}
-//                 >
-//                   <Typography
-//                     sx={{
-//                       fontFamily: 'cursive',
-//                       fontSize: { xs: 24, md: 28 },
-//                       fontWeight: 300,
-//                       color: '#2C2C2C',
-//                       fontStyle: 'italic',
-//                       marginBottom: { xs: 1.5, md: 2.5 },
-//                     }}
-//                   >
-//                     Sparkling Avenues
-//                   </Typography>
-//                   <Typography
-//                     sx={{
-//                       fontSize: { xs: 11, md: 12 },
-//                       color: '#666',
-//                       lineHeight: 1.6,
-//                       maxWidth: 200,
-//                       margin: '0 auto',
-//                     }}
-//                   >
-//                     Be a classic in an era of fleeting trends with the designs from our Sparkling Avenues collection!
-//                   </Typography>
-//                 </Card>
-//               ) : (
-//                 <Card
-//                   key={item.id}
-//                   onClick={() => handleProductClick(item.name)}
-//                   sx={{
-//                     borderRadius: 0,
-//                     boxShadow: 'none',
-//                     border: '1px solid #eee',
-//                     cursor: 'pointer',
-//                     transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-//                     display: 'flex',
-//                     flexDirection: 'column',
-//                     flexBasis: {
-//                       xs: '45%',
-//                       md: '30%',
-//                       lg: '23%',
-//                     },
-//                     maxWidth: {
-//                       xs: '45%',
-//                       md: '30%',
-//                       lg: '23%',
-//                     },
-//                     minWidth: 0,
-//                     '&:hover': {
-//                       transform: 'translateY(-5px)',
-//                       boxShadow: '0 8px 24px rgba(0,0,0,0.1)',
-//                     },
-//                   }}
-//                 >
-//                   <Box
-//                     sx={{
-//                       display: 'flex',
-//                       alignItems: 'center',
-//                       justifyContent: 'center',
-//                     }}
-//                   >
-//                     <Box
-//                       component="img"
-//                       src={item.image}
-//                       alt={item.name}
-//                       sx={{
-//                         maxWidth: '100%',
-//                         maxHeight: '100%',
-//                         objectFit: 'contain',
-//                       }}
-//                       onError={(e) => {
-//                         e.target.src = '/placeholder.svg?height=150&width=150&text=Image+Not+Found';
-//                       }}
-//                     />
-//                   </Box>
-
-//                   <CardContent
-//                     sx={{
-//                       textAlign: 'center',
-//                       padding: { xs: '10px 4px', md: '16px 8px !important' },
-//                       borderTop: '1px solid #eee',
-//                       flexGrow: 1,
-//                       display: 'flex',
-//                       flexDirection: 'column',
-//                       alignItems: 'center',
-//                       justifyContent: 'center',
-//                     }}
-//                   >
-//                     <Typography
-//                       sx={{
-//                         fontSize: { xs: 12, md: 14 },
-//                         fontWeight: 500,
-//                         color: '#2C2C2C',
-//                         marginBottom: 1,
-//                         lineHeight: 1.3,
-//                         textAlign: 'center',
-//                       }}
-//                     >
-//                       {item.name}
-//                     </Typography>
-//                     <Typography
-//                       sx={{
-//                         fontSize: { xs: 15, md: 16 },
-//                         fontWeight: 600,
-//                         color: '#2C2C2C',
-//                         marginBottom: 0.5,
-//                         textAlign: 'center',
-//                       }}
-//                     >
-//                       {item.price}
-//                     </Typography>
-//                     <Typography
-//                       sx={{
-//                         fontSize: 10,
-//                         color: '#666',
-//                         letterSpacing: '0.5px',
-//                         textAlign: 'center',
-//                       }}
-//                     >
-//                       {item.count}
-//                     </Typography>
-//                   </CardContent>
-//                 </Card>
-//               )
-//             )}
-//           </Box>
-//         </Container>
-//       </Box>
-//     </Box>
-//   );
-// }
-
-
 import React, { useEffect, useState } from 'react';
 import {
   Box,
@@ -390,7 +131,7 @@ export default function CollectionPage() {
 
 
       {/* Products Section */}
-      <Box sx={{ backgroundColor: '#fff', py: '60px' }}>
+      <Box sx={{ backgroundColor: '#fff', py: '20px' }}>
         <Container maxWidth="xl">
           <Box
             sx={{
@@ -404,7 +145,6 @@ export default function CollectionPage() {
             (<Card
               key={item.id}
               onClick={() => navigate(`/allJewellery?variety=${item.productvariety.toLowerCase()}`)}
-
               sx={{
                 borderRadius: 0,
                 boxShadow: 'none',
@@ -414,14 +154,14 @@ export default function CollectionPage() {
                 display: 'flex',
                 flexDirection: 'column',
                 flexBasis: {
-                  xs: '45%',
-                  md: '30%',
-                  lg: '23%',
+                  // xs: '45%',
+                  xs: '30%',
+                  md: '23%',
                 },
                 maxWidth: {
-                  xs: '45%',
-                  md: '30%',
-                  lg: '23%',
+                  // xs: '45%',
+                  xs: '30%',
+                  md: '23%',
                 },
                 minWidth: 0,
                 '&:hover': {
@@ -435,15 +175,16 @@ export default function CollectionPage() {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
+                  height: { xs: 100, md: 120, lg: 200 },
                 }}
               >
-                <img style={{ maxWidth: '100%', height: '300px', objectFit: 'cover' }} src={publicUrl(item.media[0].url)} alt="" />
+                <img style={{ maxWidth: '100%', height: '100%', objectFit: 'cover' }} src={publicUrl(item.media[0].url)} alt={item.name} />
               </Box>
 
               <CardContent
                 sx={{
                   textAlign: 'center',
-                  padding: { xs: '10px 4px', md: '16px 8px !important' },
+                  padding: { xs: '10px 4px' },
                   borderTop: '1px solid #eee',
                   flexGrow: 1,
                   display: 'flex',
@@ -458,32 +199,23 @@ export default function CollectionPage() {
                     fontWeight: 500,
                     color: '#2C2C2C',
                     marginBottom: 1,
-                    lineHeight: 1.3,
+                    // lineHeight: 1.3,
+                    textAlign: 'center',
+                  }}
+                >
+                  {item.productvariety}
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: { xs: 12, md: 14 },
+                    fontWeight: 500,
+                    color: '#2C2C2C',
+                    marginBottom: 1,
+                    lineHeight: 1.1,
                     textAlign: 'center',
                   }}
                 >
                   {item.name}
-                </Typography>
-                <Typography
-                  sx={{
-                    fontSize: { xs: 15, md: 16 },
-                    fontWeight: 600,
-                    color: '#2C2C2C',
-                    marginBottom: 0.5,
-                    textAlign: 'center',
-                  }}
-                >
-                  {item.price}
-                </Typography>
-                <Typography
-                  sx={{
-                    fontSize: 10,
-                    color: '#666',
-                    letterSpacing: '0.5px',
-                    textAlign: 'center',
-                  }}
-                >
-                  {item.count}
                 </Typography>
               </CardContent>
             </Card>
