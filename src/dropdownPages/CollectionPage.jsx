@@ -163,7 +163,7 @@ export default function CollectionPage() {
                   xs: '30%',
                   sm: '23%',
                 },
-                minWidth: 0,
+                // minWidth: 0,
                 '&:hover': {
                   transform: 'translateY(-5px)',
                   boxShadow: '0 8px 24px rgba(0,0,0,0.1)',
@@ -176,9 +176,10 @@ export default function CollectionPage() {
                   alignItems: 'center',
                   justifyContent: 'center',
                   height: { xs: 100, md: 120, lg: 200 },
+                  width: '100%'
                 }}
               >
-                <img style={{ maxWidth: '100%', height: '100%', objectFit: 'cover' }} src={publicUrl(item.media[0].url)} alt={item.name} />
+                <img style={{ width: '100%', height: '100%', objectFit: 'cover' }} src={publicUrl(item.media[0].url)} alt={item.name} />
               </Box>
 
               <CardContent
