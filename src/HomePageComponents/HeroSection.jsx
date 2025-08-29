@@ -111,7 +111,7 @@ function HeroSection() {
                     banner.slider_image.length > 0
             );
 
-            setBanners(mainBanners); 
+            setBanners(mainBanners);
 
         } catch (error) {
             console.error("Error fetching banners:", error);
@@ -139,7 +139,10 @@ function HeroSection() {
             <SliderWrapper>
                 <Slider {...settings}>
                     {banners.map((item, index) => (
-                        <Slide key={index} onClick={() => navigate(`/allJewellery`)}>
+                        <Slide key={index}
+                            // onClick={() => navigate(`/allJewellery`)}
+                            onClick={() => navigate(`/allJewellery/${(item.variety || 'all').toLowerCase()}`)}
+                        >
                             <SlideImage src={publicUrl(item.slider_image[0])} alt={`slide-${index}`} />
                         </Slide>
                     ))}

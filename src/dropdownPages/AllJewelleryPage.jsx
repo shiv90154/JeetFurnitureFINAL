@@ -212,6 +212,10 @@ export function JewelleryGrid() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [shownCount, setShownCount] = useState(12);
+    const { variety: param } = useParams();
+    const variety = ['diamond', 'gold', 'silver'].includes((param || 'all').toLowerCase())
+        ? param.toLowerCase()
+        : 'all';
     const [filters, setFilters] = useState({
         query: '',
         priceRange: 'all',

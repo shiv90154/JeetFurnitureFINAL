@@ -41,7 +41,7 @@ function App() {
       {!isAdminRoute && (
         <>
           <Header />
-          <Box sx={{ paddingTop: { xs: 13, md: '134px', lg: 14.5 } }} />
+          <Box sx={{ paddingTop: { xs: 13, md: '124px', lg: 14.5 } }} />
           {/* <Box sx={{ paddingTop: { xs: 13, md: '90px', lg: 14.5 } }} /> */}
         </>
       )}
@@ -50,6 +50,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/allJewellery" element={<AllJewelleryPage />} />
         <Route path="/allJewellery/:id" element={<AllJewelleryPage />} />
+        <Route path="/allJewellery/:variety?" element={<AllJewelleryPage />} />
         <Route path="/wedding" element={<WeddingPage />} />
         <Route path="/gifting" element={<GiftingPage />} />
         <Route path="/login" element={<LoginPage />} />
@@ -59,6 +60,7 @@ function App() {
         <Route path="/collection" element={<CollectionPage />} />
         <Route path="/diamond" element={<DimandShowCase />} />
         <Route path="/visit" element={<VisitOurStore />} />
+
 
         {/* admin panel  */}
         <Route>
