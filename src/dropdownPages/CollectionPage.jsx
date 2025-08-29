@@ -156,12 +156,12 @@ export default function CollectionPage() {
                 flexBasis: {
                   // xs: '45%',
                   xs: '30%',
-                  md: '23%',
+                  sm: '23%',
                 },
                 maxWidth: {
                   // xs: '45%',
                   xs: '30%',
-                  md: '23%',
+                  sm: '23%',
                 },
                 minWidth: 0,
                 '&:hover': {
