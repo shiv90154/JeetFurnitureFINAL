@@ -15,7 +15,6 @@ const HomePage = () => {
 
     return (
         <div>
-      
             <HeroSection />
             <ShopByCategories />
             <Collection />

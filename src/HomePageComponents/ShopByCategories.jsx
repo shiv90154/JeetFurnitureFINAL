@@ -31,6 +31,7 @@ const ShopByCategories = () => {
         diamond: '/allJewellery',
         gold: '/allJewellery',
         silver: '/allJewellery',
+        // dailywear: '/allJewellery',
         wedding: '/wedding',
         gifting: '/gifting',
         collection: '/collection',
@@ -106,7 +107,7 @@ const ShopByCategories = () => {
     //     </Card>
     // );
 
-    
+
     return (
         <Box sx={{ bgcolor: "#F0E5CB", py: { xs: 4, sm: 6, md: 8 } }}>
             <Container maxWidth="xl">
