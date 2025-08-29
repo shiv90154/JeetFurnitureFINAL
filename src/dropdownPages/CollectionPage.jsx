@@ -266,42 +266,20 @@ import {
   CardContent,
 } from '@mui/material';
 import axiosInstance from '../common components/AxiosInstance';
-import { useNavigate } from 'react-router-dom';
-
-const products = [
-  {
-    id: 1,
-    name: 'Rosy Glam Stud Earrings',
-    price: '₹102',
-    count: '1 PRODUCT',
-    image:
-      'https://www.tanishq.co.in/on/demandware.static/-/Library-Sites-TanishqSharedLibrary/default/dw23924cf8/microsite/joy-of-dressing/50D2FFSQGAGA02.jpg',
-  },
-  {
-    id: 2,
-    name: 'Sparkling Treasures Pendant',
-    price: '₹102',
-    count: '1 PRODUCT',
-    image:
-      'https://www.tanishq.co.in/on/demandware.static/-/Library-Sites-TanishqSharedLibrary/default/dwde8563a5/microsite/joy-of-dressing/50D2FFPRGAAA02.jpg',
-  },
-  {
-    id: 3,
-    name: 'Elite Glamorous Ring',
-    price: '₹102',
-    count: '1 PRODUCT',
-    image:
-      'https://www.tanishq.co.in/on/demandware.static/-/Library-Sites-TanishqSharedLibrary/default/dwa83f9f9e/microsite/joy-of-dressing/50D2FFFQRAA02.jpg',
-  },
-];
-
+import { useNavigate, useParams } from 'react-router-dom';
+import { publicUrl } from '../common components/PublicUrl';
 export default function CollectionPage() {
+  const { variety } = useParams();
   const [products, setProducts] = useState([]);
+  const [banners, setBanners] = useState([]);
   const navigate = useNavigate()
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [filteredBanner, setFilteredBanner] = useState(null);
 
   useEffect(() => {
     fetchAllProducts();
-  })
+    fetchBanner();
+  }, [])
 
   const fetchAllProducts = async () => {
     try {
@@ -309,21 +287,44 @@ export default function CollectionPage() {
       setProducts(response?.data ?? []);
     } catch (error) {
       console.error("Error fetching categories:", error);
-    } finally {
-      setLoading(false)
     }
   };
 
+  const fetchBanner = async () => {
+    try {
+      const response = await axiosInstance.get("/user/allBanners");
+      const bannerData = response.data;
 
+      const mainBanners = bannerData.filter(
+        (banner) =>
+          banner.type === "HomePageSlider" &&
+          Array.isArray(banner.slider_image) &&
+          banner.slider_image.length > 0
+      );
 
-  const handleProductClick = (productName) => {
-    console.log(`${productName} clicked`);
+      setBanners(mainBanners);
+
+    } catch (error) {
+      console.error("Error fetching banners:", error);
+    }
   };
 
+  useEffect(() => {
+    if (variety && products.length && banners.length) {
+      // Find the correct banner
+      const bannerForVariety = banners.find(b => b.variety?.toLowerCase() === variety.toLowerCase());
+      setFilteredBanner(bannerForVariety);
+
+      // Filter products for this variety
+      const productsForVariety = products.filter(p => p.productvariety?.toLowerCase() === variety.toLowerCase());
+      setFilteredProducts(productsForVariety);
+    }
+  }, [variety, products, banners]);
+
   return (
-    <Box sx={{ backgroundColor: '#fff', minHeight: '100vh' }}>
+    <Box sx={{ backgroundColor: '#fff' }}>
       {/* Hero Section */}
-      <Box
+      {/* <Box
         sx={{
           width: '100%',
           display: 'flex',
@@ -331,18 +332,62 @@ export default function CollectionPage() {
           backgroundColor: '#fff',
         }}
       >
-        <Box
-          component="img"
-          src="/hero_img.png"
-          alt=" Sparkling Avenues - The joy of dressing"
-          sx={{
+        <Box  sx={{
             width: '100%',
-            height: 'auto',
-            objectFit: 'cover',
-            display: 'block',
-          }}
-        />
+            height: '400px',
+          }}>
+          {filteredBanner && filteredBanner.slider_image && filteredBanner.slider_image.length > 0 ? (
+            <img 
+            style={{ width: '100%', height:'100%',  objectFit: 'cover',  }}
+             src={publicUrl(filteredBanner.slider_image)} alt="Variety Banner" />
+          ) : (
+            <img src="/hero_img.png" alt="Default Banner" />
+          )}
+        </Box>
+      </Box> */}
+
+      <Box
+        sx={{
+          width: '100vw',
+          overflow: 'hidden',
+          backgroundColor: '#fff',
+          position: 'relative',
+          left: '50%',
+          right: '50%',
+          marginLeft: '-50vw',
+          marginRight: '-50vw',
+        }}
+      >
+        {filteredBanner && filteredBanner.slider_image && filteredBanner.slider_image.length > 0 ? (
+          <img
+            src={publicUrl(filteredBanner.slider_image)}
+            alt="Variety Banner"
+            style={{
+              width: '100vw',
+              maxHeight: '350px', // Adjust as needed (e.g., 300-400px)
+              height: 'auto',
+              // objectFit: 'contain',
+              objectFit: 'cover',
+              display: 'block',
+              margin: '0 auto',
+            }}
+          />
+        ) : (
+          <img
+            src="/hero_img.png"
+            alt="Default Banner"
+            style={{
+              width: '100%',
+              height: 'auto',
+              objectFit: 'contain',
+              // objectFit: 'inherit',
+              display: 'block',
+              margin: '0 auto',
+            }}
+          />
+        )}
       </Box>
+
 
       {/* Products Section */}
       <Box sx={{ backgroundColor: '#fff', py: '60px' }}>
@@ -355,105 +400,93 @@ export default function CollectionPage() {
               gap: { xs: 2, lg: 3 },
             }}
           >
-            {[...products, { id: 'info', isInfo: true }].map((item) =>
-            (
-              <Card
-                key={item.id}
-                onClick={() => handleProductClick(item.name)}
+            {(variety ? filteredProducts : products).map((item) =>
+            (<Card
+              key={item.id}
+              onClick={() => navigate(`/allJewellery?variety=${item.productvariety.toLowerCase()}`)}
+
+              sx={{
+                borderRadius: 0,
+                boxShadow: 'none',
+                border: '1px solid #eee',
+                cursor: 'pointer',
+                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                display: 'flex',
+                flexDirection: 'column',
+                flexBasis: {
+                  xs: '45%',
+                  md: '30%',
+                  lg: '23%',
+                },
+                maxWidth: {
+                  xs: '45%',
+                  md: '30%',
+                  lg: '23%',
+                },
+                minWidth: 0,
+                '&:hover': {
+                  transform: 'translateY(-5px)',
+                  boxShadow: '0 8px 24px rgba(0,0,0,0.1)',
+                },
+              }}
+            >
+              <Box
                 sx={{
-                  borderRadius: 0,
-                  boxShadow: 'none',
-                  border: '1px solid #eee',
-                  cursor: 'pointer',
-                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
                   display: 'flex',
-                  flexDirection: 'column',
-                  flexBasis: {
-                    xs: '45%',
-                    md: '30%',
-                    lg: '23%',
-                  },
-                  maxWidth: {
-                    xs: '45%',
-                    md: '30%',
-                    lg: '23%',
-                  },
-                  minWidth: 0,
-                  '&:hover': {
-                    transform: 'translateY(-5px)',
-                    boxShadow: '0 8px 24px rgba(0,0,0,0.1)',
-                  },
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}
               >
-                <Box
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <Box
-                    component="img"
-                    src={item.image}
-                    alt={item.name}
-                    sx={{
-                      maxWidth: '100%',
-                      maxHeight: '100%',
-                      objectFit: 'contain',
-                    }}
-                    onError={(e) => {
-                      e.target.src = '/placeholder.svg?height=150&width=150&text=Image+Not+Found';
-                    }}
-                  />
-                </Box>
+                <img style={{ maxWidth: '100%', height: '300px', objectFit: 'cover' }} src={publicUrl(item.media[0].url)} alt="" />
+              </Box>
 
-                <CardContent
+              <CardContent
+                sx={{
+                  textAlign: 'center',
+                  padding: { xs: '10px 4px', md: '16px 8px !important' },
+                  borderTop: '1px solid #eee',
+                  flexGrow: 1,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Typography
                   sx={{
+                    fontSize: { xs: 12, md: 14 },
+                    fontWeight: 500,
+                    color: '#2C2C2C',
+                    marginBottom: 1,
+                    lineHeight: 1.3,
                     textAlign: 'center',
-                    padding: { xs: '10px 4px', md: '16px 8px !important' },
-                    borderTop: '1px solid #eee',
-                    flexGrow: 1,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
                   }}
                 >
-                  <Typography
-                    sx={{
-                      fontSize: { xs: 12, md: 14 },
-                      fontWeight: 500,
-                      color: '#2C2C2C',
-                      marginBottom: 1,
-                      lineHeight: 1.3,
-                      textAlign: 'center',
-                    }}
-                  >
-                    {item.name}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      fontSize: { xs: 15, md: 16 },
-                      fontWeight: 600,
-                      color: '#2C2C2C',
-                      marginBottom: 0.5,
-                      textAlign: 'center',
-                    }}
-                  >
-                    {item.price}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      fontSize: 10,
-                      color: '#666',
-                      letterSpacing: '0.5px',
-                      textAlign: 'center',
-                    }}
-                  >
-                    {item.count}
-                  </Typography>
-                </CardContent>
-              </Card>
+                  {item.name}
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: { xs: 15, md: 16 },
+                    fontWeight: 600,
+                    color: '#2C2C2C',
+                    marginBottom: 0.5,
+                    textAlign: 'center',
+                  }}
+                >
+                  {item.price}
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: 10,
+                    color: '#666',
+                    letterSpacing: '0.5px',
+                    textAlign: 'center',
+                  }}
+                >
+                  {item.count}
+                </Typography>
+              </CardContent>
+            </Card>
             )
             )}
           </Box>

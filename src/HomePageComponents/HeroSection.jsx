@@ -103,7 +103,6 @@ function HeroSection() {
             const response = await axiosInstance.get("/user/allBanners");
             const bannerData = response.data;
 
-            // Filter the banners by type "MiddleSlider" without adding duplicates
             const mainBanners = bannerData.filter(
                 (banner) =>
                     banner.type === "HomePageSlider" &&
@@ -140,8 +139,10 @@ function HeroSection() {
                 <Slider {...settings}>
                     {banners.map((item, index) => (
                         <Slide key={index}
-                            // onClick={() => navigate(`/allJewellery`)}
-                            onClick={() => navigate(`/allJewellery/${(item.variety || 'all').toLowerCase()}`)}
+                            // onClick={() => navigate(`/allJewellery/${(item.variety || 'all').toLowerCase()}`)}
+                            onClick={() => navigate(`/collection/${(item.variety || 'all').toLowerCase()}`)}
+                            // onClick={() => navigate(`/collection?variety=${(item.variety || 'all').toLowerCase()}`)}
+
                         >
                             <SlideImage src={publicUrl(item.slider_image[0])} alt={`slide-${index}`} />
                         </Slide>

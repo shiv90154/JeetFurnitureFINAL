@@ -58,6 +58,7 @@ function App() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/singleProduct/:id" element={<SingleProductPage />} />
         <Route path="/collection" element={<CollectionPage />} />
+        <Route path="/collection/:variety" element={<CollectionPage />} />
         <Route path="/diamond" element={<DimandShowCase />} />
         <Route path="/visit" element={<VisitOurStore />} />
 

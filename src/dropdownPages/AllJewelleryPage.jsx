@@ -14,7 +14,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useEffect, useState } from 'react';
 import SlickSlider from '../common components/SlickSlider';
 import axiosInstance from '../common components/AxiosInstance';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { publicUrl } from '../common components/PublicUrl';
 import { useDispatch, useSelector } from "react-redux";
 
@@ -256,6 +256,7 @@ export function JewelleryGrid() {
     }
 
     const query = useQuery();
+    const varietyParam = query.get('variety')?.toLowerCase() || 'all';
     const selectedCategory = slugify(query.get('category') || '');
     const selectedSubcategoryId = query.get('subcategory');
     const selectedSubcategory = selectedSubcategoryId
@@ -378,7 +379,9 @@ export function JewelleryGrid() {
             ? product.occasion === selectedOccasion.name
             : true;
 
-        return isInPriceRange && isMatchingQuery && matchesCategory && matchesSubcategory && matchesOccasion;
+        const matchesVariety = varietyParam === 'all' || (product.productvariety?.toLowerCase() === varietyParam);
+
+        return isInPriceRange && isMatchingQuery && matchesCategory && matchesSubcategory && matchesOccasion && matchesVariety;
     });
 
     // // 3 slugify:
