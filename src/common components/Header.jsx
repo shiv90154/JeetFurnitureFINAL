@@ -359,9 +359,9 @@ export default function Header() {
           <TopIconButton size="small">
             <DiamondOutlined onClick={() => navigate("/diamond")} sx={{ fontSize: 20 }} />
           </TopIconButton>
-          <TopIconButton size="small">
+          {/* <TopIconButton size="small">
             <FavoriteBorder onClick={() => navigate("/wishlist")} sx={{ fontSize: 20 }} />
-          </TopIconButton>
+          </TopIconButton> */}
           <TopIconButton size="small" >
             <PersonOutline onClick={() => setShowAccountPopup(!showAccountPopup)} sx={{ fontSize: 20 }} />
           </TopIconButton>

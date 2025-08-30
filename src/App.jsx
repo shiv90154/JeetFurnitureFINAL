@@ -28,6 +28,7 @@ import UsersJewel from './admin-panel/Pages/UsersJewel';
 import Occasion from './admin-panel/Pages/Occasion';
 import DimandShowCase from './pages/DaimondPageNav/DimandShowCase';
 import VisitOurStore from './ContactJewellers/VisitOurStore';
+import PolicyCenter from './ContactJewellers/PrivacyCenter';
 
 function App() {
   const location = useLocation();
@@ -62,6 +63,7 @@ function App() {
         <Route path="/collection/:variety" element={<CollectionPage />} />
         <Route path="/diamond" element={<DimandShowCase />} />
         <Route path="/visit" element={<VisitOurStore />} />
+        <Route path="/policy" element={<PolicyCenter />} />
 
 
         {/* admin panel  */}
