@@ -337,9 +337,11 @@ import { publicUrl } from '../../common components/PublicUrl';
 import axiosInstance from '../../common components/AxiosInstance';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useNavigate } from 'react-router-dom';
 
 const DiamondSliderThree = () => {
     const [categoryName, setCategoryName] = useState([]);
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchData = async () => {
@@ -437,20 +439,21 @@ const DiamondSliderThree = () => {
                     <Box
                         key={cat._id}
                         sx={{
-                            display: 'flex',
+                            display: 'flex !important',
                             flexDirection: 'row',
                             alignItems: 'center',
                             justifyContent: 'space-between',
                             minHeight: 350,
                             px: 2,
-                            width: '100%',
+                            width: '80% !important',
+                            mx: "auto !important",
                         }}
                     >
                         {/* Text Left */}
                         <Box
                             sx={{
-                                width: '50%',
-                                maxWidth: '50%',
+                                width: '45%',
+                                // maxWidth: '50%',
                                 color: '#fff',
                                 pr: 5,
                                 textAlign: 'left',
@@ -461,7 +464,7 @@ const DiamondSliderThree = () => {
                                 fontFamily="'Playfair Display', serif"
                                 fontWeight={700}
                                 mb={2}
-                                sx={{ fontSize: 38 }}
+                                sx={{ fontSize: 38, textTransform: "capitalize" }}
                             >
                                 {cat.name}
                             </Typography>
@@ -473,6 +476,7 @@ const DiamondSliderThree = () => {
                                     fontSize: 18,
                                     mb: 4,
                                     maxWidth: 480,
+                                    textTransform: "capitalize"
                                 }}
                             >
                                 {cat.description}
@@ -480,9 +484,11 @@ const DiamondSliderThree = () => {
                             <Button
                                 variant="contained"
                                 endIcon={<ChevronRight />}
+                                // onClick={() => navigate(`/allJewellery/${cat.productvariety}`)}
+                                onClick={() => navigate(`/allJewellery/${cat.variety?.toLowerCase() || 'all'}`)}
                                 sx={{
                                     bgcolor: 'linear-gradient(90deg,#f3f3f3,#e0e0e0)',
-                                    color: '#232739',
+                                    color: '#fff',
                                     fontWeight: 600,
                                     borderRadius: 8,
                                     boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
@@ -500,8 +506,8 @@ const DiamondSliderThree = () => {
                         {/* Image Right */}
                         <Box
                             sx={{
-                                width: '50%',
-                                maxWidth: '50%',
+                                width: '35%',
+                                // maxWidth: '50%',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',

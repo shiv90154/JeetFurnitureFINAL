@@ -256,7 +256,8 @@ export function JewelleryGrid() {
     }
 
     const query = useQuery();
-    const varietyParam = query.get('variety')?.toLowerCase() || 'all';
+    const varietyParam = (variety || 'all').toLowerCase();
+    // const varietyParam = query.get('variety')?.toLowerCase() || 'all';
     const selectedCategory = slugify(query.get('category') || '');
     const selectedSubcategoryId = query.get('subcategory');
     const selectedSubcategory = selectedSubcategoryId
@@ -302,7 +303,6 @@ export function JewelleryGrid() {
             bestVariant: bestVariation,
         };
     });
-
 
     // Price buckets for filtering
     const priceBuckets = [
