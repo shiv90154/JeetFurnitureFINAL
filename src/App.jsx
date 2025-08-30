@@ -49,10 +49,10 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/allJewellery" element={<AllJewelleryPage />} />
-        <Route path="/allJewellery/:id" element={<AllJewelleryPage />} />
-        <Route path="/allJewellery/:variety?" element={<AllJewelleryPage />} />
+        {/* <Route path="/allJewellery/:id" element={<AllJewelleryPage />} /> */}
+        <Route path="/allJewellery/:variety" element={<AllJewelleryPage />} />
+        {/* <Route path="/allJewellery/:productvariety" element={<AllJewelleryPage />} /> */}
         <Route path="/wedding" element={<WeddingPage />} />
-        <Route path="/wedding/:id" element={<WeddingPage />} />
         <Route path="/gifting" element={<GiftingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/wishlist" element={<WishlistPage />} />

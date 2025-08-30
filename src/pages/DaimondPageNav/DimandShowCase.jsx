@@ -22,10 +22,10 @@ const DimandShowCase = () => {
             <DiamondSliderThree />
             <DiamondSliderTwo />
             <DiamondSlider />
-            <DiamondSliderOne />
-            <BridesDiamondStories />
-            <PerfectSparkleSection />
-            <ChauhanExchange />
+            {/* <DiamondSliderOne /> */}
+            {/* <BridesDiamondStories /> */}
+            {/* <PerfectSparkleSection /> */}
+            {/* <ChauhanExchange /> */}
 
         </Box>
     )

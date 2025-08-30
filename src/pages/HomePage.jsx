@@ -15,7 +15,6 @@ const HomePage = () => {
 
     return (
         <div>
-      
             <HeroSection />
             <ShopByCategories />
             <Collection />
@@ -27,7 +26,7 @@ const HomePage = () => {
             <ChauhanWorld />
             <ExchangeOffer />
             <Exclusive />
-            <ChauhanExperience />
+            {/* <ChauhanExperience /> */}
         </div>
     )
 }
