@@ -51,13 +51,11 @@ const DiamondSliderTwo = () => {
   const subSwiperRef = useRef(null);
 
   const [categoryName, setCategoryName] = useState([]);
-  const [products, setProducts] = useState([]);
   const navigate = useNavigate()
 
   useEffect(() => {
     fetchSubCategory();
     fetchCategory();
-    fetchProducts();
   }, []);
 
   const fetchCategory = async () => {
@@ -76,14 +74,7 @@ const DiamondSliderTwo = () => {
       console.error("Error fetching sub categories:", error);
     }
   };
-  const fetchProducts = async () => {
-    try {
-      const response = await axiosInstance.get(`/user/allproducts`);
-      setProducts(response?.data ?? []);
-    } catch (error) {
-      console.error("Error fetching sub categories:", error);
-    }
-  };
+
 
   // Filter subcategories whose category's variety is 'diamond'
   const filteredSubcategories = subcategoryName.filter(
