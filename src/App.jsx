@@ -29,6 +29,10 @@ import Occasion from './admin-panel/Pages/Occasion';
 import DimandShowCase from './pages/DaimondPageNav/DimandShowCase';
 import VisitOurStore from './ContactJewellers/VisitOurStore';
 import PolicyCenter from './ContactJewellers/PrivacyCenter';
+import ReturnsPolicy from './ContactJewellers/ReturnPolicy';
+import ShippingPolicy from './ContactJewellers/ShippingPolicy';
+import TermsConditions from './ContactJewellers/TermsConditions';
+// import PrivacyPolicy from './ContactJewellers/PrivacyPolicy';
 
 function App() {
   const location = useLocation();
@@ -64,6 +68,10 @@ function App() {
         <Route path="/diamond" element={<DimandShowCase />} />
         <Route path="/visit" element={<VisitOurStore />} />
         <Route path="/policy" element={<PolicyCenter />} />
+        {/* <Route path="/privacy" element={<PrivacyPolicy />} /> */}
+        <Route path="/shipping" element={<ShippingPolicy />} />
+        <Route path="/return" element={<ReturnsPolicy />} />
+        <Route path="/terms" element={<TermsConditions />} />
 
 
         {/* admin panel  */}

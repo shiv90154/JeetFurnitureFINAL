@@ -1,5 +1,6 @@
 import { Box, Typography, Link, IconButton, styled, Container } from "@mui/material";
 import { WhatsApp, Email, Facebook, Instagram, Twitter, YouTube } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 const FooterContainer = styled(Box)({
     color: "#fff",
@@ -36,6 +37,17 @@ const FooterSection = styled(Box)({
     flexDirection: "column",
     minWidth: 140,
     gap: 12,
+    marginBottom: 40,
+    "@media (max-width: 900px)": {
+        minWidth: "auto",
+        marginBottom: 32,
+    },
+});
+const FooterSection1 = styled(Box)({
+    display: "flex",
+    flexDirection: "column",
+    minWidth: 140,
+    // gap: 12,
     marginBottom: 40,
     "@media (max-width: 900px)": {
         minWidth: "auto",
@@ -79,20 +91,20 @@ const ContactInfo = styled(Typography)({
 });
 
 const ChatSection = styled(Box)({
-    marginTop: 16,
+    marginTop: 2,
 });
 
 const ChatTitle = styled(Typography)({
     fontSize: 16,
     fontWeight: 500,
     color: "#fff",
-    marginBottom: 8,
+    marginBottom: 1,
 });
 
 const ChatNumber = styled(Typography)({
     fontSize: 14,
     color: "rgba(255,255,255,0.8)",
-    marginBottom: 12,
+    marginBottom: 2,
 });
 
 const SocialIcons = styled(Box)({
@@ -173,6 +185,7 @@ const Copyright = styled(Typography)({
 
 
 export default function Footer() {
+    const navigate = useNavigate();
     return (
         <div className="primary_Bgclr">
             <FooterContainer>
@@ -186,25 +199,35 @@ export default function Footer() {
                     </LogoAndDesc>
                     {/* Useful Links */}
                     <FooterSection>
-                        <SectionTitle>Useful Links</SectionTitle>
-                        {["Delivery Information", "International Shipping", "Payment Options", "Track Your Order", "Returns", "Find a Store"].map((text) => (
+                        <SectionTitle>Our Policy</SectionTitle>
+                        {/* {["Delivery Information", "International Shipping", "Payment Options", "Track Your Order", "Returns", "Find a Store"].map((text) => (
                             <FooterLink key={text}>{text}</FooterLink>
-                        ))}
+                        ))} */}
+                        <FooterLink onClick={() => navigate('/terms')}>Terms and Conditions</FooterLink>
+                        <FooterLink onClick={() => navigate('/privacy')}>Privacy Policy</FooterLink>
+                        <FooterLink onClick={() => navigate('/shipping')}>Shipping and Delivery Policy</FooterLink>
+                        <FooterLink onClick={() => navigate('/return')}>Return, Refund and Cancellation Policy</FooterLink>
                     </FooterSection>
                     {/* Information */}
-                    <FooterSection>
+                    {/* <FooterSection>
                         <SectionTitle>Information</SectionTitle>
                         {["Blog", "Offers & Contest Details", "Help & FAQ", "About Chauhan Sons"].map((text) => (
                             <FooterLink key={text}>{text}</FooterLink>
                         ))}
-                    </FooterSection>
+                    </FooterSection> */}
                     {/* Contact Us */}
-                    <FooterSection sx={{ minWidth: 220 }}>
+                    <FooterSection1 sx={{ minWidth: 220 }}>
                         <SectionTitle>Contact Us</SectionTitle>
-                        <ContactInfo>+91 9876-535-881</ContactInfo>
-                        <ChatSection>
+                        <ChatTitle>Phone</ChatTitle>
+                        <a href="tel: +91 9876535881">
+                            <ContactInfo>+91 9876535881</ContactInfo></a>
+                        <ChatTitle>Email</ChatTitle>
+                        <a href="mailto:chauhansons69@yahoo.com" > <ContactInfo> chauhansons69@yahoo.com </ContactInfo></a>
+                        <ChatTitle>Address</ChatTitle>
+                        <ContactInfo>  CHAUHAN SONS JEWELLER S.C.F 74 <br /> PHASE 5  SECTOR 59 , <br /> Sahibzada Ajit Singh Nagar,<br /> PUNJAB 160059,INDIA</ContactInfo>
+                        {/* <ChatSection>
                             <ChatTitle>Chat With Us</ChatTitle>
-                            <ChatNumber>+91 9876-535-881</ChatNumber>
+                            <ChatNumber>+91 9876535881</ChatNumber>
                             <SocialIcons>
                                 <SocialIcon aria-label="WhatsApp">
                                     <WhatsApp fontSize="small" />
@@ -213,8 +236,8 @@ export default function Footer() {
                                     <Email fontSize="small" />
                                 </SocialIcon>
                             </SocialIcons>
-                        </ChatSection>
-                    </FooterSection>
+                        </ChatSection> */}
+                    </FooterSection1>
                 </Container>
                 {/* Bottom Section */}
                 <Container maxWidth="xl">
@@ -229,12 +252,12 @@ export default function Footer() {
                                 ))}
                             </SocialIcons>
                         </SocialSection>
-                        <FooterLinksRow>
-                            {["Terms & Conditions", "Privacy Policy", "Disclaimer"].map((text) => (
+                        {/* <FooterLinksRow>
+                            {["Terms & Conditions", "Privacy Policy"].map((text) => (
                                 <BottomLink key={text}>{text}</BottomLink>
                             ))}
-                        </FooterLinksRow>
-                        <Copyright>© 2023 Chauhan Son's Company Limited. All Rights Reserved.</Copyright>
+                        </FooterLinksRow> */}
+                        <Copyright>© {new Date().getFullYear()} Chauhan Son's Company Limited. All Rights Reserved.</Copyright>
                     </BottomSection>
                 </Container>
             </FooterContainer>
