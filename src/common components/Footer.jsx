@@ -194,7 +194,7 @@ export default function Footer() {
                 <Container maxWidth="xl" sx={{ display: 'flex', flexWrap: 'wrap', gap: 4, justifyContent: 'space-between' }}>
                     {/* Left: Logo and description */}
                     <LogoAndDesc>
-                        <div><img src="/logo.svg" alt="logo" /></div>
+                        <a href="/"><img src="/logo.svg" alt="logo" /></a>
                         <CompanyDescription>
                             Chauhan Sons Jewellers offers exquisite gold, diamond, and traditional jewellery with timeless craftsmanship and trusted quality for every occasion.
                         </CompanyDescription>
