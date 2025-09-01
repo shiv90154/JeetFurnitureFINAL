@@ -13,10 +13,11 @@ import {
     PersonOutline,
     Star
 } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 export const MobileBottomNav = () => {
     const [value, setValue] = React.useState(0);
-    const theme = useTheme();
+    const navigate = useNavigate()
     const isMobile = useMediaQuery("(max-width:600px)");
 
     if (!isMobile) return null;
@@ -67,11 +68,11 @@ export const MobileBottomNav = () => {
                     }
                 }}
             >
-                <BottomNavigationAction label="Home" icon={<Home />} />
-                <BottomNavigationAction label="Categories" icon={<Category />} />
-                <BottomNavigationAction label="Offers" icon={<Star />} />
-                <BottomNavigationAction label="Cart" icon={<ShoppingCart />} />
-                <BottomNavigationAction label="You" icon={<PersonOutline />} />
+                <BottomNavigationAction onClick={() => navigate("/")} label="Home" icon={<Home />} />
+                <BottomNavigationAction onClick={() => navigate("/allJewellery")} label="Products" icon={<Category />} />
+                <BottomNavigationAction onClick={() => navigate("/wishlist")} label="Wishlist" icon={<Star />} />
+                <BottomNavigationAction onClick={() => navigate("/cart")} label="Cart" icon={<ShoppingCart />} />
+                <BottomNavigationAction onClick={() => navigate("/profile")} label="You" icon={<PersonOutline />} />
             </BottomNavigation>
         </Paper>
     );
