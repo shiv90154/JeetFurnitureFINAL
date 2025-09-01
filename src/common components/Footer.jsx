@@ -96,7 +96,7 @@ const ChatSection = styled(Box)({
 
 const ChatTitle = styled(Typography)({
     fontSize: 16,
-    fontWeight: 500,
+    fontWeight: 600,
     color: "#fff",
     marginBottom: 1,
 });
