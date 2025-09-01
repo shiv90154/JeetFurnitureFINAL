@@ -7,14 +7,14 @@ import CustomLoader from "../common components/CustomLoader";
 
 const SectionContainer = styled(Box)({
     backgroundColor: "#fff",
-    paddingTop: "80px",
-    paddingBottom: "80px",
+    paddingTop: "40px",
+    paddingBottom: "40px",
     "@media (max-width: 1024px)": { paddingTop: "0px", paddingBottom: "20px" },
 });
 
 const HeaderContainer = styled(Container)({
     textAlign: "center",
-    marginBottom: "60px",
+    marginBottom: "40px",
 });
 
 const MainTitle = styled(Typography)({
@@ -58,13 +58,14 @@ const CategoryCard = styled(Box)({
     transition: "transform 0.3s, box-shadow 0.3s",
     boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
     width: 480,
-    height: 340,
+    height: 290,
     margin: 16,
     background: "#f6f1ed",
     "&:hover": {
         transform: "translateY(-8px)",
         boxShadow: "0 16px 40px rgba(0,0,0,0.22)"
     },
+    // "@media (max-width: 1390px)": { width: 370, height: 300, margin: 16 },
     "@media (max-width: 1100px)": { width: 350, height: 250, margin: 10 },
     "@media (max-width: 780px)": { width: 250, height: 250, margin: 5 },
     "@media (max-width: 700px)": { width: 200, height: 220, margin: 5 },
@@ -181,7 +182,7 @@ export default function ChauhanWorld() {
             <HeaderContainer maxWidth="xl">
                 <MainTitle>Chauhan Son's World</MainTitle>
                 <SubTitle>
-                    Elevate Every Look with Fashion-Forward Diamond Jewellery
+                    Elevate Every Look with Fashion-Forward Jewellery
                 </SubTitle>
             </HeaderContainer>
 
