@@ -5,12 +5,12 @@ import axiosInstance from '../../common components/AxiosInstance';
 import { publicUrl } from '../../common components/PublicUrl';
 
 const WeddingOccasionSlider = () => {
-  const [activeIndex, setActiveIndex] = useState(6); 
+  const [activeIndex, setActiveIndex] = useState(6);
   const [occasion, setOccasion] = useState([]);
 
   useEffect(() => {
     fetchOccasions();
-  },[])
+  }, [])
   const fetchOccasions = async () => {
     try {
       const response = await axiosInstance.get(`/user/allOccasions`);
@@ -100,14 +100,14 @@ const WeddingOccasionSlider = () => {
         onClick={prevSlide}
         sx={{
           position: 'absolute',
-          left: { xs: 10, md: 40 },
+          left: { xs: -45, md: 40 },
           top: '50%',
           zIndex: 10,
           transform: 'translateY(-50%)',
           bgcolor: '#fff',
           border: '1px solid #ddd',
-          width: 50,
-          height: 50,
+          width: { xs: 30, md: 50 },
+          height: { xs: 30, md: 50 },
           borderRadius: '50%',
           boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
           '&:hover': {
@@ -115,21 +115,21 @@ const WeddingOccasionSlider = () => {
           }
         }}
       >
-        <ArrowBackIos sx={{ color: '#333', fontSize: '18px' }} />
+        <ArrowBackIos sx={{ color: '#333', fontSize: { xs: '14px', md: '18px' } }} />
       </IconButton>
 
       <IconButton
         onClick={nextSlide}
         sx={{
           position: 'absolute',
-          right: { xs: 10, md: 40 },
+          right: { xs: -45, md: 40 },
           top: '50%',
           zIndex: 10,
           transform: 'translateY(-50%)',
           bgcolor: '#fff',
           border: '1px solid #ddd',
-          width: 50,
-          height: 50,
+          width: { xs: 30, md: 50 },
+          height: { xs: 30, md: 50 },
           borderRadius: '50%',
           boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
           '&:hover': {
@@ -137,7 +137,7 @@ const WeddingOccasionSlider = () => {
           }
         }}
       >
-        <ArrowForwardIos sx={{ color: '#333', fontSize: '18px' }} />
+        <ArrowForwardIos sx={{ color: '#333',  fontSize: { xs: '14px', md: '18px' } }} />
       </IconButton>
 
       {/* 3D Card Stack Container */}
