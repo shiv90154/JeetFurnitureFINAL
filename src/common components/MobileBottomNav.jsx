@@ -4,7 +4,8 @@ import {
     BottomNavigationAction,
     Paper,
     useTheme,
-    useMediaQuery
+    useMediaQuery,
+    Badge
 } from "@mui/material";
 import {
     Home,
@@ -14,11 +15,13 @@ import {
     Star
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export const MobileBottomNav = () => {
     const [value, setValue] = React.useState(0);
     const navigate = useNavigate()
     const isMobile = useMediaQuery("(max-width:600px)");
+    const cartCount = useSelector(state => state.app?.data?.length || 0);
 
     if (!isMobile) return null;
 
@@ -71,7 +74,17 @@ export const MobileBottomNav = () => {
                 <BottomNavigationAction onClick={() => navigate("/")} label="Home" icon={<Home />} />
                 <BottomNavigationAction onClick={() => navigate("/allJewellery")} label="Products" icon={<Category />} />
                 {/* <BottomNavigationAction onClick={() => navigate("/wishlist")} label="Wishlist" icon={<Star />} /> */}
-                <BottomNavigationAction onClick={() => navigate("/cart")} label="Cart" icon={<ShoppingCart />} />
+                {/* <BottomNavigationAction onClick={() => navigate("/cart")} label="Cart" icon={<ShoppingCart />} /> */}
+                <BottomNavigationAction
+                    onClick={() => navigate("/cart")}
+                    label="Cart"
+                    icon={
+                        <Badge badgeContent={cartCount} color="error" overlap="circular"
+                            sx={{ "& .MuiBadge-badge": { fontWeight: 600, fontSize: 12, right: -7, top: 3, minWidth: 18, height: 18 } }}>
+                            <ShoppingCart />
+                        </Badge>
+                    }
+                />
                 <BottomNavigationAction onClick={() => navigate("/profile")} label="You" icon={<PersonOutline />} />
             </BottomNavigation>
         </Paper>

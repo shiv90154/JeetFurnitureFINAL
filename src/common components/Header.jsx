@@ -14,6 +14,7 @@ import {
   Divider,
   Drawer,
   Typography,
+  Badge,
 } from "@mui/material";
 import {
   Search as SearchIcon,
@@ -29,6 +30,7 @@ import { useNavigate } from "react-router-dom";
 import AccountPopup from "../popUp/AccountPopup";
 import { publicUrl } from "./PublicUrl";
 import axiosInstance from "./AxiosInstance";
+import { useSelector } from "react-redux";
 
 const StyledAppBar = styled(AppBar)(() => ({
   backgroundColor: "#44170D",
@@ -195,6 +197,8 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const searchBoxRef = useRef(null);
   const suggestionsRef = useRef(null);
+  const cartCount = useSelector(state => state.app?.data?.length || 0);
+
 
   // Dropdown IDs for hover menu
   const hasDropdown = ["category", "price", "gender", "occasion"];
@@ -412,9 +416,15 @@ export default function Header() {
           <TopIconButton size="small" >
             <PersonOutline onClick={() => setShowAccountPopup(!showAccountPopup)} sx={{ fontSize: 20 }} />
           </TopIconButton>
-          <TopIconButton size="small">
+          {/* <TopIconButton size="small">
             <ShoppingBagOutlined onClick={() => navigate("/cart")} sx={{ fontSize: 20 }} />
+          </TopIconButton> */}
+          <TopIconButton size="small">
+            <Badge badgeContent={cartCount} color="error" overlap="circular" sx={{ "& .MuiBadge-badge": { fontWeight: 600, fontSize: 13, right: 0, top: 3 } }}>
+              <ShoppingBagOutlined onClick={() => navigate("/cart")} sx={{ fontSize: 20 }} />
+            </Badge>
           </TopIconButton>
+
         </IconsRow>
       </HeaderToolbar>
 
