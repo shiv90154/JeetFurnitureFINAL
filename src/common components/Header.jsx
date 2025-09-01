@@ -159,6 +159,10 @@ const DrawerNavList = styled(Box)(({ theme }) => ({
   marginTop: theme.spacing(1),
   paddingLeft: 4,
   overflowY: "auto",
+  '&::-webkit-scrollbar': {
+    display: 'none'
+  },
+  paddingBottom: 100
 }));
 const PopupHead = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -223,7 +227,7 @@ export default function Header() {
           : null,
         assignedRoute: cat.assignedRoute // <-- retain this from backend
       }));
-      
+
       setCategories(mapped);
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -372,18 +376,11 @@ export default function Header() {
           </IconButton>
         </PopupHead>
         <Box sx={{ display: "flex", gap: 1.5, py: 1.5, px: 2.5 }}>
-          <DrawerMenuAction onClick={() => setOpen(false)}>Log In</DrawerMenuAction>
-          <DrawerMenuAction
-            onClick={() => setOpen(false)}
-            sx={{
-              fontWeight: 500,
-              border: "1px solid #FFD700",
-              color: "#FFD700",
-              background: "rgba(255,222,90,0.09)",
-            }}
-          >
-            Sign Up
-          </DrawerMenuAction>
+          <DrawerMenuAction onClick={() => {
+            setOpen(false)
+            navigate("/login")
+          }}>Log In</DrawerMenuAction>
+
         </Box>
         <Divider sx={{ bgcolor: "rgba(255,255,255,0.11)" }} />
         <DrawerNavList>
@@ -394,6 +391,7 @@ export default function Header() {
               fullWidth
               onClick={() => {
                 const route = assignedRouteToPath[item.assignedRoute];
+                setOpen(false);
                 if (route) {
                   navigate(route);
                 } else {
