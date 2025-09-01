@@ -270,7 +270,7 @@ export default function Header() {
 
   const handleSuggestionClick = (productId) => {
     // Handle clicking on a suggestion
-    navigate(`/allJewellery/${productId}`);
+    navigate(`/singleProduct/${productId}`);
     setIsOpen(false); // Close the suggestion box after selection
   };
 
@@ -297,62 +297,109 @@ export default function Header() {
 
         {isMdUp && (
           <>
-              <Box sx={{ flex: 1, px: 2, display: 'flex', justifyContent: 'center', position: 'relative' }} ref={searchBoxRef}>
-                <SearchContainer>
-                  <SearchIconWrapper>
-                    <SearchIcon sx={{ fontSize: '20px' }} />
-                  </SearchIconWrapper>
-                  <StyledInputBase
-                    placeholder="Search for Gold Jewellery, Diamond Jewellery and more..."
-                    inputProps={{ 'aria-label': 'search' }}
-                    value={query}
-                    onChange={(e) => {
-                      setQuery(e.target.value);
-                      setIsOpen(true); // Open suggestions when typing in the search box
+            <Box sx={{ flex: 1, px: 2, display: 'flex', justifyContent: 'center', position: 'relative' }} ref={searchBoxRef}>
+              <SearchContainer>
+                <SearchIconWrapper>
+                  <SearchIcon sx={{ fontSize: '20px' }} />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  placeholder="Search for Gold Jewellery, Diamond Jewellery and more..."
+                  inputProps={{ 'aria-label': 'search' }}
+                  value={query}
+                  onChange={(e) => {
+                    setQuery(e.target.value);
+                    setIsOpen(true); // Open the suggestion box
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && results.length > 0) {
+                      handleSuggestionClick(results[0]._id);
+                    }
+                  }}
+                />
+              </SearchContainer>
+            </Box>
+
+            {isOpen && query.trim() !== '' && results.length > 0 && (
+              // <Box
+              //   sx={{
+              //     position: 'absolute',
+              //     top: '55px',
+              //     left: '50%',
+              //     transform: 'translateX(-50%)',
+              //     zIndex: 999,
+              //     height: '100%',
+              //     overflowY: 'auto',
+              //     // minHeight: '260px',
+              //     maxHeight: '300px',
+              //     overflowY: 'auto',
+              //     backgroundColor: '#fff',
+              //     width: '500px',
+              //     padding: '10px',
+              //   }}
+              //   ref={suggestionsRef}
+              // >
+              //   {results.map((product) => (
+              //     <Typography
+              //       key={product._id}
+              //       sx={{
+              //         cursor: 'pointer',
+              //         color: '#44170D',
+              //         fontSize: '15px',
+              //         '&:hover': { color: '#000', bgcolor: '#f5f5f5' },
+              //         textTransform: 'capitalize',
+              //         p: '5px',
+              //         fontWeight: 600,
+              //       }}
+              //       onClick={() => handleSuggestionClick(product._id)}
+              //     >
+              //       {product.name}
+              //     </Typography>
+              //   ))}
+              // </Box>
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: '55px',
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  zIndex: 1300,
+                  maxHeight: '320px',
+                  width: '520px',
+                  borderRadius: 2,
+                  boxShadow: '0 6px 24px rgba(44,19,14,0.12)',
+                  bgcolor: '#fff',
+                  p: 0,
+                  mt: 1,
+                  border: '1px solid #eee',
+                  overflowY: 'auto'
+                }}
+                ref={suggestionsRef}
+              >
+                {results.map((product, idx) => (
+                  <Box
+                    key={product._id}
+                    onClick={() => handleSuggestionClick(product._id)}
+                    sx={{
+                      px: 2,
+                      py: 1.2,
+                      display: 'flex',
+                      alignItems: 'center',
+                      cursor: 'pointer',
+                      bgcolor: idx === 0 ? 'rgba(68,23,13,0.07)' : 'transparent',
+                      '&:hover': { bgcolor: 'rgba(68,23,13,0.13)' },
+                      borderBottom: idx === results.length - 1 ? "none" : "1px solid #f7f4f2",
+                      fontWeight: 500,
+                      fontSize: '15px',
+                      color: '#44170D'
                     }}
-                  />
-                </SearchContainer>
+                  >
+                    {product.name}
+                  </Box>
+                ))}
               </Box>
 
-              {isOpen && query.trim() !== '' && results.length > 0 && (
-                <Box
-                  sx={{
-                    position: 'absolute',
-                    top: '55px',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    zIndex: 999,
-                    height: '100%',
-                    overflowY: 'auto',
-                    // minHeight: '260px',
-                     maxHeight: '300px',
-                    overflowY: 'auto',
-                    backgroundColor: '#fff',
-                    width: '500px',
-                    padding: '10px',
-                  }}
-                  ref={suggestionsRef}
-                >
-                  {results.map((product) => (
-                    <Typography
-                      key={product._id}
-                      sx={{
-                        cursor: 'pointer',
-                        color: '#44170D',
-                        fontSize: '15px',
-                        '&:hover': { color: '#000', bgcolor: '#f5f5f5' },
-                        textTransform: 'capitalize',
-                        p: '5px',
-                        fontWeight: 600,
-                      }}
-                      onClick={() => handleSuggestionClick(product._id)}
-                    >
-                      {product.name}
-                    </Typography>
-                  ))}
-                </Box>
-              )}
-            </>
+            )}
+          </>
         )}
 
         <IconsRow>
@@ -426,7 +473,7 @@ export default function Header() {
                     setDropdownOpen(true);
                   }}
                 >
-                  <Typography sx={{textTransform: 'capitalize'}}>{item.label}</Typography>
+                  <Typography sx={{ textTransform: 'capitalize' }}>{item.label}</Typography>
                 </NavButton>
               ))}
               {dropdownOpen && hoveredMenu && (
