@@ -45,9 +45,9 @@ const Privacy = () => (
       <Typography variant="h4" color="primary" fontWeight={700} gutterBottom>
         Privacy Policy
       </Typography>
-      <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 2 }}>
+      {/* <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 2 }}>
         Effective Date: July 3, 2025 &nbsp;|&nbsp; Last Updated: July 3, 2025
-      </Typography>
+      </Typography> */}
       <Typography variant="body1" color="text.secondary" paragraph>
         At Chauhan sons jewellers&apos;s UK German Pharmaceuticals, we value your privacy and are committed to protecting the personal information you share with us. This Privacy Policy outlines the types of information we collect, how we use and protect it, and your rights regarding that information.
       </Typography>

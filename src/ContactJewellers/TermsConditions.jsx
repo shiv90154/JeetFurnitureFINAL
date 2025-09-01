@@ -49,13 +49,13 @@ const TermsConditions = () => (
             <Typography variant="h4" color="primary" fontWeight={700} gutterBottom>
                 Terms & Conditions
             </Typography>
-            <Typography
+            {/* <Typography
                 variant="subtitle2"
                 color="text.secondary"
                 sx={{ mb: 2 }}
             >
                 Effective Date: July 3, 2025 &nbsp;|&nbsp; Last Updated: July 3, 2025
-            </Typography>
+            </Typography> */}
             <TermSection
                 items={[
                     {
