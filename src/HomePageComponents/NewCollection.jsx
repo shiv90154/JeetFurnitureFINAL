@@ -305,7 +305,7 @@ export default function NewCollection() {
     <SectionContainer>
       <HeaderContainer maxWidth="xl">
         <MainTitle>New Collections</MainTitle>
-        <SubTitle>Elevate Every Look with Fashion-Forward Diamond Jewellery</SubTitle>
+        <SubTitle>Elevate Every Look with Fashion-Forward Jewellery</SubTitle>
       </HeaderContainer>
 
       <FlexRow>

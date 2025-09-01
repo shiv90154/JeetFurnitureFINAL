@@ -43,7 +43,7 @@ const Card = styled(Box)(({ height }) => ({
     height,
     background: "#fff",
     "&:hover": {
-        transform: "translateY(-8px)",
+        transform: "translateY(-4px)",
         boxShadow: "0 12px 32px rgba(0,0,0,0.2)",
     },
     "@media (max-width: 960px)": {
@@ -164,7 +164,7 @@ function Collection() {
                     <Box flex={1} minWidth={0} mb={{ xs: 3, md: 0 }}>
                         {banners.length > 0 && (
                             <Card
-                                height="500px"
+                                height="450px"
                                 // onClick={() => navigate(`/collection`)}
                                 onClick={() => navigate(`/allJewellery`)}
                             >
@@ -197,20 +197,20 @@ function Collection() {
                         minWidth={0}
                     >
                         {banners.slice(1).map((item) => (
-                            <Card height="240px" key={item._id} onClick={() => navigate(`/collection`)}>
+                            <Card height="220px" key={item._id} onClick={() => navigate(`/collection`)}>
                                 <FallbackImage
                                     src={publicUrl(item.slider_image[0])}
                                     alt={item.name}
                                     fallbackSrc="/placeholder.svg?height=240&width=400&text=Image+Not+Found"
                                 />
-                                <ImageOverlay>
+                                {/* <ImageOverlay>
                                     <CollectionText>
                                         <CollectionName>
-                                            {item.name}{" "}
+                                            {item.name}
                                             <CollectionScript>{item.script}</CollectionScript>
                                         </CollectionName>
                                     </CollectionText>
-                                </ImageOverlay>
+                                </ImageOverlay> */}
                             </Card>
                         ))}
                     </Box>
