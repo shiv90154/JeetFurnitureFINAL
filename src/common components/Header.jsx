@@ -275,9 +275,9 @@ export default function Header() {
             <AccountPopup onClose={() => setShowAccountPopup(false)} />
           )}
 
-          <TopIconButton size="small">
+          <TopIconButton size="small" onClick={() => navigate("/cart")}>
             <Badge badgeContent={cartCount} color="error" overlap="circular" sx={{ "& .MuiBadge-badge": { fontWeight: 600, fontSize: 13, right: 0, top: 3 } }}>
-              <ShoppingBagOutlined onClick={() => navigate("/cart")} sx={{ fontSize: 20 }} />
+              <ShoppingBagOutlined sx={{ fontSize: 20 }} />
             </Badge>
           </TopIconButton>
 

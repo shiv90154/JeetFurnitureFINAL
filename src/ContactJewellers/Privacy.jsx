@@ -49,7 +49,7 @@ const Privacy = () => (
         Effective Date: July 3, 2025 &nbsp;|&nbsp; Last Updated: July 3, 2025
       </Typography> */}
       <Typography variant="body1" color="text.secondary" paragraph>
-        At Chauhan sons jewellers&apos;s UK German Pharmaceuticals, we value your privacy and are committed to protecting the personal information you share with us. This Privacy Policy outlines the types of information we collect, how we use and protect it, and your rights regarding that information.
+        At Chauhan sons jewellers&apos;s we value your privacy and are committed to protecting the personal information you share with us. This Privacy Policy outlines the types of information we collect, how we use and protect it, and your rights regarding that information.
       </Typography>
       <PolicySection
         items={[
@@ -117,8 +117,8 @@ const Privacy = () => (
         If you have any questions or concerns about our Privacy Policy, please contact us:
       </Typography>
       <Box sx={{ mt: 2 }}>
-        <Typography fontWeight={600}>Chauhan sons jewellers&apos;s UK German Pharmaceuticals</Typography>
-        <Typography>Cheema, Punjab – 148031, India</Typography>
+        <Typography fontWeight={600}>Chauhan sons jewellers&apos;s </Typography>
+        <Typography>S.C.F 74 PHASE 5  SECTOR 59 , Sahibzada Ajit Singh Nagar, PUNJAB 160059,INDIA</Typography>
         <Typography>
           Email:&nbsp;
           <Link

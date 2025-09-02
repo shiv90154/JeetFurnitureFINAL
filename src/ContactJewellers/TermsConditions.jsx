@@ -66,7 +66,7 @@ const TermsConditions = () => (
                     {
                         heading: "2. Intellectual Property",
                         content:
-                            "All content on this Website, including logos, images, text, product information, and software, is the property of UK German Pharmaceuticals and protected under applicable copyright, trademark, and intellectual property laws.",
+                            "All content on this Website, including logos, images, text, product information, and software, is the property of Chauhan sons jewellers and protected under applicable copyright, trademark, and intellectual property laws.",
                     },
                     {
                         heading: "3. Product Information & Medical Disclaimer",

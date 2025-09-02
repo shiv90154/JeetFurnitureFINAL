@@ -30,7 +30,7 @@ export function normalizeCartProduct(product) {
       Number(variant?.final_price ?? variant?.finalPrice) ||
       Number(product.price) ||
       0,
-    weight: variant?.weight ?? product.weight,
+    // weight: variant?.weight ?? product.weight,
     // Add other normalized fields as required for your CartCard rendering
     // Such as discount, makingCharge, etc.
   };

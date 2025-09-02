@@ -111,6 +111,7 @@ export default function SingleProductPage() {
         } else {
             // Find the currently selected variant!
             const variant = product.quantity[selectedVariantIndex];
+            delete variant.weight;
             const wishlistItem = {
                 ...product,
                 selectedVariant: variant,
@@ -598,7 +599,7 @@ export default function SingleProductPage() {
 
 // const parseVariants = (raw) => {
 //     try {
-//         let arr = raw;
+//         let arr = raw; item
 
 //         // Check if raw data is a string and parse the array first
 //         if (typeof raw === 'string') {

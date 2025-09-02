@@ -84,7 +84,7 @@ const ReturnsPolicy = () => {
                                     primary="Email"
                                     secondary={
                                         <a
-                                            href="mailto:ukgermanpharmaceutical@gmail.com"
+                                            href="mailto:chauhansons69@yahoo.com"
                                             style={{
                                                 color: 'primary.main',
                                                 textDecoration: 'none',
@@ -93,7 +93,7 @@ const ReturnsPolicy = () => {
                                                 }
                                             }}
                                         >
-                                            ukgermanpharmaceutical@gmail.com
+                                            chauhansons69@yahoo.com
                                         </a>
                                     }
                                 />
@@ -103,9 +103,9 @@ const ReturnsPolicy = () => {
                                     primary="Phone"
                                     secondary={
                                         <Box sx={{ display: 'flex', gap: 1 }}>
-                                            <Button
+                                            {/* <Button
                                                 component="a"
-                                                href="tel:+919115739933"
+                                                href="tel:+9876535881"
                                                 size="small"
                                                 sx={{
                                                     borderRadius: 16,
@@ -113,11 +113,11 @@ const ReturnsPolicy = () => {
                                                     color: 'primary.main'
                                                 }}
                                             >
-                                                +91 91157-39933
-                                            </Button>
+                                                +91 9876535881
+                                            </Button> */}
                                             <Button
                                                 component="a"
-                                                href="tel:+919115739699"
+                                                href="tel:+9876535881"
                                                 size="small"
                                                 sx={{
                                                     borderRadius: 16,
@@ -125,7 +125,7 @@ const ReturnsPolicy = () => {
                                                     color: 'primary.main'
                                                 }}
                                             >
-                                                +91 91157-39699
+                                                +91 9876535881
                                             </Button>
                                         </Box>
                                     }
@@ -144,13 +144,13 @@ const ReturnsPolicy = () => {
                     </AccordionSummary>
                     <AccordionDetails>
                         <Typography paragraph>
-                            UK GERMAN PHARMACEUTICALS
+                            Chauhan Sons Jewellers
                         </Typography>
                         <Typography paragraph>
-                            Akal Academy Road, Opp. Punjab Gramin Bank, Cheema
+                            S.C.F 74 PHASE 5  SECTOR 59 , Sahibzada Ajit Singh Nagar,
                         </Typography>
                         <Typography>
-                            Distt. Sangrur (PB) Pin-148029
+                            PUNJAB 160059,INDIA
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
