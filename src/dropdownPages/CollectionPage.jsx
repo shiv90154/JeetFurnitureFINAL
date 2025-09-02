@@ -143,7 +143,7 @@ export default function CollectionPage() {
           >
             {(variety ? filteredProducts : products).map((item) =>
             (<Card
-              key={item.id}
+              key={item._id}
               onClick={() => navigate(`/allJewellery?variety=${item.productvariety.toLowerCase()}`)}
               sx={{
                 borderRadius: 0,

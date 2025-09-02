@@ -211,7 +211,7 @@ const SlickSlider = () => {
                 <div style={{ maxWidth: 1050, margin: "0 auto", padding: "0 20px" }}>
                     <Slider {...settings}>
                         {categoryName.map((product) => (
-                            <div key={product.id} onClick={() => console.log(`${product.name} clicked`)}>
+                            <div key={product._id} onClick={() => console.log(`${product.name} clicked`)}>
                                 <div
                                     style={{
                                         background: "#fff4ec",

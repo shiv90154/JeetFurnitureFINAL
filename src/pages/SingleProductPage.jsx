@@ -90,17 +90,37 @@ export default function SingleProductPage() {
     const handleTabChange = (tab) => setActiveTab(tab);
 
 
+    // const handleWishlistClick = (e) => {
+    //     e.stopPropagation(); // Prevent parent click event
+    //     e.preventDefault();  // Prevent any link navigation
+    //     if (isWishlisted) {
+    //         dispatch(removeFromWishlist(product._id));
+    //         toast.info('Removed from Wishlist');
+    //     } else {
+    //         dispatch(addToWishlist(product));
+    //         toast.info('Added to Wishlist');
+    //     }
+    // }
+
     const handleWishlistClick = (e) => {
-        e.stopPropagation(); // Prevent parent click event
-        e.preventDefault();  // Prevent any link navigation
+        e.stopPropagation();
+        e.preventDefault();
         if (isWishlisted) {
             dispatch(removeFromWishlist(product._id));
             toast.info('Removed from Wishlist');
         } else {
-            dispatch(addToWishlist(product));
+            // Find the currently selected variant!
+            const variant = product.quantity[selectedVariantIndex];
+            const wishlistItem = {
+                ...product,
+                selectedVariant: variant,
+                price: variant.final_price ?? variant.finalPrice ?? 0, // Store price on top level for Wishlist UI
+            };
+            dispatch(addToWishlist(wishlistItem));
             toast.info('Added to Wishlist');
         }
-    }
+    };
+
 
     // Fetch product data from the API
     const fetchData = async () => {

@@ -273,8 +273,8 @@ const Banners = () => {
                     <em>Select Banner Type</em>
                   </MenuItem>
                   {bannerList.map((item) => (
-                    <MenuItem key={item.id} value={item.id}>
-                      {item.title}
+                    <MenuItem key={item._id} value={item._id}>
+                      {item.name}
                     </MenuItem>
                   ))}
                 </Select>

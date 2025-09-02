@@ -171,6 +171,13 @@ function EmptyWishlist({ onContinueShopping }) {
 }
 
 function WishlistCard({ product, onRemove, onMoveToCart }) {
+  const displayPrice = product.selectedVariant?.final_price
+    ?? product.selectedVariant?.finalPrice
+    ?? product.price
+    ?? product.final_price
+    ?? product.finalPrice
+    ?? 0;
+
   return (
     <Box sx={{
       background: '#fff',
@@ -197,7 +204,7 @@ function WishlistCard({ product, onRemove, onMoveToCart }) {
       {/* Delete button */}
       <IconButton
         size="small"
-        onClick={() => onRemove(product.id)}
+        onClick={() => onRemove(product._id)}
         sx={{
           position: 'absolute',
           top: { xs: 4, sm: 6, md: 8 },
@@ -266,7 +273,7 @@ function WishlistCard({ product, onRemove, onMoveToCart }) {
               overflow: 'hidden'
             }}
           >
-            {product.title}
+            {product.name}
           </Typography>
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 0.3, sm: 0.5, md: 0.5 }, mb: { xs: 0.3, sm: 0.5, md: 0.5 } }}>
@@ -277,19 +284,8 @@ function WishlistCard({ product, onRemove, onMoveToCart }) {
                 fontSize: { xs: 11, sm: 12, md: 13, lg: 14 }
               }}
             >
-              {product.price}
+              {Number(displayPrice).toLocaleString("en-IN", { style: "currency", currency: "INR" })}
             </Typography>
-            {product.oldPrice && (
-              <Typography
-                sx={{
-                  color: '#bdbdbd',
-                  fontSize: { xs: 9, sm: 10, md: 11, lg: 12 },
-                  textDecoration: 'line-through'
-                }}
-              >
-                {product.oldPrice}
-              </Typography>
-            )}
           </Box>
         </Box>
 
@@ -424,8 +420,7 @@ export default function WishlistPage() {
         >
           {wishlistItems.map((item) => (
             <Grid
-              key={item.id}
-              item
+              key={item._id}
               xs={6}
               sm={4}
               md={3}

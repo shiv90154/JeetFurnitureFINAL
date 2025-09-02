@@ -439,8 +439,8 @@ const ShopByCategories = () => {
                             </Slider>
                         ) : (
                             <Grid container justifyContent="center">
-                                {categoryName.map((item, id) => (
-                                    <Grid item key={item?.id ?? id}>
+                                {categoryName.map((item) => (
+                                    <Grid item key={item?._id}>
                                         <Box sx={{ px: 1 }}>
                                             <Card
                                                 sx={{
