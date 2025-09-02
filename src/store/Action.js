@@ -34,3 +34,9 @@ export const removeFromWishlist = (productId) => ({
 export const clearWishlist = () => ({
     type: 'CLEAR_WISHLIST',
 });
+
+export const addToCart = (product) => ({
+  type: 'ADD_TO_CART',
+  payload: product,
+});
+

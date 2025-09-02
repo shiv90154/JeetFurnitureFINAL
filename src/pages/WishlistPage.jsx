@@ -1,41 +1,12 @@
-// Replace this:
-// const savedWishlist = localStorage.getItem('wishlist');
-
-
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Box, Typography, Button, Grid, IconButton, Chip, Snackbar, Alert } from '@mui/material';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import { useNavigate } from 'react-router-dom';
-
-// Sample wishlist items - replace with API data later
-const sampleWishlistItems = [
-  {
-    id: 1,
-    img: '/public/collection1.png',
-    title: 'Dazzling Grace Drop Earrings',
-    price: '₹ 59,101',
-    oldPrice: '₹ 62,000',
-    category: 'Earrings'
-  },
-  {
-    id: 2,
-    img: '/public/collection2.png',
-    title: 'Royal Diamond Necklace',
-    price: '₹ 1,25,000',
-    oldPrice: '₹ 1,35,000',
-    category: 'Necklace'
-  },
-  {
-    id: 3,
-    img: '/public/collection3.png',
-    title: 'Elegant Gold Bracelet',
-    price: '₹ 45,000',
-    oldPrice: '',
-    category: 'Bracelet'
-  },
-];
-
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart, removeFromWishlist } from "../store/Action";
+import { publicUrl } from '../common components/PublicUrl';
+import { normalizeCartProduct } from '../utils/ProductsUtils';
 
 function EmptyWishlist({ onContinueShopping }) {
   return (
@@ -260,8 +231,8 @@ function WishlistCard({ product, onRemove, onMoveToCart }) {
         borderRadius: 1
       }}>
         <img
-          src={product.img}
-          alt={product.title}
+          src={publicUrl(product.media[0]?.url)}
+          alt={product.name}
           style={{
             width: '100%',
             height: '100%',
@@ -346,37 +317,25 @@ function WishlistCard({ product, onRemove, onMoveToCart }) {
 }
 
 export default function WishlistPage() {
-  const [wishlistItems, setWishlistItems] = useState([]);
+  // const [wishlistItems, setWishlistItems] = useState([]);
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const navigate = useNavigate();
+  const wishlistItems = useSelector(state => state.app?.wishlist || []);
+  const dispatch = useDispatch();
 
-  // Load wishlist items on component mount
-  useEffect(() => {
-    // For now, use localStorage. Later replace with API call
-    const savedWishlist = localStorage.getItem('wishlist');
-    if (savedWishlist) {
-      setWishlistItems(JSON.parse(savedWishlist));
-    } else {
-      // Initialize with sample data for demonstration
-      setWishlistItems(sampleWishlistItems);
-      localStorage.setItem('wishlist', JSON.stringify(sampleWishlistItems));
-    }
-  }, []);
 
   const handleRemoveFromWishlist = (productId) => {
-    const updatedWishlist = wishlistItems.filter(item => item.id !== productId);
-    setWishlistItems(updatedWishlist);
-    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
+    dispatch(removeFromWishlist(productId));
     setSnackbarMessage('Item removed from wishlist');
     setShowSnackbar(true);
   };
 
   const handleMoveToCart = (product) => {
-    // In a real app, you would add this to cart and remove from wishlist
-    // For now, we'll just remove it from wishlist
-    handleRemoveFromWishlist(product.id);
-    setSnackbarMessage(`${product.title} moved to cart`);
+    const normalized = normalizeCartProduct(product);
+    dispatch(addToCart(normalized));
+    dispatch(removeFromWishlist(product._id));
+    setSnackbarMessage(`${product.name} moved to cart`);
     setShowSnackbar(true);
   };
 
@@ -478,8 +437,9 @@ export default function WishlistPage() {
               }}
             >
               <WishlistCard
+                key={item._id}
                 product={item}
-                onRemove={handleRemoveFromWishlist}
+                onRemove={() => handleRemoveFromWishlist(item._id)}
                 onMoveToCart={handleMoveToCart}
               />
             </Grid>

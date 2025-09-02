@@ -12,11 +12,9 @@ import {
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useEffect, useState } from 'react';
-import SlickSlider from '../common components/SlickSlider';
 import axiosInstance from '../common components/AxiosInstance';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import { publicUrl } from '../common components/PublicUrl';
-import { useDispatch, useSelector } from "react-redux";
 
 const jewelleryData = [
     {
@@ -110,67 +108,162 @@ function JewelleryHeader() {
     );
 }
 
+// function JewelleryCard({ product }) {
+//     const [liked, setLiked] = useState(false);
+//     const imgUrl = publicUrl(product.media?.[0]?.url) || "no img found";
+//     const best = product.bestVariant || {};
+
+//     return (
+//         <Box sx={{ pb: 1 }}>
+//             <Box
+//                 sx={{
+//                     position: 'relative',
+//                     borderRadius: 2,
+//                     boxShadow: 1,
+//                     overflow: 'hidden',
+//                     // mb: 1,
+//                     width: { xs: 170, sm: 200 },
+//                     height: { xs: 200 },
+//                     mx: 'auto',
+//                     bgcolor: 'transparent',
+//                     boxShadow: 'none'
+//                 }}
+//             >
+//                 {best.discount > 0 && (
+//                     <Box sx={{
+//                         position: 'absolute',
+//                         top: 4,
+//                         left: 4,
+//                         background: '#44170D',
+//                         color: '#fff',
+//                         p: '2px',
+//                         fontSize: '12px',
+//                         fontWeight: 600
+//                     }}>
+//                         {best.discount}% OFF
+//                     </Box>
+//                 )}
+//                 <img
+//                     src={imgUrl}
+//                     alt={product.name}
+//                     style={{
+//                         // display: 'block',
+//                         margin: 'auto',
+//                         objectFit: 'cover',
+//                         width: '100%',
+//                         height: '100%',
+//                     }}
+//                 />
+//                 <IconButton
+//                     onClick={() => setLiked(!liked)}
+//                     aria-label="like"
+//                     sx={{
+//                         position: 'absolute',
+//                         top: 8,
+//                         right: 12,
+//                         background: '#fff',
+//                         boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+//                         '&:hover': { background: '#f7f7f7' },
+//                         p: '5px',
+//                     }}
+//                     size="small"
+//                 >
+//                     {liked ? (
+//                         <FavoriteIcon sx={{ fontSize: 20, color: 'red' }} />
+//                     ) : (
+//                         <FavoriteBorderIcon sx={{ fontSize: 20, color: '#bbb' }} />
+//                     )}
+//                 </IconButton>
+//             </Box>
+
+//             <Typography
+//                 variant="subtitle1"
+//                 sx={{
+//                     fontSize: 18,
+//                     fontWeight: 600,
+//                     fontFamily: 'serif',
+//                     color: '#222',
+//                     textAlign: 'left',
+//                     textTransform: 'capitalize',
+//                 }}
+//             >
+//                 {product.name}
+//             </Typography>
+
+//             <Typography variant="subtitle1" sx={{ fontWeight: 500, fontSize: 17, color: '#222' }}>
+//                 ₹{best.finalPrice}
+//             </Typography>
+
+//             {/* <Button variant="contained" sx={{ mt: 1 }}
+//                 onClick={() => handleAddToCart(product)}
+//                 disabled={product.stock === 'no'}
+//             >Add to Cart</Button> */}
+
+//         </Box>
+//     );
+// }
+
+import { useDispatch, useSelector } from 'react-redux';
+import { addToWishlist, removeFromWishlist } from '../store/Action';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import { createSelector } from '@reduxjs/toolkit';
+
+export const selectWishlist = createSelector(
+    [state => Array.isArray(state.app?.wishlist) ? state.app.wishlist : []],
+    wishlist => wishlist
+);
+
 function JewelleryCard({ product }) {
-    const [liked, setLiked] = useState(false);
+    const dispatch = useDispatch();
+    const wishlist = useSelector(selectWishlist);
+
+    const isWishlisted = wishlist.some(item => item._id === product._id);
+
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMsg, setSnackbarMsg] = useState('');
+
     const imgUrl = publicUrl(product.media?.[0]?.url) || "no img found";
     const best = product.bestVariant || {};
 
+    const handleWishlistClick = (e) => {
+        e.stopPropagation(); // Prevent parent click event
+        e.preventDefault();  // Prevent any link navigation
+        if (isWishlisted) {
+            dispatch(removeFromWishlist(product._id));
+            setSnackbarMsg('Removed from Wishlist');
+        } else {
+            dispatch(addToWishlist(product));
+            setSnackbarMsg('Added to Wishlist');
+        }
+        setSnackbarOpen(true);
+    }
+
     return (
-        <Box sx={{ pb: 1 }}>
-            <Box
-                sx={{
-                    position: 'relative',
-                    borderRadius: 2,
-                    boxShadow: 1,
-                    overflow: 'hidden',
-                    // mb: 1,
-                    width: { xs: 170, sm: 200 },
-                    height: { xs: 200 },
-                    mx: 'auto',
-                    bgcolor: 'transparent',
-                    boxShadow: 'none'
-                }}
-            >
-                {best.discount > 0 && (
-                    <Box sx={{
-                        position: 'absolute',
-                        top: 4,
-                        left: 4,
-                        background: '#44170D',
-                        color: '#fff',
-                        p: '2px',
-                        fontSize: '12px',
-                        fontWeight: 600
-                    }}>
-                        {best.discount}% OFF
-                    </Box>
-                )}
-                <img
-                    src={imgUrl}
-                    alt={product.name}
-                    style={{
-                        // display: 'block',
-                        margin: 'auto',
-                        objectFit: 'cover',
-                        width: '100%',
-                        height: '100%',
-                    }}
-                />
+        <Box sx={{ pb: 1, position: 'relative' }}>
+            <Box sx={{ position: 'relative', borderRadius: 2 }}>
+                <Link to={`/singleProduct/${product._id}`} style={{ textDecoration: 'none' }}>
+                    <img
+                        src={imgUrl}
+                        alt={product.name}
+                        style={{
+                            margin: 'auto', objectFit: 'cover',
+                            width: '100%',
+                            height: 200,
+                            borderRadius: '8px'
+                        }}
+                    />
+                </Link>
                 <IconButton
-                    onClick={() => setLiked(!liked)}
-                    aria-label="like"
+                    onClick={handleWishlistClick}
+                    aria-label="wish"
                     sx={{
-                        position: 'absolute',
-                        top: 8,
-                        right: 12,
-                        background: '#fff',
-                        boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-                        '&:hover': { background: '#f7f7f7' },
-                        p: '5px',
+                        position: 'absolute', top: 8, right: 12, background: '#fff',
+                        zIndex: 2, boxShadow: '0 2px 8px rgba(0,0,0,0.08)', p: '5px'
                     }}
                     size="small"
                 >
-                    {liked ? (
+                    {isWishlisted ? (
                         <FavoriteIcon sx={{ fontSize: 20, color: 'red' }} />
                     ) : (
                         <FavoriteBorderIcon sx={{ fontSize: 20, color: '#bbb' }} />
@@ -178,32 +271,30 @@ function JewelleryCard({ product }) {
                 </IconButton>
             </Box>
 
-            <Typography
-                variant="subtitle1"
-                sx={{
-                    fontSize: 18,
-                    fontWeight: 600,
-                    fontFamily: 'serif',
-                    color: '#222',
-                    textAlign: 'left',
-                    textTransform: 'capitalize',
-                }}
+            <Link to={`/singleProduct/${product._id}`} style={{ color: 'inherit', textDecoration: 'none' }}>
+                <Typography variant="subtitle1" sx={{ fontSize: 18, fontWeight: 600, fontFamily: 'serif', color: '#222', textAlign: 'left', textTransform: 'capitalize' }}>
+                    {product.name}
+                </Typography>
+                <Typography variant="subtitle1" sx={{ fontWeight: 500, fontSize: 17, color: '#222' }}>
+                    ₹{best.finalPrice}
+                </Typography>
+            </Link>
+
+            {/* Snackbar for toast */}
+            <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={2000}
+                onClose={() => setSnackbarOpen(false)}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
             >
-                {product.name}
-            </Typography>
-
-            <Typography variant="subtitle1" sx={{ fontWeight: 500, fontSize: 17, color: '#222' }}>
-                ₹{best.finalPrice}
-            </Typography>
-
-            {/* <Button variant="contained" sx={{ mt: 1 }}
-                onClick={() => handleAddToCart(product)}
-                disabled={product.stock === 'no'}
-            >Add to Cart</Button> */}
-
+                <MuiAlert onClose={() => setSnackbarOpen(false)} severity="success" sx={{ width: '100%' }}>
+                    {snackbarMsg}
+                </MuiAlert>
+            </Snackbar>
         </Box>
     );
 }
+
 
 export function JewelleryGrid() {
     const [allProducts, setAllProducts] = useState([]);
@@ -252,12 +343,12 @@ export function JewelleryGrid() {
     const occasionQuery = query.get("occasion") || "all";
 
 
-  const norm = (s) =>
-  (s || '')
-    .toUpperCase()
-    .replace(/\s+/g, '')   // remove ALL spaces
-    .replace(/-/g, '–')    // hyphen -> en-dash
-    .trim();
+    const norm = (s) =>
+        (s || '')
+            .toUpperCase()
+            .replace(/\s+/g, '')   // remove ALL spaces
+            .replace(/-/g, '–')    // hyphen -> en-dash
+            .trim();
 
 
     const loadMoreProducts = () => {
@@ -447,11 +538,14 @@ export function JewelleryGrid() {
                 <Grid container spacing={2} justifyContent="center">
                     {productsToDisplay.map((product) => (
                         // console.log(product._id, "product id"),
-                        <Link to={`/singleProduct/${product._id}`} key={product._id}>
-                            <Grid item xs={12} sm={6} md={4}>
-                                <JewelleryCard product={product} />
-                            </Grid>
-                        </Link>
+                        // <Link to={`/singleProduct/${product._id}`} key={product._id}>
+                        //     <Grid item xs={12} sm={6} md={4}>
+                        //         <JewelleryCard product={product} />
+                        //     </Grid>
+                        // </Link>
+                        <Grid item xs={12} sm={6} md={4}>
+                            <JewelleryCard product={product} />
+                        </Grid>
                     ))}
                 </Grid>
             )}
