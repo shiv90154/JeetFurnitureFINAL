@@ -489,8 +489,12 @@ export default function SingleProductPage() {
                     )} */}
 
                     {activeTab === 'breakup' && (
-                        <TableContainer component={Paper} sx={{ borderRadius: 2, overflow: 'hidden', boxShadow: 'none', border: '1px solid #eee', mt: 2 }}>
-                            <Table>
+                        <TableContainer component={Paper} sx={{
+                            borderRadius: 2, overflowX: 'auto', boxShadow: 'none', border: '1px solid #eee', mt: 2, '&::-webkit-scrollbar': {
+                                display: 'none'
+                            },
+                        }}>
+                            <Table sx={{ minWidth: 550 }} >
                                 <TableHead>
                                     <TableRow>
                                         <TableCell sx={{ fontWeight: 700, fontSize: 13 }}>PRODUCT DETAILS</TableCell>
