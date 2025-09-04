@@ -9,7 +9,7 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import axiosInstance from '../common components/AxiosInstance';
 import { deleteProduct, updateData, clearProducts } from '../store/Action';
 import { publicUrl } from '../common components/PublicUrl';
@@ -368,7 +368,7 @@ export default function CartPage() {
     //   toast.error('Payment SDK not loaded. Please add Razorpay script on the page.');
     //   return;
     // }
- 
+
     const options = {
       key: 'rzp_live_RCKnQvruACO5FH',
       amount: Math.round(total * 100), // paise
@@ -437,6 +437,7 @@ export default function CartPage() {
 
   return (
     <Box sx={{ px: { xs: 2, sm: 3, md: 5 }, py: { xs: 4, lg: 5 }, minHeight: '100vh', backgroundColor: '#fafafa' }}>
+      <ToastContainer position="top-right" autoClose={2000} hideProgressBar />
       {/* Header */}
       <Box sx={{ display: 'flex', alignItems: 'center', mb: { xs: 2, md: 3 }, gap: 2, flexWrap: 'wrap' }}>
         <Typography variant="h6" sx={{ fontWeight: 400, color: '#222', flex: 1, fontSize: { xs: '20px', md: '24px' } }}>
@@ -459,7 +460,7 @@ export default function CartPage() {
             <Box sx={{ flex: 1 }}>
               <Grid container spacing={{ xs: 1, sm: 1.5, md: 1.5, lg: 2 }} justifyContent="center">
                 {cartItems.map((item) => (
-                  <Grid key={item._id}  xs={6} sm={4} md={4} lg={4} xl={3} sx={{ display: 'flex', justifyContent: 'center' }}>
+                  <Grid key={item._id} xs={6} sm={4} md={4} lg={4} xl={3} sx={{ display: 'flex', justifyContent: 'center' }}>
                     <CartCard product={item} onRemove={handleRemoveItem} onUpdateQuantity={handleQuantityChange} />
                   </Grid>
                 ))}
@@ -524,7 +525,7 @@ export default function CartPage() {
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1.2 }}>
                   <Typography sx={{ color: '#555' }}>Subtotal ({cartItems.length} {cartItems.length === 1 ? 'item' : 'items'})</Typography>
                   <Typography sx={{ fontWeight: 600 }}>{formatINR(subtotal)}</Typography>
-                  
+
                 </Box>
                 {/* <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1.2 }}>
                   <Typography sx={{ color: '#28a745' }}>Discount</Typography>
@@ -551,12 +552,12 @@ export default function CartPage() {
                 fullWidth
                 sx={{
                   background: '#7d2a25', color: '#fff', borderRadius: '10px',
-                  py: { xs: 1.5, md: 2 }, textTransform: 'none', fontWeight: 1000,
+                  py:  1 , textTransform: 'none', fontWeight: 600,
                   fontSize: { xs: '16px', md: '18px' }, '&:hover': { background: '#611f18' },
                   boxShadow: '0 2px 8px rgba(125,42,37,0.3)'
                 }}
               >
-                Proceed to Checkoutnbvnb
+                Proceed to Checkout
               </Button>
 
               <Box sx={{ mt: 3, pt: 2, borderTop: '1px solid #f0f0f0', textAlign: 'center' }}>
