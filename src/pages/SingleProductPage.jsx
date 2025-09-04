@@ -598,6 +598,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { createSelector } from '@reduxjs/toolkit';
+import ProductReviewsSection from '../Reviews/ProductReviewsSection';
 
 export const selectWishlist = createSelector(
     [state => Array.isArray(state.app?.wishlist) ? state.app.wishlist : []],
@@ -657,7 +658,6 @@ export default function SingleProductPage() {
     const dispatch = useDispatch();
     const [units, setUnits] = useState(1);
     const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
-
     const handleTabChange = (tab) => setActiveTab(tab);
 
 
@@ -748,38 +748,6 @@ export default function SingleProductPage() {
     const unitPrice = Number(
         selectedVariant?.final_price ?? selectedVariant?.finalPrice ?? 0
     );
-
-    // // 1:
-    // const handleAddToCart = () => {
-    //     console.log('Adding to cart:', product);
-    //     if (!product) return;
-
-    //     const variant = product.quantity[selectedVariantIndex];
-    //     if (!variant) return;
-
-    //     const cartItem = {
-    //         ...product,
-    //         selectedVariant: {
-    //             label: variant.label,
-    //             mrp: variant.mrp,
-    //             discount: variant.discount,
-    //             gst: variant.gst,
-    //             retail_price: variant.retail_price,
-    //             final_price: variant.final_price,
-    //             in_stock: variant.in_stock,
-    //         },
-    //         quantity: units,  // User selected quantity
-    //         unitPrice: variant.final_price,  // Price per unit
-    //         totalPrice: variant.final_price != null ? variant.final_price * units : null,  // Total price based on quantity
-    //     };
-
-    //     toast.success('Item added to cart!', {
-    //         position: 'top-right',
-    //         autoClose: 2000,
-    //     });
-
-    //     dispatch(addData(cartItem));
-    // };
 
     // //2:
     const handleAddToCart = () => {
@@ -997,6 +965,14 @@ export default function SingleProductPage() {
                         </Box>
                     </Box>
                 </Box>
+
+
+                {/* reviews section */}
+                {product && <ProductReviewsSection
+                    product={product}
+                    onRefreshProduct={fetchData}
+                />}
+
 
                 {/* Delivery Details */}
                 <Box sx={{ bgcolor: '#fff', py: 2, borderRadius: 2, border: '1px solid #eee', mb: { xs: 6, sm: 8 }, maxWidth: 580, mx: 'auto', textAlign: 'center' }}>
