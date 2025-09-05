@@ -129,7 +129,8 @@ function JewelleryCard({ product }) {
     const dispatch = useDispatch();
     const wishlist = useSelector(selectWishlist);
 
-    const isWishlisted = wishlist.some(item => item._id === product._id);
+    // const isWishlisted = wishlist.some(item => item._id === product._id);
+    const isWishlisted = !!product && wishlist.some(item => item._id === product._id);
 
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMsg, setSnackbarMsg] = useState('');
@@ -140,6 +141,7 @@ function JewelleryCard({ product }) {
     const handleWishlistClick = (e) => {
         e.stopPropagation(); // Prevent parent click event
         e.preventDefault();  // Prevent any link navigation
+
         if (isWishlisted) {
             dispatch(removeFromWishlist(product._id));
             setSnackbarMsg('Removed from Wishlist');
@@ -177,19 +179,22 @@ function JewelleryCard({ product }) {
                 </Link>
                 <IconButton
                     onClick={handleWishlistClick}
-                    aria-label="wish"
+                    aria-label="add to wishlist"
                     sx={{
                         position: 'absolute', top: 8, right: 12, background: '#fff',
-                        zIndex: 2, boxShadow: '0 2px 8px rgba(0,0,0,0.08)', p: '5px'
+                        zIndex: 2, boxShadow: '0 2px 8px rgba(0,0,0,0.08)', p: '5px', color: 'inherit'
                     }}
                     size="small"
                 >
                     {isWishlisted ? (
-                        <FavoriteIcon sx={{ fontSize: 20, color: 'red' }} />
+                        <FavoriteIcon sx={{ fontSize: 20, color: '#d61e1eff' }} />
+                        // <FavoriteIcon sx={{ fontSize: 20, fill: '#d61e1eff' }} />
+                        // <FavoriteIcon color="error" sx={{ fontSize: 20 }} />
                     ) : (
                         <FavoriteBorderIcon sx={{ fontSize: 20, color: '#bbb' }} />
                     )}
                 </IconButton>
+
             </Box>
 
             <Link to={`/singleProduct/${product._id}`} style={{ color: 'inherit', textDecoration: 'none' }}>

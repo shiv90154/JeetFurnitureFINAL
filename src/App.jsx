@@ -33,6 +33,7 @@ import ReturnsPolicy from './ContactJewellers/ReturnPolicy';
 import ShippingPolicy from './ContactJewellers/ShippingPolicy';
 import TermsConditions from './ContactJewellers/TermsConditions';
 import Privacy from './ContactJewellers/Privacy';
+import UserOrders from './AccountPages/UserOrders';
 
 function App() {
   const location = useLocation();
@@ -72,6 +73,7 @@ function App() {
         <Route path="/return" element={<ReturnsPolicy />} />
         <Route path="/terms" element={<TermsConditions />} />
         <Route path="/privacy" element={<Privacy />} />
+        <Route path="/userOrder" element={<UserOrders />} />
 
 
         {/* admin panel  */}
