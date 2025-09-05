@@ -1014,10 +1014,10 @@ export default function SingleProductPage() {
                                 <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}>
                                     {[{ label: 'Material', value: product?.productvariety }, { label: 'Description', value: product?.description }].map(({ label, value }) => (
                                         <Box key={label} sx={{ flex: '1 1 45%', minWidth: '140px' }}>
-                                            <Typography fontSize={13} color="#666" fontWeight={500} mb={0.8} letterSpacing={0.3}>
+                                            <Typography fontSize={13} color="#666" fontWeight={500} mb={0.8} letterSpacing={0.3} textTransform={'capitalize'}>
                                                 {label}
                                             </Typography>
-                                            <Typography fontWeight={600} fontSize={15} color="#2C2C2C" letterSpacing={0.3}>
+                                            <Typography fontWeight={600} fontSize={15} color="#2C2C2C" letterSpacing={0.3} textTransform={'capitalize'}>
                                                 {value}
                                             </Typography>
                                         </Box>
@@ -1059,7 +1059,7 @@ export default function SingleProductPage() {
                                     <TableRow>
                                         <TableCell>
                                             <Box>
-                                                <Typography sx={{ fontSize: 15, fontWeight: 600 }}>  {product?.productvariety}</Typography>
+                                                <Typography sx={{ fontSize: 15, fontWeight: 600, textTransform: 'capitalize' }}>  {product?.productvariety}</Typography>
                                                 {/* <Typography sx={{ fontSize: 11, color: '#888', mt: -0.4 }}>18KT</Typography> */}
                                             </Box>
                                         </TableCell>

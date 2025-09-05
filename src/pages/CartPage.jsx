@@ -135,9 +135,10 @@ function CartCard({ product, onRemove, onUpdateQuantity }) {
           <Typography
             variant="body1"
             sx={{
-              fontWeight: 400, color: '#333', fontFamily: 'serif',
-              mb: { xs: 0.3, sm: 0.5, md: 0.5 }, fontSize: { xs: 11, sm: 12, md: 15, lg: 20 },
-              display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden'
+               color: '#333', fontFamily: 'serif',
+              mb: { xs: 0.3, sm: 0.5, md: 0.5 }, fontSize: { xs: 11, sm: 12, md: 15, lg: 20 }, fontWeight: 500,
+              display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden',
+              textTransform: 'capitalize'
             }}
           >
             {product.name}
@@ -533,7 +534,7 @@ export default function CartPage() {
                 fullWidth
                 sx={{
                   background: '#7d2a25', color: '#fff', borderRadius: '10px',
-                  py:  1 , textTransform: 'none', fontWeight: 600,
+                  py: 1, textTransform: 'none', fontWeight: 600,
                   fontSize: { xs: '16px', md: '18px' }, '&:hover': { background: '#611f18' },
                   boxShadow: '0 2px 8px rgba(125,42,37,0.3)'
                 }}
