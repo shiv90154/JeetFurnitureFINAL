@@ -100,6 +100,7 @@ const CategoryName = styled(Typography)({
     color: "#fff",
     textShadow: "0 2px 8px rgba(0,0,0,0.5)",
     textAlign: "center",
+    textTransform: 'capitalize',
     "@media (max-width: 960px)": { fontSize: 22 },
     "@media (max-width: 600px)": { fontSize: 14 }
 });

@@ -82,6 +82,7 @@ export const ContentArea = styled(Box)(({ theme }) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-start",
+    textTransform: 'capitalize',
     padding: "16px 20px",
     //   minWidth: 400,  //uncomment if want to use rightPanel
     //   maxWidth: 800,   //uncomment if want to use rightPanel

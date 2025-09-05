@@ -101,6 +101,7 @@ const CategoryLabel = styled(Typography)(({ theme }) => ({
   width: "100%",
   padding: "16px 0 12px 0",
   fontSize: 19,
+  textTransform: 'capitalize',
   fontWeight: 500,
   color: "#191919",
   background: "rgba(255,255,255,0.79)",

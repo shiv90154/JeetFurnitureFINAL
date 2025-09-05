@@ -110,9 +110,8 @@ function JewelleryHeader() {
 
 import { useDispatch, useSelector } from 'react-redux';
 import { addToWishlist, removeFromWishlist } from '../store/Action';
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
 import { createSelector } from '@reduxjs/toolkit';
+import { toast, ToastContainer } from 'react-toastify';
 
 // export const selectWishlist = createSelector(
 //     [state => Array.isArray(state.app?.wishlist) ? state.app.wishlist : []],
@@ -130,10 +129,9 @@ function JewelleryCard({ product }) {
     const wishlist = useSelector(selectWishlist);
 
     // const isWishlisted = wishlist.some(item => item._id === product._id);
-    const isWishlisted = !!product && wishlist.some(item => item._id === product._id);
+    // const isWishlisted = !!product && wishlist.some(item => item._id === product._id);
+    const isWishlisted = !!product && wishlist.some(item => String(item._id) === String(product._id));
 
-    const [snackbarOpen, setSnackbarOpen] = useState(false);
-    const [snackbarMsg, setSnackbarMsg] = useState('');
 
     const imgUrl = publicUrl(product.media?.[0]?.url) || "no img found";
     const best = product.bestVariant || {};
@@ -144,16 +142,17 @@ function JewelleryCard({ product }) {
 
         if (isWishlisted) {
             dispatch(removeFromWishlist(product._id));
-            setSnackbarMsg('Removed from Wishlist');
+            toast.info('Removed from Wishlist');
+
         } else {
             dispatch(addToWishlist(product));
-            setSnackbarMsg('Added to Wishlist');
+            toast.success('Added to Wishlist');
         }
-        setSnackbarOpen(true);
     }
 
     return (
         <Box sx={{ pb: 1, position: 'relative' }}>
+            <ToastContainer position="top-right" autoClose={3000} />
             <Box sx={{
                 position: 'relative',
                 borderRadius: 2,
@@ -205,18 +204,6 @@ function JewelleryCard({ product }) {
                     ₹{best.finalPrice}
                 </Typography>
             </Link>
-
-            {/* Snackbar for toast */}
-            <Snackbar
-                open={snackbarOpen}
-                autoHideDuration={2000}
-                onClose={() => setSnackbarOpen(false)}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-            >
-                <MuiAlert onClose={() => setSnackbarOpen(false)} severity="success" sx={{ width: '100%' }}>
-                    {snackbarMsg}
-                </MuiAlert>
-            </Snackbar>
         </Box>
     );
 }

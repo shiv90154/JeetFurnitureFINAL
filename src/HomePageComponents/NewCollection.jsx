@@ -226,6 +226,7 @@ const ProductName = styled(Typography)({
   color: "#2C2C2C",
   marginBottom: 8,
   lineHeight: 1.3,
+    textTransform: 'capitalize',
   "@media (max-width:600px)": { fontSize: 13 },
 });
 

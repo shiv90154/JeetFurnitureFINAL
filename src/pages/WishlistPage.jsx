@@ -270,7 +270,8 @@ function WishlistCard({ product, onRemove, onMoveToCart }) {
               display: '-webkit-box',
               WebkitLineClamp: 2,
               WebkitBoxOrient: 'vertical',
-              overflow: 'hidden'
+              overflow: 'hidden',
+              textTransform: 'capitalize'
             }}
           >
             {product.name}

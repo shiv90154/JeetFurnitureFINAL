@@ -111,6 +111,7 @@ const CategoryType = styled(Typography)(({ isActive }) => ({
     marginBottom: 2,
     letterSpacing: ".4px",
     textShadow: "none",
+    textTransform: 'capitalize',
     "@media (max-width: 600px)": { fontSize: "9px" },
 }));
 
@@ -120,6 +121,7 @@ const CategoryName = styled(Typography)(() => ({
     color: "inherit",
     lineHeight: "1.12",
     textShadow: "none",
+    textTransform: 'capitalize',
     "@media (max-width: 960px)": { fontSize: "18px" },
     "@media (max-width: 600px)": { fontSize: "12px" },
 }));
@@ -151,7 +153,7 @@ function Trending() {
             const response = await axiosInstance.get(`/user/allSubcategories`);
             setSubCategoryName(response?.data);
             const shuffled = shuffleArray(response?.data);
-            const selectedRandom = shuffled.slice(0, 3); 
+            const selectedRandom = shuffled.slice(0, 3);
             setSubCategoryName(selectedRandom);
             setLoading(false)
         } catch (error) {
