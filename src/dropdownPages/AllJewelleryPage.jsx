@@ -113,25 +113,34 @@ import { addToWishlist, removeFromWishlist } from '../store/Action';
 import { createSelector } from '@reduxjs/toolkit';
 import { toast, ToastContainer } from 'react-toastify';
 
+// 1: with filter (isn't showing red heart icon)
 // export const selectWishlist = createSelector(
-//     [state => Array.isArray(state.app?.wishlist) ? state.app.wishlist : []],
-//     wishlist => wishlist
+//     [state => Array.isArray(state?.app?.wishlist) ? state.app.wishlist : []],
+//     wishlist => wishlist.filter(item => item.in_stock)
 // );
 
-export const selectWishlist = createSelector(
-    [state => Array.isArray(state?.app?.wishlist) ? state.app.wishlist : []],
-    wishlist => wishlist.filter(item => item.in_stock)
-);
+// 2: without filter (showing red heart icon)
+// export const selectWishlist = createSelector(
+//   [state => Array.isArray(state?.app?.wishlist) ? state.app.wishlist : []],
+//   wishlist => wishlist // Remove filter to test
+// );
 
+// 3:
+export const selectWishlist = createSelector(
+    [state => Array.isArray(state.app?.wishlist) ? state.app.wishlist : []],
+    wishlist => [...wishlist]  // creates a new array to avoid identity reuse warning
+);
 
 function JewelleryCard({ product }) {
     const dispatch = useDispatch();
     const wishlist = useSelector(selectWishlist);
 
     // const isWishlisted = wishlist.some(item => item._id === product._id);
+
+    // const isWishlisted = !!product && wishlist.some(item => String(item._id) === String(product._id));
+
     // const isWishlisted = !!product && wishlist.some(item => item._id === product._id);
     const isWishlisted = !!product && wishlist.some(item => String(item._id) === String(product._id));
-
 
     const imgUrl = publicUrl(product.media?.[0]?.url) || "no img found";
     const best = product.bestVariant || {};
@@ -152,7 +161,7 @@ function JewelleryCard({ product }) {
 
     return (
         <Box sx={{ pb: 1, position: 'relative' }}>
-            <ToastContainer position="top-right" autoClose={3000} />
+            <ToastContainer position="top-right" autoClose={2000} hideProgressBar={false} />
             <Box sx={{
                 position: 'relative',
                 borderRadius: 2,
@@ -186,9 +195,7 @@ function JewelleryCard({ product }) {
                     size="small"
                 >
                     {isWishlisted ? (
-                        <FavoriteIcon sx={{ fontSize: 20, color: '#d61e1eff' }} />
-                        // <FavoriteIcon sx={{ fontSize: 20, fill: '#d61e1eff' }} />
-                        // <FavoriteIcon color="error" sx={{ fontSize: 20 }} />
+                        <FavoriteIcon sx={{ fontSize: 20, color: 'red' }} />
                     ) : (
                         <FavoriteBorderIcon sx={{ fontSize: 20, color: '#bbb' }} />
                     )}
@@ -207,7 +214,6 @@ function JewelleryCard({ product }) {
         </Box>
     );
 }
-
 
 export function JewelleryGrid() {
     const [allProducts, setAllProducts] = useState([]);
