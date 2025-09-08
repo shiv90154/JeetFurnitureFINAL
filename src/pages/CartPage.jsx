@@ -542,11 +542,11 @@ export default function CartPage() {
                 Proceed to Checkout
               </Button>
 
-              <Box sx={{ mt: 3, pt: 2, borderTop: '1px solid #f0f0f0', textAlign: 'center' }}>
+              {/* <Box sx={{ mt: 3, pt: 2, borderTop: '1px solid #f0f0f0', textAlign: 'center' }}>
                 <Typography sx={{ fontSize: { xs: '12px', md: '14px' }, color: '#666', lineHeight: 1.4 }}>
                   Free shipping on orders above ₹50,000
                 </Typography>
-              </Box>
+              </Box> */}
             </Box>
           </Box>
         </Box>
