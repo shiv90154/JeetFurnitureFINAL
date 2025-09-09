@@ -35,12 +35,29 @@ const SubTitle = styled(Typography)({
     "@media (max-width: 600px)": { fontSize: "16px" },
 });
 
+// const ImageSection = styled(Box)(({ backgroundImage }) => ({
+//     position: "relative",
+//     width: "100%",
+//     height: "500px",
+//     backgroundImage: `url('${backgroundImage}')`,
+//     // backgroundSize: "100% 100%",
+//     backgroundSize: "cover",
+//     backgroundPosition: "center",
+//     backgroundRepeat: "no-repeat",
+//     transition: "background-image 0.4s",
+//     borderRadius: "12px",
+//     overflow: "hidden",
+//     boxShadow: "0 4px 40px rgba(0,0,0,0.22)",
+//     "@media (max-width: 960px)": { height: "400px" },
+//     "@media (max-width: 600px)": { height: "300px" },
+// }));
+
 const ImageSection = styled(Box)(({ backgroundImage }) => ({
     position: "relative",
     width: "100%",
     height: "500px",
     backgroundImage: `url('${backgroundImage}')`,
-    // backgroundSize: "100% 100%",
+    backgroundColor: "transparent",
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
@@ -155,6 +172,7 @@ function Trending() {
             const shuffled = shuffleArray(response?.data);
             const selectedRandom = shuffled.slice(0, 3);
             setSubCategoryName(selectedRandom);
+            setCurrentImage(selectedRandom[0]?.image || defaultImage);
             setLoading(false)
         } catch (error) {
             console.error("Error fetching subcategories:", error);
@@ -177,7 +195,6 @@ function Trending() {
             ) :
                 <ImageSection
                     backgroundImage={publicUrl(currentImage)}
-                    onClick={() => navigate("/allJewellery")}
                 >
                     <OverlayFlex>
                         {subcategoryName.map((item, idx) => {
@@ -192,17 +209,21 @@ function Trending() {
                                         setHoveredItem(item._id);
                                     }}
                                     onMouseLeave={() => {
-                                        setCurrentImage(defaultImage);
+                                        // setCurrentImage(defaultImage);
+                                        setCurrentImage(subcategoryName[0]?.image || defaultImage);
+
                                         setHoveredItem(null);
                                     }}
                                     onTouchStart={() => {
-                                        setCurrentImage(item.image);
+                                        // setCurrentImage(item.image);
+                                        setCurrentImage(subcategoryName[0]?.image || defaultImage);
                                         setHoveredItem(item._id);
                                     }}
                                     onTouchEnd={() => {
                                         setCurrentImage(defaultImage);
                                         setHoveredItem(null);
                                     }}
+                                    onClick={() => { navigate(`/allJewellery?subcategory=${item._id}`) }}
                                 >
                                     <CategoryLabel isActive={isActive}>
                                         <CategoryType isActive={isActive}>{item.subCategoryvariety}</CategoryType>
