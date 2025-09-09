@@ -37,6 +37,7 @@ import UserOrders from './AccountPages/UserOrders';
 import GetInTouchCard from './popUp/GetInTouchCard';
 import ProfileEdit from './AccountPages/ProfileEdit';
 import Contactus from './ContactJewellers/Contactus';
+import VideoUpload from './admin-panel/Pages/VideoUpload';
 
 function App() {
   const location = useLocation();
@@ -106,6 +107,7 @@ function App() {
             <Route path="orders" element={<OrderJewel />} />
             <Route path="banners" element={<Banners />} />
             <Route path="user" element={<UsersJewel />} />
+            <Route path="videoUpload" element={<VideoUpload />} />
           </Route>
         </Route>
       </Routes>
