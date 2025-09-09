@@ -337,7 +337,7 @@ export default function NewCollection() {
                     e.target.src = "/newCollectionLady.png";
                   }}
                 />
-                <DiscountBadge label={`${product.discount}%`} />
+                <DiscountBadge label={`${product.discount}% OFF`} />
               </ProductImageContainer>
 
               <ProductInfo>

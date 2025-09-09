@@ -340,8 +340,9 @@ const ShopByCategories = () => {
         infinite: categoryName.length > 4,
         speed: 500,
         slidesToShow: Math.max(1, Math.min(categoryName.length, 7)),
-        slidesToScroll: 1,
+        slidesToScroll: 4,
         arrows: false,
+        autoplay: true,
         initialSlide: 0,
         responsive: [
             {
