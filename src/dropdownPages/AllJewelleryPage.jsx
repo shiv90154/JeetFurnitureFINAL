@@ -173,7 +173,6 @@ function JewelleryCard({ product }) {
             <Box sx={{
                 position: 'relative',
                 borderRadius: 2,
-                boxShadow: 1,
                 overflow: 'hidden',
                 width: { xs: 170, sm: 200 },
                 height: { xs: 200 },
