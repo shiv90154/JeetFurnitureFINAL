@@ -162,7 +162,13 @@ export default function AccountPopup({ onClose }) {
                                     minHeight: '28px',
                                     cursor: 'pointer'
                                 }}
+                                // onClick={() => {
+                                //     if (item.navigateTo) {
+                                //         navigate(item.navigateTo);
+                                //     }
+                                // }}
                                 onClick={() => {
+                                    if (onClose) onClose();
                                     if (item.navigateTo) {
                                         navigate(item.navigateTo);
                                     }
