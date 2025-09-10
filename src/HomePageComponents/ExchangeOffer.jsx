@@ -74,7 +74,9 @@ const VideoElement = styled("video")({
     },
 })
 
-const VideoOverlay = styled(Box)(({ isPlaying }) => ({
+const VideoOverlay = styled(Box, {
+    shouldForwardProp: (prop) => prop !== 'isPlaying',
+})(({ isPlaying }) => ({
     position: "absolute",
     top: 0,
     left: 0,
