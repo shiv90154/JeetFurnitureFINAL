@@ -19,10 +19,15 @@ import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import { useNavigate } from 'react-router-dom';
 
 const menu = [
+    { icon: <PersonOutlineIcon sx={{ color: '#6a2322' }} />, label: "Edit Profile", navigateTo: "/profileEdit" },
     { icon: <HistoryOutlinedIcon sx={{ color: '#6a2322' }} />, label: "Order History", navigateTo: "/userOrder" },
     // { icon: <CardGiftcardOutlinedIcon sx={{ color: '#6a2322' }} />, label: "Gift Card Balance" },
     // { icon: <LocalShippingOutlinedIcon sx={{ color: '#6a2322' }} />, label: "Track Order" },
-    { icon: <ChatBubbleOutlineOutlinedIcon sx={{ color: '#6a2322' }} />, label: "Contact Us", navigateTo: "/getintouch" }
+    {
+        icon: <ChatBubbleOutlineOutlinedIcon sx={{ color: '#6a2322' }} />, label: "Contact Us",
+        // navigateTo: "/getintouch"
+        navigateTo: "/contact",
+    }
 ];
 
 export default function AccountPopup({ onClose }) {
@@ -133,9 +138,8 @@ export default function AccountPopup({ onClose }) {
                                 <text x={isMobile ? 1 : 3} y={isMobile ? 10 : 14} fontSize={isMobile ? "10" : "16"} fill="#fff" fontFamily="serif" style={{ opacity: 0.9 }}>✨</text>
                             </svg>
                         </Box>
-                        <Box 
-                        onClick={()=>{navigate('/profileEdit')}}
-                        sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                        <Box
+                            sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                             <PersonOutlineIcon sx={{ fontSize: iconSize, mr: 1 }} />
                             <Typography sx={{ fontWeight: 500, fontSize: headerFont, letterSpacing: 0.1, textTransform: 'capitalize', cursor: 'pointer' }}
                             >
