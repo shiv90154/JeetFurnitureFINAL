@@ -214,7 +214,7 @@ function Trending() {
                                 >
                                     <CategoryLabel isActive={isActive}>
                                         <CategoryType isActive={isActive}>{item.subCategoryvariety}</CategoryType>
-                                        <CategoryName isActive={isActive}>{item.name}</CategoryName>
+                                        <CategoryName >{item.name}</CategoryName>
                                     </CategoryLabel>
                                 </CategoryColumn>
                             );
