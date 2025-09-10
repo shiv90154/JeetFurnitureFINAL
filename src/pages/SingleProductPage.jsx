@@ -1212,28 +1212,56 @@ export default function SingleProductPage() {
         }
     };
 
+    // const handleWishlistClick = (e) => {
+    //     e.stopPropagation();
+    //     e.preventDefault();
+    //     if (isWishlisted) {
+    //         dispatch(removeFromWishlist(product._id));
+    //         toast.info('Removed from Wishlist');
+    //     } else {
+    //         // Find the currently selected variant!
+    //         const variant = product.quantity[selectedVariantIndex];
+    //         delete variant.weight;
+    //         const wishlistItem = {
+    //             ...product,
+    //             selectedVariant: variant,
+    //             price: variant.final_price ?? variant.finalPrice ?? 0, // Store price on top level for Wishlist UI
+    //         };
+    //         dispatch(addToWishlist(wishlistItem));
+    //         toast.info('Added to Wishlist');
+    //     }
+    // };
+
+
+    // Fetch product data from the API
+
     const handleWishlistClick = (e) => {
         e.stopPropagation();
         e.preventDefault();
-        if (isWishlisted) {
-            dispatch(removeFromWishlist(product._id));
+
+        const variant = product.quantity[selectedVariantIndex];
+        // Create a unique key for each variant, so multiple can be added
+        const combinedId = `${product._id}-${variant.weight ?? "undef"}-${variant.carat ?? "undef"}`;
+
+        // Build a clean wishlist object
+        const wishlistItem = {
+            ...product,
+            _id: combinedId, // uniqueness per variant!
+            selectedVariant: { ...variant }, // always copy!
+            price: variant.final_price ?? variant.finalPrice ?? 0,
+        };
+
+        // Update your isWishlisted to check for this combinedId!
+        if (wishlist.some(item => item._id === combinedId)) {
+            dispatch(removeFromWishlist(combinedId));
             toast.info('Removed from Wishlist');
         } else {
-            // Find the currently selected variant!
-            const variant = product.quantity[selectedVariantIndex];
-            delete variant.weight;
-            const wishlistItem = {
-                ...product,
-                selectedVariant: variant,
-                price: variant.final_price ?? variant.finalPrice ?? 0, // Store price on top level for Wishlist UI
-            };
             dispatch(addToWishlist(wishlistItem));
             toast.info('Added to Wishlist');
         }
     };
 
 
-    // Fetch product data from the API
     const fetchData = async () => {
         setLoading(true);
         try {
@@ -1271,17 +1299,7 @@ export default function SingleProductPage() {
     if (loading) return <div style={{ textAlign: 'center', padding: '20px', fontSize: '1.5rem' }}>Loading...</div>;
     if (!product) return <div style={{ textAlign: 'center', padding: '20px', fontSize: '1.5rem' }}>Product not found</div>;
 
-    // const selectedVariant = product.quantity[selectedVariantIndex];
     const selectedVariant = product.quantity[selectedVariantIndex];
-
-    // const finalPrice = selectedVariant?.["0"]?.finalPrice;
-    // const gst = selectedVariant?.["0"]?.gst;
-    // const makingPrice = selectedVariant?.["0"]?.makingPrice;
-    // const weight = selectedVariant?.["0"]?.weight;
-    // const pricePerGram = selectedVariant?.["0"]?.pricePerGram;
-    // const totalWeight = selectedVariant?.["0"]?.totalWeight;
-    // const discount = selectedVariant?.["0"]?.discount;
-    // // console.log('Final Price:', finalPrice);
 
     const finalPrice = selectedVariant.final_price ?? selectedVariant.finalPrice;
     const gst = selectedVariant.gst;

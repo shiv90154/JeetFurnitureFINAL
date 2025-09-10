@@ -144,13 +144,21 @@ const rootReducer = (state = initialState, action) => {
             };
             saveState(newState);
             return newState;
+        // case "DELETE_PRODUCT":
+        //     const newState1 = {
+        //         ...state,
+        //         data: state.data.filter((product) => product._id !== action.payload),
+        //     };
+        //     saveState(newState1);
+        //     return newState1;
         case "DELETE_PRODUCT":
-            const newState1 = {
+            return {
                 ...state,
-                data: state.data.filter((product) => product._id !== action.payload),
+                data: state.data.filter((product) => {
+                    const productKey = `${product._id}__${product.selectedVariant?.weight || ''}_${product.selectedVariant?.carat || ''}`;
+                    return productKey !== action.payload;
+                }),
             };
-            saveState(newState1);
-            return newState1;
         case "CLEAR_PRODUCT":
             const newState2 = {
                 ...state,

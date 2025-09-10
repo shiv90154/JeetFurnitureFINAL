@@ -908,10 +908,11 @@ export default function CartPage() {
   };
 
 
-  const handleRemoveItem = (itemId) => {
-    dispatch(deleteProduct(itemId));
+  const handleRemoveItem = (itemCompositeKey) => {
+    dispatch(deleteProduct(itemCompositeKey));
     toast.info('Item removed from cart.', { position: 'top-right', autoClose: 1500 });
   };
+
 
   const handleClearCart = () => {
     dispatch(clearProducts());
@@ -1092,7 +1093,10 @@ export default function CartPage() {
               <Grid container spacing={{ xs: 1, sm: 1.5, md: 1.5, lg: 2 }} justifyContent="center">
                 {cartItems.map((item) => (
                   <Grid key={item._id} xs={6} sm={4} md={4} lg={4} xl={3} sx={{ display: 'flex', justifyContent: 'center' }}>
-                    <CartCard product={item} onRemove={handleRemoveItem} onUpdateQuantity={handleQuantityChange} />
+                    <CartCard product={item}
+                      // onRemove={handleRemoveItem} 
+                      onRemove={() => handleRemoveItem(`${item._id}__${item.selectedVariant?.weight || ''}_${item.selectedVariant?.carat || ''}`)}
+                      onUpdateQuantity={handleQuantityChange} />
                   </Grid>
                 ))}
               </Grid>
