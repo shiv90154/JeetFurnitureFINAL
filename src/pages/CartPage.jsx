@@ -1044,7 +1044,7 @@ export default function CartPage() {
           const res = await axiosInstance.post('/api/createOrder', orderPayload);
           if (res.status === 201) {
             dispatch(clearProducts());
-            navigate('/success');
+            toast.success('Order placed successfully!');
           } else {
             toast.error('Failed to place order.');
           }
