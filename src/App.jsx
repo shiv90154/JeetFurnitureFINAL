@@ -39,6 +39,7 @@ import ProfileEdit from './AccountPages/ProfileEdit';
 import Contactus from './ContactJewellers/Contactus';
 import VideoUpload from './admin-panel/Pages/VideoUpload';
 import VideoGallery from './HomePageComponents/VideoGallery';
+import OrderSuccessPage from './pages/OrderSuccessPage';
 
 function App() {
   const location = useLocation();
@@ -85,6 +86,7 @@ function App() {
         <Route path="/profileEdit" element={<ProfileEdit />} />
         <Route path="/contact" element={<Contactus />} />
         <Route path="/videoGallery" element={<VideoGallery />} />
+        <Route path="/successOrder" element={<OrderSuccessPage />} />
 
 
         {/* admin panel  */}
