@@ -40,6 +40,7 @@ import Contactus from './ContactJewellers/Contactus';
 import VideoUpload from './admin-panel/Pages/VideoUpload';
 import VideoGallery from './HomePageComponents/VideoGallery';
 import OrderSuccessPage from './pages/OrderSuccessPage';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const location = useLocation();
@@ -51,6 +52,7 @@ function App() {
     <div
       className="fade-in"
     >
+      <ToastContainer autoClose={3000} position="top-right" />
       {/* Render Header, Footer, and MobileBottomNav only on non-admin routes */}
       {!isAdminRoute && (
         <>
