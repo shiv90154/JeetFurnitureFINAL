@@ -284,7 +284,7 @@ const Occassion = () => {
                 {/* Add/Edit Category Dialog */}
                 <Dialog open={openModal} onClose={handleCloseModal} maxWidth="sm" fullWidth>
                     <DialogTitle sx={{ position: 'relative' }}>
-                        {isEditing ? 'Edit Category' : 'Add New Category'}
+                        {isEditing ? 'Edit Occasion' : 'Add New Occasion'}
                         <IconButton
                             aria-label="close"
                             onClick={handleCloseModal}

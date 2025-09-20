@@ -1,16 +1,25 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from '@mui/material/styles'; // to access the theme object
 import { Box, Button, TextField, Typography, Paper } from '@mui/material';
 
 const AdminLogin = () => {
     const navigate = useNavigate();
-    const theme = useTheme(); // access theme palette and properties
+    const theme = useTheme();
+    const location = useLocation();
+    const [adminName, setAdminName] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
 
     const handleLogin = (e) => {
         e.preventDefault();
-        localStorage.setItem("isAdminLoggedIn", "true");
-        navigate("/AdminPanel");
+        if (adminName === "Chauhan admin" && password === "chauhan@321") {
+            localStorage.setItem("isAdminLoggedIn", "true");
+            const redirectTo = location.state?.from?.pathname || "/AdminPanel";
+            navigate(redirectTo, { replace: true });
+        } else {
+            setError("Invalid username or password");
+        }
     };
 
     return (
@@ -48,6 +57,8 @@ const AdminLogin = () => {
                         variant="outlined"
                         required
                         margin="normal"
+                        value={adminName}
+                        onChange={(e) => setAdminName(e.target.value)}
                         InputLabelProps={{ style: { color: '#fff' } }}
                         InputProps={{
                             style: { color: '#fff' },
@@ -73,6 +84,8 @@ const AdminLogin = () => {
                         variant="outlined"
                         required
                         margin="normal"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         InputLabelProps={{ style: { color: '#fff' } }}
                         InputProps={{
                             style: { color: '#fff' },
@@ -91,6 +104,7 @@ const AdminLogin = () => {
                             },
                         }}
                     />
+                    {error && <p style={{ color: "red" }}>{error}</p>}
                     <Button
                         type="submit"
                         variant="contained"
@@ -99,9 +113,6 @@ const AdminLogin = () => {
                             mt: 2,
                             backgroundColor: theme.palette.background.default,
                             color: theme.palette.primary.main,
-                            "&:hover": {
-                                // backgroundColor: theme.palette.secondary.dark,
-                            },
                         }}
                     >
                         Login
