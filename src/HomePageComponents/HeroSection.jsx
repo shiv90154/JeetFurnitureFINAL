@@ -16,26 +16,55 @@ const SliderContainer = styled(Box)({
     backgroundColor: "#000",
 })
 
+// const Slide = styled(Box)(({ theme }) => ({
+//     width: "100%",
+//     height: 420,
+//     // maxHeight: 470,
+//     position: "relative",
+//     overflow: "hidden",
+//     [theme.breakpoints.down("lg")]: {
+//         height: 400,
+//     },
+//     [theme.breakpoints.down("sm")]: {
+//         height: 250,
+//     },
+// }))
 const Slide = styled(Box)(({ theme }) => ({
     width: "100%",
     height: 420,
-    // maxHeight: 470,
     position: "relative",
     overflow: "hidden",
+    backgroundColor: "#fae6e1", // Match SlideImage bg, looks good if image is not full size
     [theme.breakpoints.down("lg")]: {
         height: 400,
     },
     [theme.breakpoints.down("sm")]: {
         height: 250,
     },
-}))
+}));
 
+// const SlideImage = styled("img")({
+//     height: "100%",     // always fills vertical
+//     width: "auto",      // image will never be cropped horizontally
+//     maxWidth: "100%",   // keeps it from overflowing parent width
+//     objectFit: "unset", // disables both cover and contain logic
+//     objectPosition: "center",
+//     display: "block",
+//     margin: "0 auto",   // centers image when pillarbox appears
+//     backgroundColor: "#fae6e1",
+// });
 const SlideImage = styled("img")({
-    width: "100%",
     height: "100%",
-    objectFit: "cover",
-    objectPosition: "center",
-})
+    width: "auto",
+    maxWidth: "100%",
+    display: "block",
+    margin: "0 auto",
+    backgroundColor: "#fae6e1", // optional: matches your theme
+});
+
+
+
+
 
 const SliderWrapper = styled(Box)(({ theme }) => ({
     position: "relative",
@@ -142,7 +171,7 @@ function HeroSection() {
                         <Slide key={index}
                             // onClick={() => navigate(`/allJewellery/${(item.variety || 'all').toLowerCase()}`)}
                             onClick={() => navigate(`/collection/${(item.variety || 'all').toLowerCase()}`)}
-                            // onClick={() => navigate(`/collection?variety=${(item.variety || 'all').toLowerCase()}`)}
+                        // onClick={() => navigate(`/collection?variety=${(item.variety || 'all').toLowerCase()}`)}
                         >
                             <SlideImage src={publicUrl(item.slider_image[0])} alt={`slide-${index}`} />
                         </Slide>
