@@ -9,17 +9,15 @@ import { useEffect, useState } from "react"
 import { publicUrl } from "../common components/PublicUrl"
 
 const SliderContainer = styled(Box)({
-    position: "relative",
+    // position: "relative",
     width: "100%",
-    // height: "600px",
     overflow: "hidden",
-    backgroundColor: "#000",
 })
 
 // const Slide = styled(Box)(({ theme }) => ({
 //     width: "100%",
 //     height: 420,
-//     // maxHeight: 470,
+//     maxHeight: 470,
 //     position: "relative",
 //     overflow: "hidden",
 //     [theme.breakpoints.down("lg")]: {
@@ -31,30 +29,21 @@ const SliderContainer = styled(Box)({
 // }))
 const Slide = styled(Box)(({ theme }) => ({
     width: "100%",
-    height: 420,
-    position: "relative",
-    overflow: "hidden",
+    height: "auto",
+    // position: "relative",
+    // overflow: "hidden",
     backgroundColor: "#fae6e1", // Match SlideImage bg, looks good if image is not full size
     [theme.breakpoints.down("lg")]: {
-        height: 400,
+        // height: 400,
     },
     [theme.breakpoints.down("sm")]: {
-        height: 250,
+        // height: 250,
+        width: "100%",
     },
 }));
 
-// const SlideImage = styled("img")({
-//     height: "100%",     // always fills vertical
-//     width: "auto",      // image will never be cropped horizontally
-//     maxWidth: "100%",   // keeps it from overflowing parent width
-//     objectFit: "unset", // disables both cover and contain logic
-//     objectPosition: "center",
-//     display: "block",
-//     margin: "0 auto",   // centers image when pillarbox appears
-//     backgroundColor: "#fae6e1",
-// });
 const SlideImage = styled("img")({
-    height: "100%",
+    height: "auto",
     width: "auto",
     maxWidth: "100%",
     display: "block",
@@ -62,15 +51,13 @@ const SlideImage = styled("img")({
     backgroundColor: "#fae6e1", // optional: matches your theme
 });
 
-
-
-
-
 const SliderWrapper = styled(Box)(({ theme }) => ({
-    position: "relative",
+    // position: "relative",
     width: "100%",
     overflow: "hidden",
-    backgroundColor: "#000",
+    // backgroundColor: "#000",
+    backgroundColor: "rgba(0, 0, 0, 0.1)", // 50% opacity
+
 
     // scoped slick styles
     "& .slick-dots": {
@@ -79,11 +66,11 @@ const SliderWrapper = styled(Box)(({ theme }) => ({
             width: "10px",
             height: "10px",
             borderRadius: "50%",
-            backgroundColor: "#7A7469B0",
+            // backgroundColor: "#7A7469B0",
             transition: "all 0.3s ease",
         },
         "& li.slick-active": {
-            backgroundColor: "#fff",
+            // backgroundColor: "#fff",
         },
     },
     "& .slick-prev, & .slick-next": {
@@ -93,8 +80,8 @@ const SliderWrapper = styled(Box)(({ theme }) => ({
         top: "50% !important",
         transform: "translateY(-50%) !important",
         borderRadius: "50%",
-        backgroundColor: "#7A7469B0",
-        color: "#fff",
+        // backgroundColor: "#7A7469B0",
+        // color: "#fff",
         transition: "all 0.3s ease",
         [theme.breakpoints.down("lg")]: {
             width: "40px",
@@ -169,9 +156,7 @@ function HeroSection() {
                 <Slider {...settings} >
                     {banners.map((item, index) => (
                         <Slide key={index}
-                            // onClick={() => navigate(`/allJewellery/${(item.variety || 'all').toLowerCase()}`)}
                             onClick={() => navigate(`/collection/${(item.variety || 'all').toLowerCase()}`)}
-                        // onClick={() => navigate(`/collection?variety=${(item.variety || 'all').toLowerCase()}`)}
                         >
                             <SlideImage src={publicUrl(item.slider_image[0])} alt={`slide-${index}`} />
                         </Slide>
