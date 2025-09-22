@@ -37,13 +37,6 @@ const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
 }));
 
-const StatusChip = styled(Chip)(({ theme, status }) => ({
-  fontWeight: 600,
-  backgroundColor:
-    status === 'active' ? theme.palette.success.light : theme.palette.error.light,
-  color: status === 'active' ? theme.palette.success.dark : theme.palette.error.dark,
-  pointerEvents: 'none',
-}));
 
 const UsersJewel = () => {
   const [users, setUsers] = useState([]);
@@ -161,7 +154,7 @@ const UsersJewel = () => {
               <Table sx={{ minWidth: 650 }} aria-label="user table">
                 <TableHead>
                   <TableRow sx={{ backgroundColor: (theme) => theme.palette.primary.main }}>
-                    {['Name', 'Email', 'Role', 'Address', 'Phone', 'Status', 'Actions'].map(
+                    {['Name', 'Email', 'Role', 'Address', 'Phone',  'Actions'].map(
                       (head) => (
                         <TableCell
                           key={head}
@@ -197,13 +190,7 @@ const UsersJewel = () => {
                       </TableCell>
                       <TableCell>{user.address || 'N/A'}</TableCell>
                       <TableCell>{user.phone || 'N/A'}</TableCell>
-                      <TableCell>
-                        <StatusChip
-                          label={user.deleted_at ? 'Deleted' : 'Active'}
-                          status={user.deleted_at ? 'inactive' : 'active'}
-                          size="small"
-                        />
-                      </TableCell>
+                      
                       <TableCell align="center">
                         <IconButton
                           color="primary"

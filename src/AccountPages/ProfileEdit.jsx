@@ -177,7 +177,7 @@ export default function ProfileEdit() {
                         fullWidth
                         variant="outlined"
                     />
-                    {/* <TextField
+                    <TextField
                         id="address"
                         label="Address"
                         value={formData.address}
@@ -186,7 +186,7 @@ export default function ProfileEdit() {
                         multiline
                         minRows={2}
                         variant="outlined"
-                    /> */}
+                    />
                     <Button
                         type="submit"
                         variant="contained"
