@@ -144,6 +144,7 @@ const RightFlexBox = styled(Box)({
     // maxWidth: "100%",
     gap: "12px",
     justifyContent: "center",
+    flex: "2 1 0",
   },
   "@media (max-width:500px)": {
     // flexDirection: "column",
@@ -183,15 +184,19 @@ const ProductImageContainer = styled(Box)({
   position: "relative",
   width: "100%",
   height: 165,
-  "@media (max-width:900px)": { height: 135 },
-  "@media (max-width:600px)": { height: 100 },
+  "@media (max-width:900px)": { height: 145 },
+  // "@media (max-width:600px)": { height: 10 },
 });
 
 const ProductImage = styled(CardMedia)({
-  width: "100%",
   height: "100%",
+  width: "100%",
+  // width: "auto",
+  maxWidth: "100%",
+  display: "block",
+  margin: "0 auto",
   backgroundSize: "cover",
-  backgroundPosition: "center",
+  // backgroundColor: "#fae6e1",
 });
 
 const DiscountBadge = styled(Chip)({
@@ -226,7 +231,7 @@ const ProductName = styled(Typography)({
   color: "#2C2C2C",
   marginBottom: 8,
   lineHeight: 1.3,
-    textTransform: 'capitalize',
+  textTransform: 'capitalize',
   "@media (max-width:600px)": { fontSize: 13 },
 });
 

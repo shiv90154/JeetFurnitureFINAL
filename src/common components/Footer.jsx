@@ -236,13 +236,31 @@ export default function Footer() {
                     <BottomSection>
                         <SocialSection>
                             <SocialTitle>Social</SocialTitle>
-                            <SocialIcons>
+                            {/* <SocialIcons>
                                 {[Facebook, Instagram, Twitter, YouTube].map((IconComp, idx) => (
                                     <SocialIcon key={idx} aria-label={IconComp.displayName || "social-icon"}>
                                         <IconComp fontSize="small" />
                                     </SocialIcon>
                                 ))}
+                            </SocialIcons> */}
+
+                            <SocialIcons>
+                                <SocialIcon aria-label="Facebook">
+                                    <Facebook fontSize="small" />
+                                </SocialIcon>
+                                <SocialIcon aria-label="Instagram">
+                                    <a className="text-white" target="blank" href="https://www.instagram.com/chauhansonsjewellers/?hl=en">
+                                        <Instagram fontSize="small" />
+                                    </a>
+                                </SocialIcon>
+                                <SocialIcon aria-label="Twitter">
+                                    <Twitter fontSize="small" />
+                                </SocialIcon>
+                                <SocialIcon aria-label="YouTube">
+                                    <YouTube fontSize="small" />
+                                </SocialIcon>
                             </SocialIcons>
+
                         </SocialSection>
                         {/* <FooterLinksRow>
                             {["Terms & Conditions", "Privacy Policy"].map((text) => (

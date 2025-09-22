@@ -55,12 +55,22 @@ const Card = styled(Box)(({ height }) => ({
 }));
 
 const CollectionImage = styled("img")({
-    width: "100%",
     height: "100%",
-    objectFit: "cover",
-    objectPosition: "center",
+    width: "auto",
+    maxWidth: "100%",
+    display: "block",
+    margin: "0 auto",
+    backgroundColor: "#fae6e1",
     transition: "transform 0.3s ease",
 });
+
+// const CollectionImage = styled("img")({
+//     width: "100%",
+//     height: "100%",
+//     objectFit: "cover",
+//     objectPosition: "center",
+//     transition: "transform 0.3s ease",
+// });
 
 const ImageOverlay = styled(Box)({
     position: "absolute",
@@ -72,7 +82,7 @@ const ImageOverlay = styled(Box)({
         "linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.4) 100%)",
     display: "flex",
     alignItems: "flex-end",
-    padding: 24,
+    // padding: 24,
 });
 
 const CollectionText = styled(Box)({

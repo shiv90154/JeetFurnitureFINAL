@@ -20,9 +20,7 @@ const HomePage = () => {
             <ShopByCategories />
             <Collection />
             <Treasure />
-
-            <Trending />
-
+            {/* <Trending /> */}
             {/* <MasterDaimondSlider /> */}
             {/* <VideoCardSlider /> */}
             <VideoGallery />

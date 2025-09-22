@@ -287,19 +287,73 @@ export default function CartPage() {
   const handleContinueShopping = () => navigate(-1);
 
   // ----- address: add/save/select -----
+  // const handleAddAddress = async () => {
+  //   const userData = JSON.parse(localStorage.getItem('userData'));
+  //   const userId = userData?._id;
+  //   if (!userId) {
+  //     toast.error('User ID not found.');
+  //     return;
+  //   }
+  //   const fullAddress = `${formData.flat}, ${formData.landmark}, ${formData.city}, ${formData.state}, ${formData.country} ,${formData.pincode}`;
+  //   try {
+  //     const response = await axiosInstance.put(`admin/updateAdmin/${userId}`, {
+  //       address: [...addresses, fullAddress],
+  //       phone: formData.phone,
+  //     });
+  //     if (response.status === 200) {
+  //       toast.success('Address added successfully');
+  //       setAddresses((prev) => [...prev, fullAddress]);
+  //       setFormData((p) => ({ ...p, selectedAddress: fullAddress }));
+  //       setShowModal(false);
+  //     }
+  //   } catch (error) {
+  //     toast.error('Failed to update address');
+  //     console.error('Address update error:', error);
+  //   }
+  // };
+
+  // // 2:
   const handleAddAddress = async () => {
+    if (!formData.flat?.trim()) {
+      toast.error('Flat / House is required');
+      return;
+    }
+    if (!formData.landmark?.trim()) {
+      toast.error('Landmark is required');
+      return;
+    }
+    if (!formData.state) {
+      toast.error('State is required');
+      return;
+    }
+    if (!formData.city) {
+      toast.error('City is required');
+      return;
+    }
+    if (!formData.phone || !/^\d{10}$/.test(formData.phone)) {
+      toast.error('Phone number is required and must be exactly 10 digits');
+      return;
+    }
+    if (!formData.pincode?.trim()) {
+      toast.error('Pincode is required');
+      return;
+    }
+
     const userData = JSON.parse(localStorage.getItem('userData'));
     const userId = userData?._id;
     if (!userId) {
       toast.error('User ID not found.');
       return;
     }
-    const fullAddress = `${formData.flat}, ${formData.landmark}, ${formData.city}, ${formData.state}, ${formData.country}`;
+
+    const fullAddress = `${formData.flat}, ${formData.landmark}, ${formData.city}, ${formData.state}, ${formData.country} ,${formData.pincode}`;
+
     try {
       const response = await axiosInstance.put(`admin/updateAdmin/${userId}`, {
         address: [...addresses, fullAddress],
         phone: formData.phone,
       });
+
       if (response.status === 200) {
         toast.success('Address added successfully');
         setAddresses((prev) => [...prev, fullAddress]);
@@ -446,6 +500,7 @@ export default function CartPage() {
   // const handlePhoneBlur = () => {
   //   setPhoneError(formData.phone.length !== 10);
   // };
+
   const handlePhoneBlur = () => {
     setPhoneError(formData.phone.length !== 10 || !/^[1-9][0-9]{9}$/.test(formData.phone));
   };
@@ -570,6 +625,7 @@ export default function CartPage() {
                 variant="contained"
                 onClick={handleCheckout}
                 fullWidth
+                required
                 sx={{
                   background: '#7d2a25', color: '#fff', borderRadius: '10px',
                   py: 1, textTransform: 'none', fontWeight: 600,
@@ -593,76 +649,82 @@ export default function CartPage() {
       {/* Add address dialog */}
       <Dialog open={showModal} onClose={() => setShowModal(false)} fullWidth maxWidth="sm">
         <DialogTitle sx={{ fontWeight: 'bold' }}>Add New Address</DialogTitle>
-        <DialogContent sx={{ pt: 2, display: 'flex', flexDirection: 'column', gap: 2 }}>
-          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 2 }}>
-            <TextField
-              label="Flat / House"
-              fullWidth
-              size="small"
-              value={formData.flat}
-              onChange={(e) => setFormData((p) => ({ ...p, flat: e.target.value }))}
-            />
-            <TextField
-              label="Landmark"
-              fullWidth
-              size="small"
-              value={formData.landmark}
-              onChange={(e) => setFormData((p) => ({ ...p, landmark: e.target.value }))}
-            />
+        <form onSubmit={handleAddAddress}>
+          <DialogContent sx={{ pt: 2, display: 'flex', flexDirection: 'column', gap: 2 }}>
+            <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 2 }}>
+              <TextField
+                label="Flat / House"
+                fullWidth
+                required
+                size="small"
+                value={formData.flat}
+                onChange={(e) => setFormData((p) => ({ ...p, flat: e.target.value }))}
+              />
+              <TextField
+                label="Landmark"
+                fullWidth
+                required
+                size="small"
+                value={formData.landmark}
+                onChange={(e) => setFormData((p) => ({ ...p, landmark: e.target.value }))}
+              />
+              <FormControl size="small" fullWidth sx={{ gridColumn: { xs: 'auto', sm: '1 / span 2' } }}>
+                <InputLabel id="state-label">State</InputLabel>
+                <Select
+                  labelId="state-label"
+                  label="State"
+                  value={formData.state}
+                  required
+                  onChange={(e) => setFormData((p) => ({ ...p, state: e.target.value, city: '' }))}
+                >
+                  <MenuItem value=""><em>Select State</em></MenuItem>
+                  {states.map((s) => <MenuItem key={s} value={s}>{s}</MenuItem>)}
+                </Select>
+              </FormControl>
+              <FormControl size="small" fullWidth sx={{ gridColumn: { xs: 'auto', sm: '1 / span 2' } }}>
+                <InputLabel id="city-label">City</InputLabel>
+                <Select
+                  labelId="city-label"
+                  label="City"
+                  value={formData.city}
+                  required
+                  onChange={(e) => setFormData((p) => ({ ...p, city: e.target.value }))}
+                  disabled={!formData.state}
+                >
+                  <MenuItem value=""><em>Select City</em></MenuItem>
+                  {cities.map((c) => <MenuItem key={c} value={c}>{c}</MenuItem>)}
+                </Select>
+              </FormControl>
+              <TextField label="Country" fullWidth required size="small" value="India" disabled />
+              <TextField
+                label="Phone Number"
+                fullWidth
+                required
+                size="small"
+                value={formData.phone}
+                // onChange={(e) => setFormData((p) => ({ ...p, phone: e.target.value }))}
+                onChange={handlePhoneChange}
+                onBlur={handlePhoneBlur}
+                error={phoneError}
+                helperText={phoneError ? "Phone number must be exactly 10 digits" : ""}
+                InputProps={{ startAdornment: <InputAdornment position="start">+91</InputAdornment> }}
+              />
+              <TextField
+                label="Pincode"
+                fullWidth
+                required
+                size="small"
+                value={formData.pincode}
+                onChange={(e) => setFormData((p) => ({ ...p, pincode: e.target.value }))}
+              />
+            </Box>
 
-            <FormControl size="small" fullWidth sx={{ gridColumn: { xs: 'auto', sm: '1 / span 2' } }}>
-              <InputLabel id="state-label">State</InputLabel>
-              <Select
-                labelId="state-label"
-                label="State"
-                value={formData.state}
-                onChange={(e) => setFormData((p) => ({ ...p, state: e.target.value, city: '' }))}
-              >
-                <MenuItem value=""><em>Select State</em></MenuItem>
-                {states.map((s) => <MenuItem key={s} value={s}>{s}</MenuItem>)}
-              </Select>
-            </FormControl>
-
-            <FormControl size="small" fullWidth sx={{ gridColumn: { xs: 'auto', sm: '1 / span 2' } }}>
-              <InputLabel id="city-label">City</InputLabel>
-              <Select
-                labelId="city-label"
-                label="City"
-                value={formData.city}
-                onChange={(e) => setFormData((p) => ({ ...p, city: e.target.value }))}
-                disabled={!formData.state}
-              >
-                <MenuItem value=""><em>Select City</em></MenuItem>
-                {cities.map((c) => <MenuItem key={c} value={c}>{c}</MenuItem>)}
-              </Select>
-            </FormControl>
-
-            <TextField label="Country" fullWidth size="small" value="India" disabled />
-            <TextField
-              label="Phone Number"
-              fullWidth
-              size="small"
-              value={formData.phone}
-              // onChange={(e) => setFormData((p) => ({ ...p, phone: e.target.value }))}
-              onChange={handlePhoneChange}
-              onBlur={handlePhoneBlur}
-              error={phoneError}
-              helperText={phoneError ? "Phone number must be exactly 10 digits" : ""}
-              InputProps={{ startAdornment: <InputAdornment position="start">+91</InputAdornment> }}
-            />
-            <TextField
-              label="Pincode"
-              fullWidth
-              size="small"
-              value={formData.pincode}
-              onChange={(e) => setFormData((p) => ({ ...p, pincode: e.target.value }))}
-            />
-          </Box>
-        </DialogContent>
-        <DialogActions sx={{ px: 3, pb: 2 }}>
-          <Button onClick={handleAddAddress} variant="contained" sx={{ fontWeight: 600 }}>Add Address</Button>
-          <Button onClick={() => setShowModal(false)} variant="outlined" color="secondary">Cancel</Button>
-        </DialogActions>
+          </DialogContent>
+          <DialogActions sx={{ px: 3, pb: 2 }}>
+            <Button type="submit" onClick={handleAddAddress} variant="contained" sx={{ fontWeight: 600 }}>Add Address</Button>
+            <Button onClick={() => setShowModal(false)} variant="outlined" color="secondary">Cancel</Button>
+          </DialogActions>
+        </form>
       </Dialog>
 
       {/* Snackbar (optional app-level messages) */}
@@ -677,7 +739,7 @@ export default function CartPage() {
           {snack.msg}
         </Alert>
       </Snackbar>
-    </Box>
+    </Box >
   );
 }
 
