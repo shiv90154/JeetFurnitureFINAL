@@ -20,7 +20,7 @@ const DimandShowCase = () => {
         }}>
 
             <DiamondSliderThree />
-            <DiamondSliderTwo />
+            {/* <DiamondSliderTwo /> */}
             <DiamondSlider />
             {/* <DiamondSliderOne /> */}
             {/* <BridesDiamondStories /> */}
