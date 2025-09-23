@@ -366,9 +366,9 @@ const CategoryJewel = () => {
                                             Select Assigned Route
                                         </MenuItem>
                                         <MenuItem value="allJewellery">All Jewellery</MenuItem>
-                                        <MenuItem value="diamond">Diamond</MenuItem>
+                                        {/* <MenuItem value="diamond">Diamond</MenuItem>
                                         <MenuItem value="gold">Gold</MenuItem>
-                                        <MenuItem value="silver">Silver</MenuItem>
+                                        <MenuItem value="silver">Silver</MenuItem> */}
                                         <MenuItem value="wedding">Wedding</MenuItem>
                                         <MenuItem value="gifting">Gifting</MenuItem>
                                         <MenuItem value="collection">Collection</MenuItem>

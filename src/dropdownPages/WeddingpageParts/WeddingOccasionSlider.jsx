@@ -217,28 +217,8 @@ const WeddingOccasionSlider = () => {
                         boxShadow: '0 4px 16px rgba(131, 39, 41, 0.3)'
                       }
                     }}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      window.open(occasion.link, '_blank');
-                    }}
                   >
                     {occasion.name}
-                    <Box sx={{
-                      ml: 1,
-                      width: 25,
-                      height: 25,
-                      borderRadius: '50%',
-                      backgroundColor: 'transparent',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      boxShadow: 'rgba(0, 0, 0, 0.15) 0px 2px 8px',
-                      '&:hover': {
-                        backgroundColor: 'rgba(99,21,24,0.99)'
-                      }
-                    }}>
-                      <ArrowForward sx={{ fontSize: '15px', color: '#fff' }} />
-                    </Box>
                   </Button>
                 </Box>
               )}

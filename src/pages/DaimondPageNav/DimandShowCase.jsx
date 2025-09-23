@@ -4,9 +4,6 @@ import DiamondSliderThree from './DiamondSliderThree'
 import DiamondSliderTwo from './DiamondSliderTwo'
 import DiamondSlider from './DiamondSlider'
 import DiamondSliderOne from './DiamondSliderOne'
-import BridesDiamondStories from './BridesDiamondStories'
-import PerfectSparkleSection from './PerfectSparkleSection'
-import ChauhanExchange from './ChauhanExchange'
 
 
 const DimandShowCase = () => {
@@ -23,9 +20,6 @@ const DimandShowCase = () => {
             {/* <DiamondSliderTwo /> */}
             <DiamondSlider />
             {/* <DiamondSliderOne /> */}
-            {/* <BridesDiamondStories /> */}
-            {/* <PerfectSparkleSection /> */}
-            {/* <ChauhanExchange /> */}
 
         </Box>
     )
