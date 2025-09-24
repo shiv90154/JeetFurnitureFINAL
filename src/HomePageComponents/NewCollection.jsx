@@ -183,9 +183,8 @@ const ProductCard = styled(Card)({
 const ProductImageContainer = styled(Box)({
   position: "relative",
   width: "100%",
-  height: 165,
-  "@media (max-width:900px)": { height: 145 },
-  // "@media (max-width:600px)": { height: 10 },
+  height: 200,
+  "@media (max-width:900px)": { height: 155 }
 });
 
 const ProductImage = styled(CardMedia)({
@@ -194,9 +193,8 @@ const ProductImage = styled(CardMedia)({
   // width: "auto",
   maxWidth: "100%",
   display: "block",
-  margin: "0 auto",
-  backgroundSize: "cover",
-  // backgroundColor: "#fae6e1",
+  // margin: "0 auto",
+  // objectFit: "contain",
 });
 
 const DiscountBadge = styled(Chip)({

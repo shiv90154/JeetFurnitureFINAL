@@ -48,7 +48,7 @@ const SlideImage = styled("img")({
     maxWidth: "100%",
     display: "block",
     margin: "0 auto",
-    backgroundColor: "#fae6e1", // optional: matches your theme
+    backgroundColor: "#fae6e1", 
 });
 
 const SliderWrapper = styled(Box)(({ theme }) => ({
