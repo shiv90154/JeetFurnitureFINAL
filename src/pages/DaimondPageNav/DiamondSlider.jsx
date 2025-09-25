@@ -280,9 +280,10 @@ const DiamondSlider = () => {
                         mx: { xs: 'auto', md: 0 }
                     }}>
                         <Box sx={{
-                            width: { xs: '15rem', md: '23rem' }, // Smaller circular image
+                            width: { xs: '15rem', md: '38rem' }, 
                             height: { xs: '15rem', md: '23rem' },
-                            borderRadius: '50%',
+                            // borderRadius: '50%',
+                            borderRadius: '20px',
                             overflow: 'hidden',
                             position: 'relative'
                         }}>
@@ -311,10 +312,10 @@ const DiamondSlider = () => {
                                                 width: '100%',
                                                 height: '100%',
                                                 objectFit: 'cover',
-                                                transform: {
-                                                    xs: 'scale(1.8)',
-                                                    md: index === 1 ? 'scale(1.4)' : index === 3 ? 'scale(1.4)' : 'scale(1.8)'
-                                                },
+                                                // transform: {
+                                                //     xs: 'scale(1.8)',
+                                                //     md: index === 1 ? 'scale(1.4)' : index === 3 ? 'scale(1.4)' : 'scale(1.8)'
+                                                // },
                                             }}
                                         />
                                     </SwiperSlide>

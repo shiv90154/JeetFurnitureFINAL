@@ -531,12 +531,11 @@ const DiamondSliderThree = () => {
                                 src={publicUrl(cat.image)}
                                 alt={cat.name}
                                 sx={{
-                                    width: { xs: 200, md: 300 },
-                                    height: { xs: 200, md: 300 },
+                                    width: { xs: 200, md: 350 },
+                                    height: { xs: 200, md: 350 },
                                     objectFit: 'cover',
                                     borderRadius: '50%',
-                                    boxShadow:
-                                        '0 0 0 12px rgba(255,255,255,0.02), 0 4px 40px #141929',
+                                    border: '2px solid #FFD700',
                                 }}
                             />
                         </Box>
