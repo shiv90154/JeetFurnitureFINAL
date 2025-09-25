@@ -52,7 +52,7 @@ const Contactus = () => {
         // handleSubmit(formData);
         const ok = await handleSubmit(formData);
         if (ok) {
-            form.reset();              
+            form.reset();
         }
     };
 
@@ -185,8 +185,8 @@ const Contactus = () => {
                         <IconButton
                             aria-label="Instagram"
                             component="a"
-                            //   href="https://www.instagram.com/drbsk_humanhealth"
-                            target="_blank"
+                            target="blank"
+                            href="https://www.instagram.com/chauhansonsjewellers/?hl=en"
                             sx={{ color: "#FFD700" }}
                         >
                             <InstagramIcon />
