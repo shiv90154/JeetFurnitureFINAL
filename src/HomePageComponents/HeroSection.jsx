@@ -30,9 +30,6 @@ const SliderContainer = styled(Box)({
 const Slide = styled(Box)(({ theme }) => ({
     width: "100%",
     height: "auto",
-    // position: "relative",
-    // overflow: "hidden",
-    backgroundColor: "#fae6e1", // Match SlideImage bg, looks good if image is not full size
     [theme.breakpoints.down("lg")]: {
         // height: 400,
     },
@@ -48,15 +45,13 @@ const SlideImage = styled("img")({
     maxWidth: "100%",
     display: "block",
     margin: "0 auto",
-    backgroundColor: "#fae6e1", 
 });
 
 const SliderWrapper = styled(Box)(({ theme }) => ({
     // position: "relative",
     width: "100%",
     overflow: "hidden",
-    // backgroundColor: "#000",
-    backgroundColor: "rgba(0, 0, 0, 0.1)", // 50% opacity
+    backgroundColor: "#F0E5CB",
 
 
     // scoped slick styles
