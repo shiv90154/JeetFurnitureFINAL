@@ -445,14 +445,6 @@ export default function SingleProductPage() {
                     </Box>
                 </Box>
 
-
-                {/* reviews section */}
-                {product && <ProductReviewsSection
-                    product={product}
-                    onRefreshProduct={fetchData}
-                />}
-
-
                 {/* Delivery Details */}
                 <Box sx={{ bgcolor: '#fff', py: 2, borderRadius: 2, border: '1px solid #eee', mb: { xs: 6, sm: 8 }, maxWidth: 580, mx: 'auto', textAlign: 'center' }}>
                     <Typography variant="h6" sx={{ fontWeight: 700, color: '#2C2C2C', mb: 3, fontFamily: 'serif' }}>
@@ -462,6 +454,13 @@ export default function SingleProductPage() {
                     {/* location pincode */}
                     <LocationSelector />
                 </Box>
+
+
+                {/* reviews section */}
+                {product && <ProductReviewsSection
+                    product={product}
+                    onRefreshProduct={fetchData}
+                />}
 
                 {/* Jewellery Details */}
                 <Box sx={{ bgcolor: '#fff', borderRadius: 2, p: { xs: 3, sm: 5 }, maxWidth: 920, mx: 'auto', boxShadow: '0 4px 32px rgb(242 227 213 / 0.8)' }}>

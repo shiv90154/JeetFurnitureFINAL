@@ -27,25 +27,9 @@ const ProductReviewsSection = ({ product, onRefreshProduct }) => {
         setShowReviews(!showReviews);
     };
 
-
     const [totalReviews, setTotalReviews] = useState(0);
 
-    // Fetch total reviews count
-
-    // // 1:
-    // const fetchTotalReviews = async () => {
-    //     try {
-    //         const response = await axiosInstance.get(`/api/review/product/${productId}`);
-    //         // The total reviews will be in the pagination object
-    //         setTotalReviews(response.data.pagination.total);
-    //     } catch (error) {
-    //         console.error("Error fetching reviews:", error);
-    //     }
-    // };
-
-    // // 2:
     const fetchTotalReviews = async () => {
-        // Ensure productId is valid
         if (!productId) {
             console.error('Product ID is undefined or invalid');
             return;
@@ -74,77 +58,15 @@ const ProductReviewsSection = ({ product, onRefreshProduct }) => {
                 display="flex"
                 alignItems="center"
                 justifyContent="space-between"
-                p={2}
+                py={4}
+                px={1}
                 sx={{
                     backgroundColor: '#fafafa',
                     borderRadius: 2,
                     mb: 2,
                 }}
             >
-                {/* older code */}
-                {/* <Box display="flex" alignItems="center" gap={2}>
-                    {product.averageRating && product.averageRating > 0 ? (
-                        <>
-                            <Box display="flex" alignItems="center" gap={1}>
-                                <Star sx={{ color: '#FFD700', fontSize: 28 }} />
-                                <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                                    {product.averageRating?.toFixed(1)}
-                                </Typography>
-                            </Box>
-                            <Typography
-                                variant="body1"
-                                sx={{
-                                    color: '#44170D',
-                                    cursor: 'pointer',
-                                    textDecoration: 'underline',
-                                    fontWeight: 500,
-                                }}
-                                onClick={toggleReviews}
-                            >
-                                ({product.totalReviews || 0} {product.totalReviews === 1 ? 'review' : 'reviews'})
-                            </Typography>
-                        </>
-                    ) : (
-                        <Typography variant="body1" color="text.secondary">
-                            No reviews yet
-                        </Typography>
-                    )}
-                </Box> */}
-
-                {/* new code */}
                 <>
-                    {/* option 1: */}
-                    {/* <Box display="flex" alignItems="center" gap={1}>
-                        <Star sx={{ color: '#FFD700', fontSize: 28 }} />
-                        <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                            {(product.averageRating ?? 0).toFixed(1)}
-                        </Typography>
-                    </Box>
-                    <Typography
-                        variant="body1"
-                        sx={{ color: '#44170D', cursor: 'pointer', textDecoration: 'underline', fontWeight: 500 }}
-                        onClick={toggleReviews}
-                    >
-                        ({product.totalReviews || 0} {(product.totalReviews || 0) === 1 ? 'review' : 'reviews'})
-                    </Typography> */}
-
-                    {/* option 2: */}
-                    {/* <Box display="flex" alignItems="center" gap={1}>
-                        <Star sx={{ color: '#FFD700', fontSize: 28 }} />
-                        <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                            {(product.averageRating ?? 0).toFixed(1)}
-                        </Typography>
-                    </Box> */}
-
-                    {/* option 3: */}
-                    {/* Rating Summary */}
-                    {/* <Box display="flex" alignItems="center" gap={1}>
-                        <Star sx={{ color: '#FFD700', fontSize: 28 }} />
-                        <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                            {(product.averageRating ?? 0).toFixed(1)}
-                        </Typography>
-                    </Box> */}
-
                     {/* Total Reviews */}
                     <Typography
                         variant="body1"
@@ -153,7 +75,10 @@ const ProductReviewsSection = ({ product, onRefreshProduct }) => {
                             cursor: 'pointer',
                             textDecoration: 'underline',
                             fontWeight: 600,
-                            fontSize: 20,
+                            fontSize: {
+                                xs: '14px',
+                                md: '20px',
+                            },
                             textTransform: 'capitalize'
                         }}
                         onClick={toggleReviews}
@@ -162,25 +87,8 @@ const ProductReviewsSection = ({ product, onRefreshProduct }) => {
                     </Typography>
                 </>
 
-                <Box display="flex" gap={2}>
-                    {/* {product.totalReviews > 0 && (
-                        <Button
-                            variant="outlined"
-                            onClick={toggleReviews}
-                            sx={{
-                                borderColor: '#44170D',
-                                color: '#44170D',
-                                '&:hover': {
-                                    borderColor: '#7A3A0F',
-                                    backgroundColor: 'rgba(68, 23, 13, 0.04)',
-                                },
-                            }}
-                        >
-                            {showReviews ? 'Hide Reviews' : 'See Reviews'}
-                        </Button>
-                    )} */}
+                <Box display="flex" gap={{ xs: 1, sm: 2 }}>
 
-                    {/* 2: */}
                     {true && (
                         <Button
                             variant="outlined"
@@ -188,6 +96,8 @@ const ProductReviewsSection = ({ product, onRefreshProduct }) => {
                             sx={{
                                 borderColor: '#44170D',
                                 color: '#44170D',
+                                fontSize: { xs: 9, sm: 14 },
+                                padding: { xs: "4px 8px", md: "6px 12px" },
                                 '&:hover': {
                                     borderColor: '#7A3A0F',
                                     backgroundColor: 'rgba(68, 23, 13, 0.04)',
@@ -204,6 +114,8 @@ const ProductReviewsSection = ({ product, onRefreshProduct }) => {
                         onClick={handleWriteReview}
                         sx={{
                             backgroundColor: '#44170D',
+                            fontSize: { xs: 9, sm: 14 },
+                            padding: { xs: "4px 8px", md: "6px 12px" },
                             '&:hover': {
                                 backgroundColor: '#7A3A0F'
                             }
@@ -231,7 +143,7 @@ const ProductReviewsSection = ({ product, onRefreshProduct }) => {
                 onReviewSubmitted={() => {
                     onRefreshProduct?.();
                     fetchData()
-                    setRefreshKey(k => k + 1); 
+                    setRefreshKey(k => k + 1);
                 }}
             />
 
