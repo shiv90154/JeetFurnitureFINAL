@@ -41,7 +41,8 @@ const Slide = styled(Box)(({ theme }) => ({
 }));
 
 const SlideImage = styled("img")({
-    height: "auto",
+    // height: "auto",
+    height: "200px",
     width: "auto",
     maxWidth: "100%",
     display: "block",
@@ -52,7 +53,7 @@ const SliderWrapper = styled(Box)(({ theme }) => ({
     // position: "relative",
     width: "100%",
     overflow: "hidden",
-    backgroundColor: "#F0E5CB",
+    backgroundColor: "#fff",
 
 
     // scoped slick styles
