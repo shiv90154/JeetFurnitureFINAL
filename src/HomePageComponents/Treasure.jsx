@@ -6,10 +6,8 @@ import { publicUrl } from "../common components/PublicUrl"
 
 const SectionContainer = styled(Box)({
     position: "relative",
-    // minHeight: "600px",
     backgroundImage: "url('/treasureBg.png')",
     backgroundSize: "inherit",
-    // backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     "&::before": {
@@ -19,7 +17,6 @@ const SectionContainer = styled(Box)({
         left: 0,
         right: 0,
         bottom: 0,
-        // backgroundColor: "rgba(160, 130, 109, 0.7)",
         zIndex: 1,
     },
 })
@@ -124,38 +121,18 @@ const CategoryOverlay = styled(Box)({
     left: 0,
     right: 0,
     background: "linear-gradient(transparent, rgba(0,0,0,0.7))",
-    padding: "30px 20px 20px",
+    padding: "30px 8px 15px",
     display: "flex",
     alignItems: "flex-end",
 })
 
 const CategoryName = styled(Typography)({
-    fontSize: "20px",
-    fontWeight: "400",
+    fontSize: { xs: "12px", md: "18px" },
+    fontWeight: "600",
     color: "#fff",
-    textShadow: "0 2px 4px rgba(0,0,0,0.5)",
-    "@media (max-width: 600px)": {
-        fontSize: "18px",
-    },
+    textTransform: "capitalize",
 })
 
-const categories = [
-    {
-        id: 1,
-        name: "Ear Rings",
-        image: "/latestImg1.png",
-    },
-    {
-        id: 2,
-        name: "Bangles",
-        image: "/latestImg2.png",
-    },
-    {
-        id: 3,
-        name: "Pendants",
-        image: "/latestImg3.png",
-    },
-]
 
 function Treasure() {
     const [subcategoryName, setSubCategoryName] = useState([]);
@@ -185,7 +162,7 @@ function Treasure() {
                             From Monday to Friday, discover a daily dose of elegance with our newest arrivals—each piece thoughtfully
                             designed to elevate your everyday style.
                         </Description>
-                        <CTAButton variant="contained" onClick={() => { navigate("/allJewellery") }}>1000+ New Items</CTAButton>
+                        <CTAButton variant="contained" onClick={() => { navigate("/allJewellery") }}>500+ New Items</CTAButton>
                     </TextContent>
                 </ContentOverlay>
             </SectionContainer>
