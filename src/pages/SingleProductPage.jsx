@@ -261,7 +261,7 @@ export default function SingleProductPage() {
         <Box bgcolor="#fff" py={6}>
             <ToastContainer position="top-right" autoClose={2000} hideProgressBar={false} />
             <Container maxWidth="xl" sx={{ maxWidth: 1140 }}>
-                <Box display="flex" alignItems="center" justifyContent="space-between" flexDirection={{ xs: "column", sm: "row" }} gap={{ xs: 3, md: 0 }} mb={4}>
+                <Box display="flex" alignItems="center" justifyContent="space-between" flexDirection={{ xs: "column-reverse", sm: "row" }} gap={{ xs: 3, md: 0 }} mb={4}>
                     <Box sx={{ width: { sm: "46%" } }}>
                         {/* Product Specs Chips */}
                         <Box sx={{ display: 'flex', justifyContent: "center", textAlign: 'center', mb: 1 }}>
@@ -422,18 +422,18 @@ export default function SingleProductPage() {
                     </Box>
 
                     {/* Product Images */}
-                    <Box sx={{ width: { sm: "55%" } }}>
+                    <Box sx={{ width: { xs: "100%", sm: "55%" } }}>
                         <Box
                             sx={{
                                 display: 'flex',
                                 justifyContent: 'center',
                                 alignItems: 'center',
-                                gap: 2,
+                                // gap: { md: 2 },
                                 borderRadius: 3,
                                 position: 'relative',
                             }}
                         >
-                            <Box>
+                            <Box sx={{ width: "100%" }}>
                                 <Box component="img" src={product?.frontImage} alt="Front view" sx={{ height: 300, width: '100%', objectFit: 'cover', userSelect: 'none', boxShadow: '0 6px 20px rgb(0 0 0 / 0.10)', borderRadius: 2 }} draggable={false} />
                             </Box>
                             <Box>
