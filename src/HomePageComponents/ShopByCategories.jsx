@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import axiosInstance from "../common components/AxiosInstance";
 import { publicUrl } from "../common components/PublicUrl";
 import { useNavigate } from "react-router-dom";
+import Theme from "../../Theme";
 
 const ShopByCategories = () => {
     const [categoryName, setCategoryName] = useState([]);
@@ -105,7 +106,7 @@ const ShopByCategories = () => {
         ]
     };
 
-    const CARD_W = { xs: 140, sm: 160, md: 180 };  
+    const CARD_W = { xs: 140, sm: 160, md: 180 };
     const MEDIA_H = { xs: 100, sm: 120, md: 140 };
 
 
@@ -117,10 +118,11 @@ const ShopByCategories = () => {
                         variant="h3"
                         fontFamily="serif"
                         fontWeight={600}
-                        color="#2C2C2C"
+                        // color="#2C2C2C"
+                        Theme={Theme.palette.primary.contrastText}
                         fontSize={{ xs: "32px", sm: "40px", md: "48px" }}
                     >
-                        Find Your Perfect Match
+                        Find Your Perfect Match of Jewellery
                     </Typography>
                     <Typography
                         variant="h6"
@@ -144,7 +146,7 @@ const ShopByCategories = () => {
                                     sx={{
                                         px: 1,
                                         py: 1,
-                                        width: CARD_W,        
+                                        width: CARD_W,
                                         boxSizing: "border-box"
                                     }}
                                 >
@@ -152,8 +154,8 @@ const ShopByCategories = () => {
                                         sx={{
                                             cursor: "pointer",
                                             transition: "0.3s",
-                                            width: "100%",        
-                                            maxWidth: 200,        
+                                            width: "100%",
+                                            maxWidth: 200,
                                             borderRadius: 4,
                                             "&:hover": { transform: "translateY(-4px)" },
                                             display: "flex",
@@ -169,11 +171,11 @@ const ShopByCategories = () => {
                                             loading="lazy"
                                             sx={{
                                                 width: "100%",
-                                                height: MEDIA_H,    
+                                                height: MEDIA_H,
                                                 objectFit: "contain",
-                                                pt: 1,             
+                                                pt: 1,
                                                 backgroundColor: "#fff",
-                                               borderRadius:4
+                                                borderRadius: 4
                                             }}
                                         />
                                         <Typography
@@ -221,7 +223,7 @@ const ShopByCategories = () => {
                                         sx={{
                                             height: MEDIA_H,
                                             width: MEDIA_H,
-                                            objectFit: "contain",   
+                                            objectFit: "contain",
                                             borderRadius: 4,
                                             p: 1,
                                             backgroundColor: "#fff"

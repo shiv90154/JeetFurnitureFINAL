@@ -12,9 +12,8 @@ const Theme = createTheme({
       paper: '#fff',
     },
     text: {
-      primary: '#44170D',     // dark text on light bg
-      secondary: '#44170D',
-      light: '#fff',          // light text on dark bg
+      primary: '#44170D',     
+      light: '#fff',          
     },
     action: {
       hover: '#f5f5f5',

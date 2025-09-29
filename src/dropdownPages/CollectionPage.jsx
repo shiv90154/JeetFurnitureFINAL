@@ -70,9 +70,6 @@ export default function CollectionPage() {
 
       <Swiper
         modules={[Navigation, Autoplay]}
-        // spaceBetween={30}
-        // slidesPerView={1}
-        // breakpoints={{ 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }}
         autoplay={{ delay: 4000, disableOnInteraction: false }}
         loop={true}
       >
@@ -84,7 +81,6 @@ export default function CollectionPage() {
                   <img
                     src={publicUrl(item.slider_image)}
                     alt={item.type}
-                    // style={{ width: "100%",height:"350px", objectFit: "cover", cursor: "pointer" }}
                     style={{
                       height: "auto",
                       // width: "auto",
@@ -198,7 +194,7 @@ export default function CollectionPage() {
             )}
           </Box>
         </Container>
-      </Box>
-    </Box>
+      </Box >
+    </Box >
   );
 }
