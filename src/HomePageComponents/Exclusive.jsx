@@ -67,7 +67,7 @@ const SubTitle = styled(Typography)(({ theme }) => ({
 }));
 
 const CategoryCard = styled(Card)(({ theme }) => ({
-  boxShadow: "none",
+  boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
   borderRadius: 18,
   overflow: "hidden",
   position: "relative",
