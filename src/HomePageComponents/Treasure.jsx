@@ -99,20 +99,23 @@ const CategoryCard = styled(Box)({
     transition: "transform 0.3s ease, box-shadow 0.3s ease",
     boxShadow: "0 8px 24px rgba(0,0,0,0.2)",
     backgroundColor: "#fff",
+    width: "160px",
+    height: "200px",
     "&:hover": {
         transform: "translateY(-5px)",
         boxShadow: "0 12px 32px rgba(0,0,0,0.3)",
     },
+    "@media (max-width: 600px)": {
+        height: "160px",
+        width: "110px",
+    },
 })
 
 const CategoryImage = styled("img")({
-    width: "200px",
-    height: "200px",
-    objectFit: "cover",
+    width: "100%",
+    height: "100%",
+    objectFit: "contain",
     objectPosition: "center",
-    "@media (max-width: 600px)": {
-        height: "160px",
-    },
 })
 
 const CategoryOverlay = styled(Box)({
@@ -124,6 +127,9 @@ const CategoryOverlay = styled(Box)({
     padding: "30px 8px 15px",
     display: "flex",
     alignItems: "flex-end",
+    "@media (max-width: 600px)": {
+        padding: "20px 2px 10px 5px",
+    },
 })
 
 const CategoryName = styled(Typography)({

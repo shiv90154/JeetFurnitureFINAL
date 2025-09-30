@@ -122,7 +122,7 @@ const ShopByCategories = () => {
                         // Theme={Theme.palette.primary.contrastText}
                         fontSize={{ xs: "32px", sm: "40px", md: "48px" }}
                     >
-                        Find Your Perfect Match of Jewellery
+                        Find Your Perfect Match
                     </Typography>
                     <Typography
                         variant="h6"
