@@ -129,7 +129,9 @@ function CartCard({ product, onRemove, onUpdateQuantity }) {
         width: '100%', height: { xs: 100, sm: 120, md: 140, lg: 160 }, display: 'flex',
         alignItems: 'center', justifyContent: 'center', mb: { xs: 0.5, sm: 0.8, md: 1 }, overflow: 'hidden', borderRadius: 1
       }}>
-        <img src={publicUrl(product?.media?.[0]?.url)} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
+        <img src={publicUrl(product?.media?.[0]?.url)} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center' }}
+          // onClick={() => navigate(`/singleProduct/${product._id}`)}
+        />
       </Box>
 
       <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>

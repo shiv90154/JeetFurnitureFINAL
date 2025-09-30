@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addToCart, removeFromWishlist, addData } from "../store/Action";
 import { publicUrl } from '../common components/PublicUrl';
 import { normalizeCartProduct } from '../utils/ProductsUtils';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 
 function EmptyWishlist({ onContinueShopping }) {
   return (
@@ -199,6 +199,8 @@ function WishlistCard({ product, onRemove }) {
   };
 
   return (
+    <>
+    <ToastContainer autoClose={2000} position="top-right"  />
     <Box sx={{
       background: '#fff',
       borderRadius: 2,
@@ -304,6 +306,7 @@ function WishlistCard({ product, onRemove }) {
         {isInStock ? 'ADD TO CART' : 'OUT OF STOCK'}
       </Button>
     </Box>
+    </>
   );
 }
 
