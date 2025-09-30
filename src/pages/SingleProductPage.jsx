@@ -446,7 +446,7 @@ export default function SingleProductPage() {
                 </Box>
 
                 {/* Delivery Details */}
-                <Box sx={{ bgcolor: '#fff', py: 2, borderRadius: 2, border: '1px solid #eee', mb: { xs: 6, sm: 8 }, maxWidth: 580, mx: 'auto', textAlign: 'center' }}>
+                <Box sx={{ bgcolor: '#fff', py: 2, borderRadius: 2, border: '1px solid #eee', mb: { xs: 6, sm: 8 }, mx: 'auto', textAlign: 'center' }}>
                     <Typography variant="h6" sx={{ fontWeight: 700, color: '#2C2C2C', mb: 3, fontFamily: 'serif' }}>
                         Delivery Details
                     </Typography>

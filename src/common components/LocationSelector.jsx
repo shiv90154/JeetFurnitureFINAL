@@ -65,7 +65,7 @@ export default function LocationSelector() {
     };
 
     return (
-        <Box sx={{ maxWidth: 400, margin: '0 auto', padding: 2 }}>
+        <Box sx={{ width: { xs: '90%', md: '70%' }, margin: '0 auto', padding: 2 }}>
             {/* Display current location and pincode */}
             <Box
                 sx={{
