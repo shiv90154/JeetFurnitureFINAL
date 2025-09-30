@@ -441,7 +441,7 @@ export default function SingleProductPage() {
                             }}
                         >
                             <Box sx={{ width: "100%" }}>
-                                <Box component="img" src={product?.frontImage} alt="Front view" sx={{ height: 300, width: '100%', objectFit: 'cover', userSelect: 'none', boxShadow: '0 6px 20px rgb(0 0 0 / 0.10)', borderRadius: 2 }} draggable={false} />
+                                <Box component="img" src={product?.frontImage} alt="Front view" sx={{ height: 300, width: '100%', objectFit: 'contain', userSelect: 'none', boxShadow: '0 6px 20px rgb(0 0 0 / 0.10)', borderRadius: 2 }} draggable={false} />
                             </Box>
                             <Box>
                                 {product?.sideImage && (
