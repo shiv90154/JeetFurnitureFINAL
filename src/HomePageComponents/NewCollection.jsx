@@ -505,7 +505,7 @@ const PromoButton = styled(Button)({
   borderRadius: "6px",
   border: "1px solid rgba(255,255,255,0.33)",
   letterSpacing: ".4px",
-  "&:hover": { backgroundColor: "rgba(255,255,255,0.25)" },
+  "&:hover": { backgroundColor: "rgba(0,0,0,0.25)" },
 });
 
 const RightFlexBox = styled(Box)({
@@ -552,7 +552,7 @@ const ProductCard = styled(Card)({
 const ProductImageContainer = styled(Box)({
   position: "relative",
   width: "100%",
-  height: 200,
+  height: 170,
   "@media (max-width:900px)": { height: 155 }
 });
 
@@ -562,6 +562,7 @@ const ProductImage = styled(CardMedia)({
   maxWidth: "100%",
   display: "block",
   cursor: "pointer",
+  objectFit: "contain",
 });
 
 const DiscountBadge = styled(Chip)({
@@ -594,8 +595,8 @@ const ProductName = styled(Typography)({
   fontSize: 15,
   fontWeight: 500,
   color: "#2C2C2C",
-  marginBottom: 8,
-  lineHeight: 1.3,
+  marginBottom: 4,
+  lineHeight: 1.2,
   textTransform: 'capitalize',
   "@media (max-width:600px)": { fontSize: 13 },
 });
