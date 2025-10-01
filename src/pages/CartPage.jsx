@@ -1,4 +1,3 @@
-// // option2: use it when multiple products with different quantities are added to the cart (single product option3 is used):
 import React, { useState, useEffect, useMemo } from 'react';
 import {
   Box, Typography, Button, Grid, IconButton, Snackbar, Alert, Divider,
@@ -130,7 +129,7 @@ function CartCard({ product, onRemove, onUpdateQuantity }) {
         alignItems: 'center', justifyContent: 'center', mb: { xs: 0.5, sm: 0.8, md: 1 }, overflow: 'hidden', borderRadius: 1
       }}>
         <img src={publicUrl(product?.media?.[0]?.url)} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center' }}
-          // onClick={() => navigate(`/singleProduct/${product._id}`)}
+        // onClick={() => navigate(`/singleProduct/${product._id}`)}
         />
       </Box>
 
@@ -234,11 +233,18 @@ export default function CartPage() {
   const userData = JSON.parse(localStorage.getItem('userData'));
 
   // ----- auth check -----
+  // useEffect(() => {
+  //   const userData = localStorage.getItem('userData');
+  //   if (userData) setIsAuthenticated(true);
+  //   else navigate('/login');
+  // }, [navigate]);
+
   useEffect(() => {
     const userData = localStorage.getItem('userData');
-    if (userData) setIsAuthenticated(true);
-    else navigate('/login');
-  }, [navigate]);
+    if (userData) {
+      setIsAuthenticated(true);
+    }
+  }, []);
 
   // ----- totals -----
   const subtotal = useMemo(
@@ -388,6 +394,13 @@ export default function CartPage() {
 
   // ----- razorpay -----
   const handleCheckout = () => {
+
+    if (!isAuthenticated) {
+      toast.warn('Please log in to proceed with checkout.');
+      navigate('/login'); // Redirecting to login page if the user is not logged in
+      return;
+    }
+
     if (!formData.selectedAddress) {
       toast.warn('Please select an address before checkout.');
       return;
