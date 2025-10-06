@@ -165,9 +165,10 @@ const WeddingPage = () => {
                   sx={{
                     width: "100%",
                     height: { xs: 110, sm: 130 },
-                    objectFit: "cover",
+                    objectFit: "contain ",
                     borderTopLeftRadius: 12,
-                    borderTopRightRadius: 12
+                    borderTopRightRadius: 12,
+                    pt: 1,
                   }}
                 />
                 <Typography variant="body2" sx={{
@@ -205,7 +206,7 @@ const WeddingPage = () => {
 
       {/* Featured Articles */}
       <Box sx={{ py: 8, backgroundColor: "#fff" }}>
-        <Container maxWidth="lg">
+        <Container maxWidth="xl">
           {banners.length > 0 ?
             (<h1 className="text-center">Featured Articles</h1>) : ""}
 
@@ -213,27 +214,48 @@ const WeddingPage = () => {
             modules={[Navigation, Autoplay]}
             spaceBetween={30}
             slidesPerView={1}
-            breakpoints={{ 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }}
+            breakpoints={{ 640: { slidesPerView: 2 } }}
             autoplay={{ delay: 4000, disableOnInteraction: false }}
             loop={true}
           >
             {banners.length > 0 && (
-              <>
+              < >
                 {banners.map((item) => (
+                  // <SwiperSlide key={item._id}>
+                  //   <Box sx={{ height: "auto", width: "100%" }}>
+                  //     <img
+                  //       src={publicUrl(item.slider_image)}
+                  //       alt={item.type}
+                  //       style={{ width: "100%", height: { xs: "200px", md: "100%" }, objectFit: { xs: "cover", md: "contain" }, display: "block", cursor: "pointer", borderRadius: "12px" }}
+                  //       onClick={() => navigate(`/allJewellery/${(item.variety || 'all').toLowerCase()}`)}
+                  //     />
+                  //   </Box>
+                  // </SwiperSlide>
+
+                  // //2
                   <SwiperSlide key={item._id}>
-                    <Box>
+                    <Box sx={{ width: "100%" }}>
                       <img
                         src={publicUrl(item.slider_image)}
                         alt={item.type}
-                        style={{ width: "100%", height: "220px", objectFit: "cover", cursor: "pointer", borderRadius: "12px" }}
+                        style={{ width: "100%", height: "100%", maxWidth: "100%", objectFit: "contain", display: "block", cursor: "pointer", borderRadius: "12px" }}
                         onClick={() => navigate(`/allJewellery/${(item.variety || 'all').toLowerCase()}`)}
                       />
+                      {/* <Box
+                        component="img"
+                        src={publicUrl(item.slider_image)}
+                        alt={item.type}
+                        sx={{
+                          width: { xs: "auto", md: "100%" }, height: { xs: "200px", md: "auto" }, maxWidth: "100%", objectFit: "contain", display: "block", cursor: "pointer", borderRadius: "12px"
+                        }}
+                        onClick={() => navigate(`/allJewellery/${(item.variety || 'all').toLowerCase()}`)}
+                      /> */}
                     </Box>
                   </SwiperSlide>
+
                 ))}
               </>
             )}
-
           </Swiper>
         </Container>
       </Box>

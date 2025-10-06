@@ -164,6 +164,7 @@ const WeddingOccasionSlider = () => {
                 borderRadius: '20px',
                 overflow: 'hidden',
                 cursor: 'pointer',
+                backgroundColor: '#fff',
                 transformOrigin: 'center center',
                 boxShadow: '0 8px 32px rgba(0,0,0,0.15)',
                 ...cardStyle,
@@ -180,7 +181,7 @@ const WeddingOccasionSlider = () => {
                 style={{
                   width: '100%',
                   height: '100%',
-                  objectFit: 'cover',
+                  objectFit: 'contain',
                   display: 'block'
                 }}
               />
