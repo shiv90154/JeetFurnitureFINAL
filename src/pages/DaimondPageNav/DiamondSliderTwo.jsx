@@ -17,8 +17,8 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
 import 'swiper/css/effect-coverflow';
-import axiosInstance from '../../common components/AxiosInstance';
-import { publicUrl } from '../../common components/PublicUrl';
+import axiosInstance from '../../commonComponents/AxiosInstance';
+import { publicUrl } from '../../commonComponents/PublicUrl';
 import { useNavigate } from 'react-router-dom';
 
 const DiamondSliderContainer = styled(Box)(({ theme }) => ({

@@ -8,8 +8,8 @@ import {
     useTheme,
     useMediaQuery
 } from '@mui/material';
-import axiosInstance from '../common components/AxiosInstance';
-import { publicUrl } from '../common components/PublicUrl';
+import axiosInstance from '../commonComponents/AxiosInstance';
+import { publicUrl } from '../commonComponents/PublicUrl';
 import { useNavigate } from 'react-router-dom';
 
 const GiftingPage = () => {

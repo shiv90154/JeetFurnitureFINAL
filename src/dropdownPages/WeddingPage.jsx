@@ -10,9 +10,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import TrendingKeywordsMarquee from "./WeddingpageParts/TrendingKeywordsMarquee";
 import WeddingOccasionSlider from "./WeddingpageParts/WeddingOccasionSlider";
-import FindMyCommunity from "../common components/FindMyCommunity";
-import { publicUrl } from "../common components/PublicUrl";
-import axiosInstance from "../common components/AxiosInstance";
+import FindMyCommunity from "../commonComponents/FindMyCommunity";
+import { publicUrl } from "../commonComponents/PublicUrl";
+import axiosInstance from "../commonComponents/AxiosInstance";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const titleStyle = {

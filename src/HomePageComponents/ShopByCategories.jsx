@@ -2,8 +2,8 @@
 import { Box, Typography, Card, CardMedia, Container } from "@mui/material";
 import { useEffect, useState } from "react";
 import Slider from "react-slick";
-import axiosInstance from "../common components/AxiosInstance";
-import { publicUrl } from "../common components/PublicUrl";
+import axiosInstance from "../commonComponents/AxiosInstance";
+import { publicUrl } from "../commonComponents/PublicUrl";
 import { useNavigate } from "react-router-dom";
 import Theme from "../../Theme";
 

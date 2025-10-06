@@ -23,7 +23,7 @@ import {
 import { keyframes } from "@emotion/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
-import WedSlider from "../common components/WedSlider";
+import WedSlider from "./WedSlider";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/autoplay";

@@ -58,7 +58,7 @@
 
 // // 2:
 import React, { useState, useEffect } from 'react';
-import axiosInstance from '../../common components/AxiosInstance';
+import axiosInstance from '../../commonComponents/AxiosInstance';
 import {
     Box,
     Typography,
@@ -83,7 +83,7 @@ import {
     Stack,
 } from '@mui/material';
 import { Add, Delete, Close as CloseIcon } from '@mui/icons-material';
-import { publicUrl } from '../../common components/PublicUrl';
+import { publicUrl } from '../../commonComponents/PublicUrl';
 
 export default function VideoUpload() {
     const [videos, setVideos] = useState([]);

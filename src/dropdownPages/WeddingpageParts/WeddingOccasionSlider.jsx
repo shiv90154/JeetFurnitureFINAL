@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Box, IconButton, Button } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos, ArrowForward } from '@mui/icons-material';
-import axiosInstance from '../../common components/AxiosInstance';
-import { publicUrl } from '../../common components/PublicUrl';
+import axiosInstance from '../../commonComponents/AxiosInstance';
+import { publicUrl } from '../../commonComponents/PublicUrl';
 
 const WeddingOccasionSlider = () => {
   const [activeIndex, setActiveIndex] = useState(6);

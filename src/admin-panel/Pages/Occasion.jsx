@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axiosInstance from '../../common components/AxiosInstance';
+import axiosInstance from '../../commonComponents/AxiosInstance';
 import {
     Box,
     Button,
@@ -25,7 +25,7 @@ import {
 } from '@mui/material';
 import { Add, Edit, Delete, Close, CloudUpload } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
-import { publicUrl } from '../../common components/PublicUrl';
+import { publicUrl } from '../../commonComponents/PublicUrl';
 
 const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
     marginTop: theme.spacing(3),

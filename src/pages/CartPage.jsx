@@ -10,9 +10,9 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast, ToastContainer } from 'react-toastify';
-import axiosInstance from '../common components/AxiosInstance';
+import axiosInstance from '../commonComponents/AxiosInstance';
 import { deleteProduct, updateData, clearProducts } from '../store/Action';
-import { publicUrl } from '../common components/PublicUrl';
+import { publicUrl } from '../commonComponents/PublicUrl';
 
 // ---------- helpers ----------
 const formatINR = (n) =>

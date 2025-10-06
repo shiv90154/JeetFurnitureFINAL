@@ -30,7 +30,7 @@ import {
 import { styled } from '@mui/material/styles';
 import StarRating from './StarRating';
 import ReviewSubmissionForm from './ReviewSubmissionForm';
-import axiosInstance from '../common components/AxiosInstance';
+import axiosInstance from '../commonComponents/AxiosInstance';
 import { toast } from 'react-toastify';
 
 const ReviewItem = styled(Paper)(({ theme }) => ({

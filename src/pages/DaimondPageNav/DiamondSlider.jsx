@@ -7,9 +7,9 @@ import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
 import 'swiper/css/free-mode';
 import 'swiper/css/thumbs';
-import axiosInstance from '../../common components/AxiosInstance';
+import axiosInstance from '../../commonComponents/AxiosInstance';
 import { useNavigate } from 'react-router-dom';
-import { publicUrl } from '../../common components/PublicUrl';
+import { publicUrl } from '../../commonComponents/PublicUrl';
 
 const DiamondSlider = () => {
     const [products, setProducts] = useState([]);

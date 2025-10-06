@@ -4,7 +4,7 @@ import { RateReview, Star } from '@mui/icons-material';
 import ReviewsList from './ReviewsList';
 import ReviewSubmissionForm from './ReviewSubmissionForm';
 import { toast } from 'react-toastify';
-import axiosInstance from '../common components/AxiosInstance';
+import axiosInstance from '../commonComponents/AxiosInstance';
 
 const ProductReviewsSection = ({ product, onRefreshProduct }) => {
     const [reviewFormOpen, setReviewFormOpen] = useState(false);

@@ -15,7 +15,7 @@ import {
 import { styled } from '@mui/material/styles';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import StarRating from './StarRating';
-import axiosInstance from '../common components/AxiosInstance';
+import axiosInstance from '../commonComponents/AxiosInstance';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 

@@ -18,9 +18,9 @@ import {
     Diamond,
 } from '@mui/icons-material';
 import { useNavigate, useParams } from 'react-router-dom';
-import axiosInstance from '../common components/AxiosInstance';
-import { publicUrl } from '../common components/PublicUrl';
-import LocationSelector from '../common components/LocationSelector';
+import axiosInstance from '../commonComponents/AxiosInstance';
+import { publicUrl } from '../commonComponents/PublicUrl';
+import LocationSelector from '../commonComponents/LocationSelector';
 import { useDispatch, useSelector } from 'react-redux';
 import { addData, addToWishlist, removeFromWishlist } from '../store/Action';
 import { toast, ToastContainer } from 'react-toastify';

@@ -1,7 +1,7 @@
 import { Box, Typography, Container, styled, CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
-import axiosInstance from "../common components/AxiosInstance";
-import { publicUrl } from "../common components/PublicUrl";
+import axiosInstance from "../commonComponents/AxiosInstance";
+import { publicUrl } from "../commonComponents/PublicUrl";
 import { useNavigate } from "react-router-dom";
 
 const SectionContainer = styled(Box)({

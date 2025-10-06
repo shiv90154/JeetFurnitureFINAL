@@ -3,9 +3,9 @@ import { Box, styled } from "@mui/material"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import { useNavigate } from "react-router-dom"
-import axiosInstance from "../common components/AxiosInstance"
+import axiosInstance from "../commonComponents/AxiosInstance"
 import { useEffect, useState } from "react"
-import { publicUrl } from "../common components/PublicUrl"
+import { publicUrl } from "../commonComponents/PublicUrl"
 
 const SliderContainer = styled(Box)({
     width: "100%",

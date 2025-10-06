@@ -9,10 +9,10 @@ import {
   styled,
   Button,
 } from "@mui/material";
-import axiosInstance from "../common components/AxiosInstance";
+import axiosInstance from "../commonComponents/AxiosInstance";
 import { useNavigate } from "react-router-dom";
-import { publicUrl } from "../common components/PublicUrl";
-import CustomLoader from "../common components/CustomLoader";
+import { publicUrl } from "../commonComponents/PublicUrl";
+import CustomLoader from "../commonComponents/CustomLoader";
 
 // ===== Slider Component & styles (your existing code) =====
 

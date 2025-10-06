@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Box, Typography, Grid, Card, CardMedia, CardContent } from '@mui/material';
-import axiosInstance from '../common components/AxiosInstance';
-import { publicUrl } from '../common components/PublicUrl';
+import axiosInstance from '../commonComponents/AxiosInstance';
+import { publicUrl } from '../commonComponents/PublicUrl';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

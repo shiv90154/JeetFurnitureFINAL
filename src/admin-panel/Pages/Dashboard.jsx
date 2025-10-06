@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axiosInstance from '../../common components/AxiosInstance';
-import CustomLoader from '../../common components/CustomLoader';
+import axiosInstance from '../../commonComponents/AxiosInstance';
+import CustomLoader from '../../commonComponents/CustomLoader';
 import { Line, Bar } from 'react-chartjs-2';
 import {
     Chart as ChartJS,

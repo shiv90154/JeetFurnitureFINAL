@@ -7,7 +7,7 @@ import {
     Timeline, TimelineItem, TimelineSeparator, TimelineDot, TimelineConnector, TimelineContent
 } from '@mui/lab';
 import { useNavigate } from 'react-router-dom';
-import axiosInstance from '../common components/AxiosInstance';
+import axiosInstance from '../commonComponents/AxiosInstance';
 
 // --- STATUS COLOR LOGIC ---
 const statusColor = status => {

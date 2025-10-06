@@ -13,7 +13,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import axiosInstance from "../common components/AxiosInstance";
+import axiosInstance from "../commonComponents/AxiosInstance";
 import { toast, ToastContainer } from "react-toastify";
 
 const Contactus = () => {

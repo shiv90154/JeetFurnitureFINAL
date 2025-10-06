@@ -227,9 +227,9 @@ import { Navigation, EffectCoverflow, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/navigation';
-import axiosInstance from '../common components/AxiosInstance';
+import axiosInstance from '../commonComponents/AxiosInstance';
 import { useNavigate } from 'react-router-dom';
-import { publicUrl } from '../common components/PublicUrl';
+import { publicUrl } from '../commonComponents/PublicUrl';
 
 const jewelryProducts = [
     { id: 1, name: "Subtle Sparkle Diamond Bangle", image: "/masterSlider1.png", category: "Bangles" },

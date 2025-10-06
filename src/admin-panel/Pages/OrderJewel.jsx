@@ -246,7 +246,7 @@
 
 // // 2:
 import React, { useEffect, useState } from 'react';
-import axiosInstance from '../../common components/AxiosInstance';
+import axiosInstance from '../../commonComponents/AxiosInstance';
 import {
   Box,
   Container,

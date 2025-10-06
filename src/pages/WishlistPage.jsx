@@ -5,7 +5,7 @@ import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart, removeFromWishlist, addData } from "../store/Action";
-import { publicUrl } from '../common components/PublicUrl';
+import { publicUrl } from '../commonComponents/PublicUrl';
 import { normalizeCartProduct } from '../utils/ProductsUtils';
 import { toast, ToastContainer } from 'react-toastify';
 

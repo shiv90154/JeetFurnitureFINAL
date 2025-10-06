@@ -11,9 +11,9 @@ import {
 } from "@mui/material";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import { useNavigate } from "react-router-dom";
-import axiosInstance from "../common components/AxiosInstance";
+import axiosInstance from "../commonComponents/AxiosInstance";
 import { toast } from "react-toastify";
-import { publicUrl } from "../common components/PublicUrl";
+import { publicUrl } from "../commonComponents/PublicUrl";
 
 export default function ProfileEdit() {
     

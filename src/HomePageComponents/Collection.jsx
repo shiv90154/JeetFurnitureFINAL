@@ -1,7 +1,7 @@
 import { Box, Typography, Container, styled } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { publicUrl } from "../common components/PublicUrl";
-import axiosInstance from "../common components/AxiosInstance";
+import { publicUrl } from "../commonComponents/PublicUrl";
+import axiosInstance from "../commonComponents/AxiosInstance";
 import { useNavigate } from "react-router-dom";
 import Theme from "../../Theme";
 

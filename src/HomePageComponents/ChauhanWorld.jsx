@@ -1,9 +1,9 @@
 import { Box, Typography, Container, styled } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import axiosInstance from "../common components/AxiosInstance";
-import { publicUrl } from "../common components/PublicUrl";
+import axiosInstance from "../commonComponents/AxiosInstance";
+import { publicUrl } from "../commonComponents/PublicUrl";
 import { useEffect, useState } from "react";
-import CustomLoader from "../common components/CustomLoader";
+import CustomLoader from "../commonComponents/CustomLoader";
 import Theme from "../../Theme";
 
 const SectionContainer = styled(Box)({

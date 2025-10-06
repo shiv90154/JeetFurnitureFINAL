@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axiosInstance from '../../common components/AxiosInstance';
+import axiosInstance from '../../commonComponents/AxiosInstance';
 import API_URL from '../../../config';
 import { toast } from 'react-toastify';
 
@@ -35,7 +35,7 @@ import {
 
 import CloseIcon from '@mui/icons-material/Close';
 import { Add, Delete } from '@mui/icons-material';
-import { publicUrl } from '../../common components/PublicUrl';
+import { publicUrl } from '../../commonComponents/PublicUrl';
 
 const Banners = () => {
   const [formData, setFormData] = useState({ image: '', banner_type: '', variety: '', });

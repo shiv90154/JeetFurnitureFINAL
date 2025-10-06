@@ -1,8 +1,8 @@
 import { Box, Typography, Button, Grid, Container, styled } from "@mui/material"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import axiosInstance from "../common components/AxiosInstance"
-import { publicUrl } from "../common components/PublicUrl"
+import axiosInstance from "../commonComponents/AxiosInstance"
+import { publicUrl } from "../commonComponents/PublicUrl"
 
 const SectionContainer = styled(Box)({
     position: "relative",
