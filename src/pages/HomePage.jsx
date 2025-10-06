@@ -10,6 +10,7 @@ import ExchangeOffer from '../HomePageComponents/ExchangeOffer'
 import Exclusive from '../HomePageComponents/Exclusive'
 import ChauhanExperience from '../HomePageComponents/ChauhanExperience'
 import VideoGallery from '../HomePageComponents/VideoGallery'
+// import AnimatedSection from '../common components/AnimatedSection'
 // import VideoCardSlider from '../common components/VideoCardSlider'
 
 const HomePage = () => {
@@ -17,7 +18,9 @@ const HomePage = () => {
     return (
         <div>
             <HeroSection />
-            <ShopByCategories />
+            {/* <AnimatedSection delay={200}> */}
+                <ShopByCategories />
+            {/* </AnimatedSection> */}
             <Collection />
             <Treasure />
             {/* <Trending /> */}
