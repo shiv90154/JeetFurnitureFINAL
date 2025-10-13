@@ -1653,23 +1653,8 @@ const OrderJewel = () => {
     return `Refund ${status}`;
   };
 
-  const getEstimatedRefundDays = (refundInfo) => {
-    if (!refundInfo || !refundInfo.estimatedSettlement) return null;
-    const now = new Date();
-    const settlement = new Date(refundInfo.estimatedSettlement);
-    const diffTime = settlement - now;
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    if (diffDays <= 0) return 'Should be settled';
-    if (diffDays === 1) return 'Expected tomorrow';
-    return `Expected in ${diffDays} days`;
-  };
-
   const canCancelOrder = (order) => {
     return order.status !== 'Cancelled' && order.status !== 'Delivered';
-  };
-
-  const needsPaymentCapture = (paymentInfo) => {
-    return paymentInfo?.status === 'authorized';
   };
 
   return (
@@ -1749,18 +1734,6 @@ const OrderJewel = () => {
                               status={order.paymentInfo?.status?.toLowerCase() || 'unknown'}
                               size="small"
                             />
-                            {needsPaymentCapture(order.paymentInfo) && (
-                              <Button
-                                variant="outlined"
-                                color="primary"
-                                size="small"
-                                disabled={processingCapture === order._id}
-                                onClick={() => capturePayment(order._id)}
-                                sx={{ fontSize: '10px', padding: '2px 8px' }}
-                              >
-                                {processingCapture === order._id ? 'Capturing...' : 'Capture Payment'}
-                              </Button>
-                            )}
                           </Box>
                         </TableCell>
                       )}

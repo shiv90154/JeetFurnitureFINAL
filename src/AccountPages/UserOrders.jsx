@@ -1754,6 +1754,15 @@ function getEstimatedRefundDays(refundInfo) {
     return `Expected in ${diffDays} days`;
 }
 
+function shouldShowRefundSection(refundInfo) {
+    if (!refundInfo) return false;
+    if (refundInfo.status === 'none') return false;
+    if (!refundInfo.refundId) return false;
+    if (!refundInfo.amount || refundInfo.amount <= 0) return false;
+    return true;
+}
+
+
 // --- MAIN PAGE COMPONENT ---
 const UserOrders = () => {
     const [orders, setOrders] = useState([]);
@@ -1942,23 +1951,9 @@ const UserOrders = () => {
             </TableContainer>
 
             {/* MODAL FOR ORDER DETAILS */}
-            {/* <Modal open={showModal} onClose={closeOrderDetails}>
-        <Box sx={{
-          maxWidth: 800, width: '100%', bgcolor: 'background.paper', borderRadius: 2,
-          boxShadow: 24, mx: 'auto', my: 4, overflowY: 'auto'
-        }}>
-          {selectedOrder && (
-            <>
-
-            </>
-          )}
-        </Box>
-      </Modal> */}
-
-            {/* MODAL FOR ORDER DETAILS */}
             <Modal open={showModal} onClose={closeOrderDetails}>
                 <Box sx={{
-                    maxWidth: 800, width: '100%', bgcolor: 'background.paper', borderRadius: 2,
+                    maxWidth: 800, width: '90%', bgcolor: 'background.paper', borderRadius: 2, maxHeight: 'calc(100vh - 64px)',
                     boxShadow: 24, mx: 'auto', my: 4, overflowY: 'auto'
                 }}>
                     {selectedOrder && (
@@ -1996,7 +1991,7 @@ const UserOrders = () => {
                                 <Box mb={3}>
                                     <Typography variant="h6" mb={2}>Payment Information</Typography>
                                     <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 2 }}>
-                                        <Box><strong>Payment ID:</strong> {selectedOrder.paymentInfo?.paymentId || 'N/A'}</Box>
+                                        {/* <Box><strong>Payment ID:</strong> {selectedOrder.paymentInfo?.paymentId || 'N/A'}</Box> */}
                                         <Box>
                                             <strong>Payment Status:</strong>
                                             <Chip
@@ -2012,9 +2007,13 @@ const UserOrders = () => {
                                     </Box>
                                 </Box>
                                 {/* Refund Info Section */}
+                                {/* 1 option */}
+                                {/* {shouldShowRefundSection(selectedOrder.refundInfo) && ( */}
+                                {/* 2 option */}
                                 {selectedOrder.refundInfo && (
                                     <Box mb={3} bgcolor="#e8f4fd" border={2} borderColor="#74b9ff" borderRadius={2} p={2}>
                                         <Typography variant="h6" mb={2}>Refund Information</Typography>
+                                        <Typography variant="p" mb={4}>Refund takes upto 5-7 working days after the refund has processed</Typography>
                                         <Box display="flex" alignItems="center" mb={2}>
                                             <Chip
                                                 label={refundStatusLabel(selectedOrder.refundInfo)}
