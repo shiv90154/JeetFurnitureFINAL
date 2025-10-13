@@ -244,7 +244,7 @@
 // export default OrderJewel;
 
 
-// // 2:
+// 2:
 // import React, { useEffect, useState } from 'react';
 // import axiosInstance from '../../commonComponents/AxiosInstance';
 // import {
@@ -1381,7 +1381,8 @@
 
 // export default OrderJewel;
 
-// // 4
+
+// // final:
 import React, { useEffect, useState } from 'react';
 import axiosInstance from '../../commonComponents/AxiosInstance';
 import {
@@ -1461,31 +1462,51 @@ const OrderJewel = () => {
   const [processingCapture, setProcessingCapture] = useState(null);
 
   useEffect(() => {
-    fetchOrders();
-
-    // Auto-refresh every 60 seconds
+    fetchData();
     const interval = setInterval(() => {
-      fetchOrders();
-    }, 60000);
+      fetchDataSilently();
+    }, 30000);
 
     return () => clearInterval(interval);
   }, []);
 
-  const fetchOrders = async () => {
+  const fetchData = async () => {
+    setLoading(true);
     try {
-      setLoading(true);
-      // const response = await axiosInstance.get('/api/orders');
-      const response = await axiosInstance.get('/api/orders?includeLiveStatus=true');
+      const response = await axiosInstance.get('/api/orders');
       setOrders(response.data.orders || []);
     } catch (error) {
-      console.error('Error fetching orders:', error);
+      console.error("Error fetching data:", error);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleViewOrder = (order) => {
-    setSelectedOrder(order);
+  const fetchDataSilently = async () => {
+    setRefreshing(true);
+    try {
+      const response = await axiosInstance.get('/api/orders');
+      setOrders(response.data.orders || []);
+    } catch (error) {
+      console.error("Error fetching data silently:", error);
+    } finally {
+      setRefreshing(false);
+    }
+  };
+
+  const handleViewOrder = async (order) => {
+    try {
+      const paymentResponse = await axiosInstance.get(`/api/paymentStatus/${order._id}`);
+      const updatedOrder = {
+        ...order,
+        paymentInfo: paymentResponse.data.paymentInfo,
+        refundInfo: paymentResponse.data.refundInfo
+      };
+      setSelectedOrder(updatedOrder);
+    } catch (error) {
+      console.error("Error fetching latest payment status:", error);
+      setSelectedOrder(order);
+    }
     setOpenDialog(true);
   };
 
@@ -1512,8 +1533,6 @@ const OrderJewel = () => {
     setProcessingCapture(orderId);
     try {
       const response = await axiosInstance.post(`/api/capturePayment/${orderId}`);
-
-      // Update the order in local state
       setOrders(prevOrders =>
         prevOrders.map(order =>
           order._id === orderId
@@ -1521,9 +1540,8 @@ const OrderJewel = () => {
             : order
         )
       );
-
       alert('Payment captured successfully!');
-      fetchOrders(); // Refresh to get latest data
+      fetchData();
     } catch (error) {
       console.error("Failed to capture payment:", error);
       alert("Failed to capture payment. Please try again.");
@@ -1532,26 +1550,29 @@ const OrderJewel = () => {
     }
   };
 
-  const updateOrderStatus = async (orderId, newStatus, cancelReason = '') => {
-    setUpdatingStatusId(orderId);
+  const updateOrderStatus = async (orderId, newStatus) => {
+    if (newStatus === 'Cancelled') {
+      setOrderToCancel(orderId);
+      setShowCancelDialog(true);
+      return;
+    }
 
+    setUpdatingStatusId(orderId);
     try {
-      await axiosInstance.put(`/api/orders/${orderId}/status`, {
+      const response = await axiosInstance.put(`/api/orders/${orderId}/status`, {
         status: newStatus,
-        cancelReason: cancelReason || undefined
       });
 
-      // Refresh orders to get updated data including refund info
-      await fetchOrders();
+      setOrders(prevOrders =>
+        prevOrders.map(order =>
+          order._id === orderId ? { ...order, status: newStatus } : order
+        )
+      );
 
-      if (newStatus === 'Cancelled') {
-        alert('Order cancelled. Refund has been automatically initiated.');
-      } else {
-        alert('Order status updated successfully!');
-      }
+      alert('Order status updated successfully!');
     } catch (error) {
-      console.error('Failed to update order status:', error);
-      alert('Failed to update order status. Please try again.');
+      console.error("Failed to update order status:", error);
+      alert("Failed to update order status. Please try again.");
     } finally {
       setUpdatingStatusId(null);
     }
@@ -1574,16 +1595,17 @@ const OrderJewel = () => {
             status: 'Cancelled',
             cancelReason: cancelReason || 'Cancelled by admin',
             cancelledAt: new Date(),
-            refundInfo: response.data.order.refundInfo
+            refundInfo: response.data.refundDetails || response.data.order?.refundInfo
           } : order
         )
       );
 
-      // Show success message about refund
-      alert(`Order cancelled successfully! ${response.data.refundProcessed ? 'Automatic refund has been initiated.' : 'No refund needed or payment not captured yet.'}`);
+      const message = response.data.refundProcessed
+        ? `Order cancelled and refund initiated! Refund will be processed within 5-7 business days.`
+        : 'Order cancelled successfully! No refund needed.';
 
-      // Refresh data to get updated refund info
-      fetchOrders();
+      alert(message);
+      await fetchData();
 
     } catch (error) {
       console.error("Failed to cancel order:", error);
@@ -1596,23 +1618,8 @@ const OrderJewel = () => {
     }
   };
 
-  const processManualRefund = async (orderId, amount) => {
-    try {
-      const response = await axiosInstance.post(`/api/orders/${orderId}/refund`, {
-        amount,
-        reason: 'Manual refund by admin',
-        speed: 'optimum'
-      });
-
-      alert('Refund processed successfully!');
-      fetchOrders(); // Refresh data
-    } catch (error) {
-      console.error("Failed to process refund:", error);
-      alert(`Failed to process refund: ${error.response?.data?.message || error.message}`);
-    }
-  };
-
   const formatDate = (dateString) => {
+    if (!dateString) return '-';
     return new Date(dateString).toLocaleString('en-IN', {
       year: 'numeric',
       month: 'short',
@@ -1624,7 +1631,6 @@ const OrderJewel = () => {
 
   const getPaymentStatusLabel = (paymentInfo) => {
     if (!paymentInfo || !paymentInfo.status) return 'Unknown';
-
     switch (paymentInfo.status.toLowerCase()) {
       case 'captured': return 'Paid';
       case 'authorized': return 'Authorized';
@@ -1635,13 +1641,27 @@ const OrderJewel = () => {
   };
 
   const getRefundStatusText = (refundInfo) => {
-    if (!refundInfo || !refundInfo.refundId) return 'No Refund';
+    if (!refundInfo) return 'No Refund';
+    if (!refundInfo.refundId && refundInfo.status === 'none') return 'No Refund';
+    if (!refundInfo.refundId) return 'No Refund';
 
     const status = refundInfo.status;
     if (status === 'processed') return 'Refund Processed';
     if (status === 'failed') return 'Refund Failed';
     if (status === 'pending') return 'Refund Pending';
+    if (status === 'initiated') return 'Refund Initiated';
     return `Refund ${status}`;
+  };
+
+  const getEstimatedRefundDays = (refundInfo) => {
+    if (!refundInfo || !refundInfo.estimatedSettlement) return null;
+    const now = new Date();
+    const settlement = new Date(refundInfo.estimatedSettlement);
+    const diffTime = settlement - now;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    if (diffDays <= 0) return 'Should be settled';
+    if (diffDays === 1) return 'Expected tomorrow';
+    return `Expected in ${diffDays} days`;
   };
 
   const canCancelOrder = (order) => {
@@ -1946,4 +1966,3 @@ const OrderJewel = () => {
 };
 
 export default OrderJewel;
-
