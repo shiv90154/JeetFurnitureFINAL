@@ -58,7 +58,7 @@ function App() {
         <>
           <Header />
           <Box sx={{ paddingTop: { xs: "103px", md: '124px', lg: 14.5 } }} />
-        <LiveMetalPrice/>
+        {/* <LiveMetalPrice/> */}
         </>
       )}
 
