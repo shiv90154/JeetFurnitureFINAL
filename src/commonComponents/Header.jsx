@@ -40,6 +40,17 @@ import SearchBar from "./SearchBar";
 import Theme from "../../Theme";
 import { toast } from "react-toastify";
 
+// Color Constants
+const COLORS = {
+  primary: "#003B78",
+  secondary: "#FF6A00",
+  accent: "#C18A46",
+  backgroundLight: "#FFFFFF",
+  backgroundDark: "#1E1E1E",
+  textDark: "#222222",
+  textLight: "#F5F5F5"
+};
+
 // LocationSelector Component
 const LocationSelector = ({ onClose, open }) => {
   const [pincode, setPincode] = useState("");
@@ -142,13 +153,20 @@ const LocationSelector = ({ onClose, open }) => {
         sx: {
           borderRadius: 2,
           padding: 0,
+          backgroundColor: COLORS.backgroundLight,
         }
       }}
     >
       <DialogContent sx={{ p: 3 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
-          <Typography variant="h6" sx={{ fontWeight: 600, display: 'flex', alignItems: 'center', gap: 1 }}>
-            <LocationOn color="primary" />
+          <Typography variant="h6" sx={{ 
+            fontWeight: 600, 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: 1,
+            color: COLORS.textDark 
+          }}>
+            <LocationOn sx={{ color: COLORS.primary }} />
             Where to Deliver?
           </Typography>
           <IconButton onClick={onClose} size="small">
@@ -183,9 +201,9 @@ const LocationSelector = ({ onClose, open }) => {
               type="submit"
               sx={{
                 py: 1,
-                backgroundColor: Theme.palette.primary.main,
+                backgroundColor: COLORS.primary,
                 '&:hover': {
-                  backgroundColor: Theme.palette.primary.dark,
+                  backgroundColor: '#002A5A', // Darker shade of primary
                 }
               }}
             >
@@ -198,8 +216,14 @@ const LocationSelector = ({ onClose, open }) => {
         {recentPincodes.length > 0 && (
           <Box sx={{ mb: 2 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1 }}>
-              <Typography variant="subtitle2" sx={{ fontWeight: 600, color: 'text.secondary', display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                <History sx={{ fontSize: 16 }} />
+              <Typography variant="subtitle2" sx={{ 
+                fontWeight: 600, 
+                color: COLORS.textDark,
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: 0.5 
+              }}>
+                <History sx={{ fontSize: 16, color: COLORS.accent }} />
                 Recent Searches
               </Typography>
               <Button 
@@ -208,7 +232,7 @@ const LocationSelector = ({ onClose, open }) => {
                 sx={{ 
                   minWidth: 'auto', 
                   fontSize: '12px', 
-                  color: 'text.secondary',
+                  color: COLORS.textDark,
                   '&:hover': {
                     backgroundColor: 'rgba(0,0,0,0.04)'
                   }
@@ -234,22 +258,22 @@ const LocationSelector = ({ onClose, open }) => {
                     transition: 'all 0.2s ease',
                     '&:hover': {
                       backgroundColor: 'rgba(0,0,0,0.04)',
-                      borderColor: Theme.palette.primary.main,
+                      borderColor: COLORS.primary,
                     }
                   }}
                 >
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <LocationOn sx={{ fontSize: 18, color: 'text.secondary' }} />
+                    <LocationOn sx={{ fontSize: 18, color: COLORS.textDark }} />
                     <Box>
-                      <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                      <Typography variant="body2" sx={{ fontWeight: 500, color: COLORS.textDark }}>
                         {item.pincode}
                       </Typography>
-                      <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+                      <Typography variant="caption" sx={{ color: COLORS.textDark }}>
                         {item.address}
                       </Typography>
                     </Box>
                   </Box>
-                  <Typography variant="caption" sx={{ color: 'success.main', fontWeight: 500 }}>
+                  <Typography variant="caption" sx={{ color: COLORS.secondary, fontWeight: 500 }}>
                     {getDeliveryDays(item.pincode)} days
                   </Typography>
                 </Box>
@@ -269,12 +293,12 @@ const LocationSelector = ({ onClose, open }) => {
           >
             <Typography variant="body1" sx={{ 
               fontWeight: 500, 
-              color: deliveryInfo.includes('not available') ? 'error.main' : 'success.main' 
+              color: deliveryInfo.includes('not available') ? 'error.main' : COLORS.secondary 
             }}>
               {deliveryInfo}
             </Typography>
             {address && (
-              <Typography variant="body2" sx={{ color: 'text.secondary', mt: 0.5 }}>
+              <Typography variant="body2" sx={{ color: COLORS.textDark, mt: 0.5 }}>
                 {address}
               </Typography>
             )}
@@ -287,7 +311,7 @@ const LocationSelector = ({ onClose, open }) => {
 
 // Styled Components
 const StyledAppBar = styled(AppBar)(() => ({
-  backgroundColor: Theme.palette.primary.main,
+  backgroundColor: COLORS.primary,
   boxShadow: "none",
 }));
 
@@ -298,6 +322,7 @@ const HeaderToolbar = styled(Toolbar)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   position: "relative",
+  backgroundColor: COLORS.primary,
   [theme.breakpoints.down("md")]: {
     minHeight: 56,
     paddingLeft: theme.spacing(1),
@@ -324,7 +349,7 @@ const IconsRow = styled(Box)(({ theme }) => ({
 }));
 
 const TopIconButton = styled(IconButton)({
-  color: Theme.palette.primary.contrastText,
+  color: COLORS.textLight,
   padding: "8px",
   "&:hover": {
     backgroundColor: "rgba(255, 255, 255, 0.1)",
@@ -332,7 +357,7 @@ const TopIconButton = styled(IconButton)({
 });
 
 const NavigationBar = styled(Box)(() => ({
-  backgroundColor: Theme.palette.primary.main,
+  backgroundColor: COLORS.primary,
   borderTop: "1px solid rgba(255, 255, 255, 0.1)",
   padding: "8px 0",
   position: "relative",
@@ -342,7 +367,7 @@ const NavigationBar = styled(Box)(() => ({
 }));
 
 const NavButton = styled(Button)(() => ({
-  color: Theme.palette.primary.contrastText,
+  color: COLORS.textLight,
   textTransform: "none",
   fontSize: "13px",
   fontWeight: 400,
@@ -352,7 +377,7 @@ const NavButton = styled(Button)(() => ({
   justifyContent: "flex-start",
   "&:hover": {
     backgroundColor: "rgba(255, 255, 255, 0.1)",
-    color: "#FFD700",
+    color: COLORS.accent, // Using accent color for hover
   },
 }));
 
@@ -372,11 +397,12 @@ const PopupHead = styled(Box)(({ theme }) => ({
   alignItems: "center",
   justifyContent: "space-between",
   padding: theme.spacing(2, 2, 1, 2.5),
-  borderBottom: "1px solid rgba(255,255,255,0.06)"
+  borderBottom: "1px solid rgba(255,255,255,0.06)",
+  backgroundColor: COLORS.primary,
 }));
 
 const LocationButton = styled(Button)(({ theme }) => ({
-  color: Theme.palette.primary.contrastText,
+  color: COLORS.textLight,
   textTransform: "none",
   fontSize: "12px",
   fontWeight: 400,
@@ -480,13 +506,13 @@ export default function Header() {
               onClick={() => setOpen(true)}
               size="large"
               edge="start"
-              sx={{ color: "#fff", mr: 0.5 }}
+              sx={{ color: COLORS.textLight, mr: 0.5 }}
             >
               <MenuIcon />
             </IconButton>
           )}
           <LogoContainer sx={{ ml: !isMdUp ? 0.5 : 0, flex: "none", cursor: "pointer" }}>
-            <img onClick={() => navigate("/")} src="/logo.svg" alt="logo" />
+            <img onClick={() => navigate("/")} src="/logo2.png" alt="logo" />
           </LogoContainer>
 
           {/* Location Button - Only show on desktop */}
@@ -530,7 +556,16 @@ export default function Header() {
           )}
 
           <TopIconButton size="small" onClick={() => navigate("/cart")}>
-            <Badge badgeContent={cartCount} color="error" overlap="circular" sx={{ "& .MuiBadge-badge": { fontWeight: 600, fontSize: 13, right: 0, top: 3 } }}>
+            <Badge badgeContent={cartCount} color="error" overlap="circular" sx={{ 
+              "& .MuiBadge-badge": { 
+                fontWeight: 600, 
+                fontSize: 13, 
+                right: 0, 
+                top: 3,
+                backgroundColor: COLORS.secondary,
+                color: COLORS.textLight
+              } 
+            }}>
               <ShoppingBagOutlined sx={{ fontSize: 20 }} />
             </Badge>
           </TopIconButton>
@@ -595,8 +630,8 @@ export default function Header() {
         PaperProps={{
           sx: {
             p: 0,
-            background: Theme.palette.primary.main,
-            color: Theme.palette.primary.contrastText,
+            background: COLORS.primary,
+            color: COLORS.textLight,
             width: "92vw",
             maxWidth: 410,
             [theme.breakpoints.down("sm")]: { maxWidth: "100vw" },
@@ -608,7 +643,7 @@ export default function Header() {
             size="small"
             edge="end"
             onClick={() => setOpen(false)}
-            sx={{ color: Theme.palette.primary.contrastText, bgcolor: "rgba(255,255,255,0.06)" }}
+            sx={{ color: COLORS.textLight, bgcolor: "rgba(255,255,255,0.06)" }}
           >
             <CloseIcon />
           </IconButton>
@@ -624,7 +659,7 @@ export default function Header() {
             }}
             sx={{
               justifyContent: "flex-start",
-              color: Theme.palette.primary.contrastText,
+              color: COLORS.textLight,
               textTransform: "none",
               bgcolor: "rgba(255,255,255,0.1)",
               borderRadius: 1,

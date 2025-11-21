@@ -114,20 +114,21 @@ export default function SearchBar() {
         <SearchIconWrapper>
           <SearchIcon sx={{ fontSize: "20px" }} />
         </SearchIconWrapper>
-        <StyledInputBase
-          placeholder="Search for Gold Jewellery, Diamond Jewellery and more..."
-          inputProps={{ "aria-label": "search" }}
-          value={query}
-          onChange={(e) => {
-            setQuery(e.target.value);
-            setIsOpen(true);
-          }}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && results.length > 0) {
-              handleSuggestionClick(results[0]._id);
-            }
-          }}
-        />
+       <StyledInputBase
+  placeholder="Search for Furniture, Sofa Sets, Beds, Wardrobes and more..."
+  inputProps={{ "aria-label": "search" }}
+  value={query}
+  onChange={(e) => {
+    setQuery(e.target.value);
+    setIsOpen(true);
+  }}
+  onKeyDown={(e) => {
+    if (e.key === "Enter" && results.length > 0) {
+      handleSuggestionClick(results[0]._id);
+    }
+  }}
+/>
+
       </SearchContainer>
 
       {isOpen && query.trim() !== "" && results.length > 0 && (
